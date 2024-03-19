@@ -4,7 +4,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -28,7 +27,7 @@ public class Meeting {
     /*
      * description must be alphanumeric
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*$";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -46,6 +45,7 @@ public class Meeting {
     public Meeting(String description, LocalDateTime dateTime, Person client) {
         requireAllNonNull(description, dateTime);
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDateTime(dateTime.format(formatter)), MESSAGE_INVALID_DATE_TIME);
         this.description = description;
         this.dateTime = dateTime;
         this.client = client;
@@ -66,18 +66,15 @@ public class Meeting {
     public static boolean isValidDateTime(String test) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            // Attempt to parse the date-time to check format. The result is not used if parsing is successful.
             LocalDateTime parsedDateTime = LocalDateTime.parse(test, formatter);
-            LocalDateTime currentDateTime = LocalDateTime.now();
-
-            LocalTime startTime = LocalTime.of(8, 0);
-            LocalTime endTime = LocalTime.of(18, 0);
-
-            return parsedDateTime.isAfter(currentDateTime)
-                    && parsedDateTime.toLocalTime().isAfter(startTime)
-                    && parsedDateTime.toLocalTime().isBefore(endTime)
-                    && parsedDateTime.getMinute() == 0;
+            // Check if the parsed date-time is before the current system date-time.
+            if (parsedDateTime.isBefore(LocalDateTime.now())) {
+                return false; // The date-time is in the past.
+            }
+            return true; // The string is in the correct format.
         } catch (DateTimeParseException e) {
-            return false;
+            return false; // The string is not in the correct format.
         }
     }
 

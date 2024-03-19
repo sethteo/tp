@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
+
 
 /**
  * Container for user visible messages.
@@ -45,6 +47,19 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+    /**
+     * Formats the {@code meeting} for display to the user.
+     */
+    public static String format(Meeting meeting) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Client: ")
+                .append(meeting.getClientName())
+                .append("DateTime: ")
+                .append(meeting.getDateTime())
+                .append("; Description: ")
+                .append(meeting.getDescription());
         return builder.toString();
     }
 
