@@ -44,6 +44,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Meeting
 
 AddressBook *--> "1" UniqueMeetingList
 UniqueMeetingList --> "~* all" Meeting
@@ -64,6 +65,5 @@ Class AddMeetingCommand {
     +execute(): CommandResult
 }
 AddMeetingCommand ..> Meeting : creates
-
 @enduml
 ```
