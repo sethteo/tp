@@ -108,6 +108,11 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withMeeting(Meeting meeting) {
+        this.meetings.add(meeting);
+
+        return this;
+    }
     /**
      * Sets the {@code Meeting} of the {@code Person} that we are building.
      */

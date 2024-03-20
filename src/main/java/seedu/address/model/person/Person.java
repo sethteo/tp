@@ -87,8 +87,9 @@ public class Person {
         this.meetings = meetings;
     }
 
-    public void addMeetings(Meeting meeting) {
+    public Person addMeetings(Meeting meeting) {
         this.meetings.add(meeting);
+        return this;
     }
     /**
      * Returns true if the person has existing meeting.
