@@ -140,7 +140,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.meetings.setMeetings(meetings);
     }
 
-    public void deleteMeeting(Meeting meeting) { meetings.delete(meeting); }
+    public void deleteMeeting(Meeting meeting) {
+        meetings.delete(meeting);
+    }
 
     @Override
     public boolean equals(Object other) {

@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,7 +27,8 @@ class JsonAdaptedMeeting {
      * Constructs a {@code JsonAdaptedMeeting} with the given meeting details.
      */
     @JsonCreator
-    public JsonAdaptedMeeting(@JsonProperty("description") String description, @JsonProperty("dateTime") LocalDateTime dateTime, @JsonProperty("client") JsonAdaptedPerson client) {
+    public JsonAdaptedMeeting(@JsonProperty("description") String description, @JsonProperty("dateTime")
+            LocalDateTime dateTime, @JsonProperty("client") JsonAdaptedPerson client) {
         this.description = description;
         this.dateTime = dateTime;
         this.client = client;
@@ -49,24 +49,21 @@ class JsonAdaptedMeeting {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Meeting toModelType() throws IllegalValueException {
-        // checks for whether the given description is nullified
-        if (this.description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "This is an example description"));
-        }
-
         // checks whether the given description is empty or blank
-        if (this.description.isEmpty() || this.description.isBlank()) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "This is an example description"));
+        if (this.description == null || this.description.isEmpty() || this.description.isBlank()) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, "description"));
         }
 
         // Jackson's Object Mapper allows LocalDateTime to be formatted to ISO 8601 Format
         if (this.dateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "01-12-2069 11:11"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date time"));
         }
 
         // ASSUMING THAT SAMPLE DATA WOULD HAVE AT LEAST ONE PERSON
         if (this.client == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, SampleDataUtil.getSamplePersons()[0].toString()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, SampleDataUtil.getSamplePersons()[0].toString()));
         }
 
         // JSON unmarshalling (throws IllegalValueException if invalid marshalling)
