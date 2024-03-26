@@ -82,7 +82,6 @@ public class MainApp extends Application {
 
         // TODO: RETRIEVAL OF ADDRESS BOOK FROM FILE PATH
         Path storagePath = Paths.get("data/newAddressBook.json");
-
         try {
             addressBookOptional = storage.readAddressBook(storagePath);
             if (!addressBookOptional.isPresent()) {
@@ -98,7 +97,9 @@ public class MainApp extends Application {
             initialAddressData = new AddressBook();
         }
 
-        return new ModelManager(initialAddressData, userPrefs);
+        ModelManager modelManager = new ModelManager(initialAddressData, userPrefs);
+        modelManager.setAddressBookFilePath(storagePath);
+        return modelManager;
     }
 
     private void initLogging(Config config) {
@@ -186,6 +187,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
+            storage.saveAddressBook(model.getAddressBook(), model.getAddressBookFilePath());
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
