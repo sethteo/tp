@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -61,7 +59,8 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            person.getMeetings().stream().forEach(meeting -> addressBook.addMeeting(meeting));
+            person.getMeetings().stream().forEach(meeting -> addressBook.addMeeting(
+                    new Meeting(meeting.getDescription(), meeting.getDateTime(), person)));
             addressBook.addPerson(person);
         }
         return addressBook;
