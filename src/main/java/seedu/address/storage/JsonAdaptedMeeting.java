@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Jackson-friendly version of {@link Meeting}.
@@ -19,7 +17,6 @@ class JsonAdaptedMeeting {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meeting's %s field is missing!";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    private final JsonAdaptedPerson client;
     private final LocalDateTime dateTime;
     private final String description;
 
@@ -28,10 +25,9 @@ class JsonAdaptedMeeting {
      */
     @JsonCreator
     public JsonAdaptedMeeting(@JsonProperty("description") String description, @JsonProperty("dateTime")
-            LocalDateTime dateTime, @JsonProperty("client") JsonAdaptedPerson client) {
+            LocalDateTime dateTime) {
         this.description = description;
         this.dateTime = dateTime;
-        this.client = client;
     }
 
     /**
@@ -40,7 +36,6 @@ class JsonAdaptedMeeting {
     public JsonAdaptedMeeting(Meeting source) {
         this.description = source.getDescription();
         this.dateTime = source.getDateTime();
-        this.client = new JsonAdaptedPerson(source.getClient());
     }
 
     /**
@@ -60,14 +55,6 @@ class JsonAdaptedMeeting {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date time"));
         }
 
-        // ASSUMING THAT SAMPLE DATA WOULD HAVE AT LEAST ONE PERSON
-        if (this.client == null) {
-            throw new IllegalValueException(String.format(
-                    MISSING_FIELD_MESSAGE_FORMAT, SampleDataUtil.getSamplePersons()[0].toString()));
-        }
-
-        // JSON unmarshalling (throws IllegalValueException if invalid marshalling)
-        Person client = this.client.toModelType();
 
         // conversion to standard format from ISO 8601
         String formattedDateTimeString = this.dateTime.format(formatter);
@@ -76,7 +63,7 @@ class JsonAdaptedMeeting {
         LocalDateTime reformattedDateTime = LocalDateTime.parse(formattedDateTimeString, formatter);
 
 
-        return new Meeting(this.description, reformattedDateTime, client);
+        return new Meeting(this.description, reformattedDateTime);
     }
 
 }
