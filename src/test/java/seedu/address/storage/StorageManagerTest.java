@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
-import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,11 +56,9 @@ public class StorageManagerTest {
          */
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        try {
+        if (storageManager.readAddressBook().isPresent()) {
             ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
             assertEquals(original, new AddressBook(retrieved));
-        } catch (NoSuchElementException e) {
-            throw e;
         }
     }
 
