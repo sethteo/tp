@@ -34,7 +34,11 @@ class JsonSerializableAddressBook {
             @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings) {
         this.persons.addAll(persons);
         if (meetings != null) {
-            this.meetings.addAll(meetings);
+            for (JsonAdaptedMeeting m: meetings) {
+                if (!this.meetings.contains(m)) {
+                    this.meetings.add(m);
+                }
+            }
         }
     }
 
