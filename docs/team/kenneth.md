@@ -3,7 +3,7 @@ layout: page
 title: Kenneth Seet's Project Portfolio Page
 ---
 
-### Project: FinCliQ
+### Project: FinCliq
 
 FinCliQ is a desktop client and meeting tracker application optimised for CLI users.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
