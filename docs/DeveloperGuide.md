@@ -3,14 +3,29 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
-  {:toc}
+## Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI Component](#ui-component)
+   3. [Logic Component](#logic-component)
+   4. [Model Component](#model-component)
+   5. [Storage Component](#storage-component)
+   6. [Common Classes](#common-classes)
+4. [Appendix](#appendix-requirements)
+
 
 ---
 
 ## **Acknowledgements**
 
 - {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+- Third-party libraries used:
+  - [JavaFX](https://openjfx.io/) for the GUI
+  - [JUnit 5](https://junit.org/junit5/) for testing
+  - [Jackson](https://github.com/FasterXML/jackson) for serializing and deserializing JSON data
 
 ---
 
@@ -79,15 +94,6 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 
-![Indepth structure of UI Component](images/UiClassDiagramUpdated.png)
-The diagram above shows the classes that are associated to the `PersonListPanel` as well as the `MeetingListPanel` in order to generate the UI that we have.
-
-The `UI` component,
-
-- executes user commands using the `Logic` component.
-- listens for changes to `Model` data so that the UI can be updated with the modified data.
-- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
 
@@ -407,29 +413,211 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a client
 
-### Deleting a person
+1. Adding a client with all fields
 
-1. Deleting a person while all persons are being shown
+   1. Prerequisites: Adding the client should not result in duplicate clients.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
+      t/friends t/owesMoney` <br>
+      Expected: A new client is added to the list. The client's details are shown in the 
+      list, and the status bar shows the client's details.
+   
+   1. Test case: `add n/Jane Doe p/87654321`<br>
+      Expected: Given client is not added. Error details shown in status message.
+   
+   1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add n/John Doe o/98765432`, 
+      `...`<br>
+      Expected: Similar to previous.
+
+### Editing a client
+
+1. Editing a client's details in the client list
+
+   1. Prerequisites: At least 1 client in the client list
+   
+   1. Test case: `edit 1 p/91234567 e/johndoe@example.com` <br>
+      Expected: The client's details are updated in the list. The updated meeting's 
+      details are shown in the list, and the status bar shows the client's details.
+
+   1. Test case: `edit 0 p/91234567` <br>
+      Expected: No client is edited. Error details shown in the status message. Status bar 
+      remains the same.
+   
+   1. Other incorrect edit commands to try: `edit`, `edit x`, `edit x p/91234567` (where x is 
+      larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Deleting a client
+
+1. Deleting a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First client is deleted from the list. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### View a specific client
+
+1. View a client based on an index provided
+    
+   1. Prerequisites: At least 1 client in client list
+
+   2. Test case: `view c [index not in list]`
+      Expected: No client is shown. Error details that index provided is invalid in status message.
+   3. Test case: `view c [valid index]` followed by `view c [valid index]`
+      Expected: No new client is shown. Error details to request user to go back to home page by using `list` command
+   4. Test case: `view c [valid index]`
+      Expected: Shows the client with the index provided as well as all his/her associated meetings.
+   5. Other incorrect view commands to try: `view`, `view [any character] [any number]` 
+
+### Filter client by tag
+
+1. Filters through list of clients by a Tag provided
+
+    1. Prerequisites: At least 1 client in client list
+
+    2. Test case: `filter friends`
+       Expected: Shows all clients who have the tag "friends"
+   
+    3. Test case: `filter [invalid tag]`
+       Expected: Shows all clients. Error details that tag provided does not belong to any client.
+
+### Adding a meeting
+
+1. Adding a meeting with all fields
+
+   1. Prerequisites: Adding the meeting should not result in duplicate meetings, and the client
+      index should be listed in the client list.
+
+   1. Test case: ` addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`<br>
+      Expected: A new meeting is added to the list. The meeting's details are shown in the list, 
+      and the status bar shows the meeting's details.
+
+   1. Test case: `addMeeting clientIndex/1 dt/02-01-2024 12:00 d/sign life plan`<br>
+      Expected: Meeting is not added because the date has already elapsed. Error details shown in 
+      status message.
+
+   1. Other incorrect addMeeting commands to try: `addMeeting`, `addMeeting n/John Doe`, `addMeeting n/John Doe d/2021-10-10`, `...`<br>
+      Expected: Similar to previous.
+   
+### Editing a meeting
+
+1. Editing a meeting's details in the meeting list
+
+   1. Prerequisites: At least 1 meeting in the meeting list
+   
+   1. Test case: `editMeeting clientIndex/1 meetingIndex/1 n/starbucks meeting dt/02-01-2025 12:00` <br>
+      Expected: The meeting's details are updated in the list. The updated meeting's 
+      details are shown in the list, and the status bar shows the meeting's details.
+
+   1. Test case: `editMeeting clientIndex/0 dt/02-01-2030 12:00` <br>
+      Expected: No meeting is edited. Error details shown in the status message. Status bar 
+      remains the same.
+   
+   1. Other incorrect editMeeting commands to try: `editMeeting`, `editMeeting clientIndex/x`, 
+      `editMeeting clientIndex/x meetingIndex/y dt/02-01-2030 12:00` (where x is larger than the client list size, and y is larger than the meeting list size, or x and y are less than or equals to zero.)<br>
+      Expected: Similar to previous.
+
+### Deleting a meeting
+
+1. Deleting a meeting while all meetings are being shown
+
+   1. Prerequisites: List all meetings using the `listMeetings` command.
+
+   1. Test case: `deleteMeeting clientIndex/1 meetingIndex/1`<br>
+      Expected: First meeting is deleted from the list. Details of the deleted meeting shown in the status message. 
+
+   1. Test case: `deleteMeeting clientIndex/1 meetingIndex/0`<br>
+      Expected: No meeting is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect deleteMeeting commands to try: `deleteMeeting clientIndex/x 
+      meetingIndex/y`, `deleteMeeting clientIndex/x`, `...` (where x is larger than the client 
+      list size, and y is larger than the meeting list size, or x and y are less than or equals to zero.) <br>
+      Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Simulating a missing file
 
-1. _{ more test cases …​ }_
+        1. Prerequisites: Delete the data file `data/addressbook.json` if it exists.
+
+        1. Test case: Launch the app<br>
+            Expected: A new data file is created. The app launches with a set of sample contacts.
+    
+    1. Simulating a corrupted file
+       1. Prerequisites: Corrupt the data file `data/addressbook.json` by adding some random text.
+    
+       1. Test case: Launch the app<br>
+           Expected: A new data file is created. The app launches with a set of sample contacts.
+
+---
+
+## **Appendix: Possible Improvements**
+In future iterations of FinCliq, the following improvements could be made:
+
+### Prevent meeting slots at the same date and time 
+
+#### Implementation
+
+Currently, multiple meetings can be scheduled at the same date and time. This is not ideal as it may cause confusion for the financial advisor. In the future, we hope to be able to prevent the user from adding a meeting with the same date and time as an existing meeting.
+
+To implement this, there has to be a check to ensure that the meeting timing does not clash with any other meetings when adding/editing meetings.
+
+#### Design consideration:
+
+**Aspect: How to ensure that the meeting timing does not clash with any other meetings:**
+
+* When a new meeting is added or edited, check if the meeting timing clashes with any other meetings.
+    * Pros: Easy to implement.
+    * Cons: Additional check required when adding/editing meetings.
+
+### Change duration of each meeting to start in intervals of 30 minutes
+
+#### Implementation
+
+Currently, the duration of each meeting is fixed at 1 hour.
+
+In the future, we hope to be able to change the duration of each meeting to start in intervals 
+of 30 minutes. This will allow the financial advisors to have more flexibility in scheduling 
+meetings.
+
+To implement this, the validation check in the `Meeting` class will have to be updated to ensure 
+the duration of each meeting is in intervals of 30 minutes.
+
+#### Design consideration:
+
+**Aspect: How to ensure that the duration of each meeting is in intervals of 30 minutes:**
+
+* When a new meeting is added or edited, check if the duration of the meeting is in intervals of 30 minutes.
+    * Pros: Easy to implement.
+    * Cons: Additional check required when adding/editing meetings.
+
+### Shorten command words to improve user experience
+
+Currently, the command words are quite long and may be difficult to remember. In the future, we 
+hope to shorten the command words to improve the user experience to optimise the user experience 
+for financial advisors who are comfortable with typing and using CLI apps.
+
+To implement this, the command words in the different `Command` classes will have to be updated to 
+shorter 
+command words, such as `am` for `addMeeting`, `dm` for `deleteMeeting`, `em` for `editMeeting`, etc.
+
+#### Design consideration:
+
+**Aspect: How to shorten the command words:**
+
+* Update the command words in the different `Command` classes to shorter command words.
+    * Pros: Easy to implement.
+    * Cons: May be confusing for users who are used to the current command words.
+
+---
