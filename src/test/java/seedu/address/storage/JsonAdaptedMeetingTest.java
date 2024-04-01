@@ -1,21 +1,19 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.JAMAL;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.testutil.MeetingBuilder;
 
 public class JsonAdaptedMeetingTest {
     private static final String INVALID_NAME = "R@chel";
@@ -36,85 +34,49 @@ public class JsonAdaptedMeetingTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(JAMAL);
-        assertEquals(JAMAL, person.toModelType());
-    }
-
-    @Test
-    public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    public void toModelType_validMeetingDetails_returnsMeeting() throws Exception {
+        JsonAdaptedMeeting meeting = new JsonAdaptedMeeting(new MeetingBuilder().buildMeeting());
+        assertEquals(new MeetingBuilder().buildMeeting(), meeting.toModelType());
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime parsedDateTime = LocalDateTime.parse(VALID_DATETIME, formatter);
+        JsonAdaptedMeeting meeting = new JsonAdaptedMeeting(null, parsedDateTime);
+        String expectedMessage = String.format(
+                JsonAdaptedMeeting.MISSING_FIELD_MESSAGE_FORMAT, "description");
+        assertThrows(IllegalValueException.class, expectedMessage, meeting::toModelType);
     }
 
     @Test
-    public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    public void toModelType_emptyName_throwsIllegalValueException() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime parsedDateTime = LocalDateTime.parse(VALID_DATETIME, formatter);
+        JsonAdaptedMeeting meeting = new JsonAdaptedMeeting("", parsedDateTime);
+        String expectedMessage = String.format(
+                JsonAdaptedMeeting.MISSING_FIELD_MESSAGE_FORMAT, "description");
+        assertThrows(IllegalValueException.class, expectedMessage, meeting::toModelType);
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    public void toModelType_blankName_throwsIllegalValueException() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime parsedDateTime = LocalDateTime.parse(VALID_DATETIME, formatter);
+        JsonAdaptedMeeting meeting = new JsonAdaptedMeeting("  ", parsedDateTime);
+        String expectedMessage = String.format(
+                JsonAdaptedMeeting.MISSING_FIELD_MESSAGE_FORMAT, "description");
+        assertThrows(IllegalValueException.class, expectedMessage, meeting::toModelType);
     }
 
     @Test
-    public void toModelType_invalidEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
-                        VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = Email.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, null,
-                VALID_ADDRESS, VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
-                        VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                null, VALID_TAGS, VALID_MEETINGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_MEETINGS);
-        assertThrows(IllegalValueException.class, person::toModelType);
+    public void toModelType_nullDateTime_throwsIllegalValueException() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime parsedDateTime = LocalDateTime.parse(VALID_DATETIME, formatter);
+        JsonAdaptedMeeting meeting = new JsonAdaptedMeeting("test", null);
+        String expectedMessage = String.format(
+                JsonAdaptedMeeting.MISSING_FIELD_MESSAGE_FORMAT, "date time");
+        assertThrows(IllegalValueException.class, expectedMessage, meeting::toModelType);
     }
 
 }
