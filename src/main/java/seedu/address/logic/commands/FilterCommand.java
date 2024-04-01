@@ -3,11 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsTagPredicate;
 import seedu.address.model.tag.Tag;
@@ -55,6 +58,14 @@ public class FilterCommand extends Command {
             model.updateFilteredPersonList(p -> true);
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_FILTER_TAG, tag));
         }
+        List<Person> filteredPersonsWithTag = model.getFilteredPersonList();
+        List<Meeting> meetingsOfPersonsWithTag = new ArrayList<>();
+
+        for (Person p : filteredPersonsWithTag) {
+            meetingsOfPersonsWithTag.addAll(p.getMeetings());
+        }
+
+        model.updateFilteredMeetingList(meetingsOfPersonsWithTag::contains);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.tag));
     }

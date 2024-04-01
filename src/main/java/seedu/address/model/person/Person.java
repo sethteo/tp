@@ -98,11 +98,13 @@ public class Person {
         meeting.setClient(this);
         return this;
     }
+
     /**
      * Returns true if the person has existing meeting.
      */
     public boolean hasExistingMeeting(Meeting meeting) {
         for (Meeting m : this.meetings) {
+            // prevents same time and same description
             if (m.equals(meeting)) {
                 return true;
             }
