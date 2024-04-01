@@ -24,7 +24,7 @@ public class DeleteMeetingCommand extends Command {
             + ": Deletes the meeting of a particular client identified by the "
             + "index number used in the displayed client list.\n"
             + "Parameters: CLIENT_INDEX (must be a positive integer) MEETING_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 1";
+            + "Example: " + COMMAND_WORD + " clientIndex/1 meetingIndex/1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Meeting %1$s deleted successfully ";
 
