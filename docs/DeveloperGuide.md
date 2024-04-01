@@ -3,8 +3,18 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
-  {:toc}
+## Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI Component](#ui-component)
+   3. [Logic Component](#logic-component)
+   4. [Model Component](#model-component)
+   5. [Storage Component](#storage-component)
+   6. [Common Classes](#common-classes)
+4. [Appendix](#appendix-requirements)
+
 
 ---
 
@@ -84,15 +94,6 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 
-![Indepth structure of UI Component](images/UiClassDiagramUpdated.png)
-The diagram above shows the classes that are associated to the `PersonListPanel` as well as the `MeetingListPanel` in order to generate the UI that we have.
-
-The `UI` component,
-
-- executes user commands using the `Logic` component.
-- listens for changes to `Model` data so that the UI can be updated with the modified data.
-- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
 
@@ -462,6 +463,32 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### View a specific client
+
+1. View a client based on an index provided
+    
+   1. Prerequisites: At least 1 client in client list
+
+   2. Test case: `view c [index not in list]`
+      Expected: No client is shown. Error details that index provided is invalid in status message.
+   3. Test case: `view c [valid index]` followed by `view c [valid index]`
+      Expected: No new client is shown. Error details to request user to go back to home page by using `list` command
+   4. Test case: `view c [valid index]`
+      Expected: Shows the client with the index provided as well as all his/her associated meetings.
+   5. Other incorrect view commands to try: `view`, `view [any character] [any number]` 
+
+### Filter client by tag
+
+1. Filters through list of clients by a Tag provided
+
+    1. Prerequisites: At least 1 client in client list
+
+    2. Test case: `filter friends`
+       Expected: Shows all clients who have the tag "friends"
+   
+    3. Test case: `filter [invalid tag]`
+       Expected: Shows all clients. Error details that tag provided does not belong to any client.
 
 ### Adding a meeting
 
