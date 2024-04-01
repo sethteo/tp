@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -78,11 +79,14 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialAddressData;
         boolean addressBookIsPresent = false;
+
+        // TODO: RETRIEVAL OF ADDRESS BOOK FROM FILE PATH
+        Path storagePath = Paths.get("data/newAddressBook.json");
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readAddressBook(storagePath);
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                        + " populated with custom AddressBook.");
             } else {
                 addressBookIsPresent = true;
             }
@@ -93,7 +97,9 @@ public class MainApp extends Application {
             initialAddressData = new AddressBook();
         }
 
-        return new ModelManager(initialAddressData, userPrefs);
+        ModelManager modelManager = new ModelManager(initialAddressData, userPrefs);
+        modelManager.setAddressBookFilePath(storagePath);
+        return modelManager;
     }
 
     private void initLogging(Config config) {
@@ -181,6 +187,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
+            storage.saveAddressBook(model.getAddressBook(), model.getAddressBookFilePath());
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));

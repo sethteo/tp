@@ -1,0 +1,18 @@
+{
+  "persons": [ {
+    "name": "Lee Yong @ing",
+    "phone": "91234567812",
+    "email": "leeyongning@gmail.com",
+    "address": "69th street",
+    "meetings": [
+      {
+        "description": "sign life insurance",
+        "dateTime": "2024-11-05T21:30:00"
+      },
+      {
+        "description": "buy stock plan",
+        "dateTime": "2025-12-05T21:30:00"
+      }
+    ]
+  } ]
+}
