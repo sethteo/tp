@@ -25,7 +25,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    - `list` : Lists all clients.
+    - `list` : List all clients.
 
     - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -33,7 +33,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
     - `clear` : Deletes all clients.
 
-    - `exit` : Exits the app.
+    - `exit` : Exit the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -221,7 +221,7 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clear all entries from the address book.
 
 Format: `clear`
 
@@ -244,10 +244,6 @@ If your changes to the data file makes its format invalid, FinCliq will discard 
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ---
 
 ## FAQ
@@ -258,6 +254,9 @@ To keep track of your clients/meetings, you can follow the various commands in t
 
 **Q**: Is there a limit to the number of clients/meetings I can store in the app<br>
 **A**: No, there is no limit to the number.
+
+**Q**: Are the clients/meetings storage persistent between application restarts?<br>
+**A**: Yes. We have implemented a storage feature that would populate the information inside the address book based on a .json file.
 
 ---
 
