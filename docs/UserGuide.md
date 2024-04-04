@@ -157,6 +157,7 @@ Format: `filter TAG_NAME`
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
+  ![result for filter](images/release_images/filterMeeting.png)
 
 ## Meeting Functions
 
@@ -174,7 +175,7 @@ Examples:
 
 - `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan` Adds a meeting with description "Sign life plan" and meeting date 02-01-2025 12:00 to client with index 1.
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
-  ![result for second add](images/resultImages/addMeetingResult.png)
+  ![result for first add](images/release_images/addMeeting.png)
 
 ### Listing all Meetings for a Client: `view`
 
@@ -187,7 +188,7 @@ Format: `view c CLIENT_INDEX`
 Example:
 
 - `view c 2` Lists all meetings of the first client.<br>
-  ![result for 'view c 2'](images/resultImages/viewClientResult.png)
+  ![result for 'view c 2'](images/release_images/viewMeeting.png)
 
 ### Editing a Meeting: `edit`
 
@@ -204,7 +205,7 @@ Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCR
 Examples:
 
 - `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
-  ![edit meeting result](images/resultImages/editMeetingResult.png)
+  ![edit meeting result](images/release_images/editMeeting.png)
 
 ### Deleting a Meeting: `delete`
 
@@ -217,7 +218,7 @@ Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 Example:
 
 - `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the first client.<br>
-  ![delete meeting result](images/resultImages/deleteMeetingResult.png)
+  ![delete meeting result](images/release_images/deleteMeeting.png)
 
 ### Clearing all entries : `clear`
 
