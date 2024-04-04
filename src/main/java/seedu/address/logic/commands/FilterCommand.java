@@ -29,7 +29,7 @@ public class FilterCommand extends Command {
             + "tag - The tag you wish to filter your clients by\n"
             + "Example: " + COMMAND_WORD + " family";
 
-    public static final String MESSAGE_SUCCESS = "Displaying all clients filtered by: %s";
+    public static final String MESSAGE_SUCCESS = "Displaying all clients filtered by the tag: %s";
 
     private final Predicate<Person> predicate;
     private final Tag tag;
