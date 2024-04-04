@@ -5,8 +5,12 @@ title: User Guide
 
 FinCliq is a **desktop app for financial advisors to manage contacts and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FinCliQ can get your contact management tasks done faster than traditional GUI apps.
 
-- Table of Contents
-  {:toc}
+---
+## Table of contents
+<div class="reset-page-break-defaults" markdown="1">
+* Table of Contents
+{:toc}
+</div>
 
 ---
 
@@ -16,7 +20,8 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/fincliq/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq!.
+1. Copy the file to the folder you want to use as the _home folder_ for your own personal
+   FinCliq application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fincliq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -168,7 +173,8 @@ Adds a meeting for a specific client in the address book.
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
-- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`.
+- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`. It should also not
+  be before the current date and time.
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string.
 
 Examples:
