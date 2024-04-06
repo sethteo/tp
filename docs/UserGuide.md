@@ -210,7 +210,7 @@ Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCR
 Examples:
 
 - `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
-  ![edit meeting result](images/release_images/editMeeting.png)
+  ![edit meeting result](images/release_images/editMeetingResult.png)
 
 ### Deleting a Meeting: `deleteMeeting`
 
