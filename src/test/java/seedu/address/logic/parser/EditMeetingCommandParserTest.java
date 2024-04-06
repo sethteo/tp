@@ -1,23 +1,44 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CLIENT_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.JAMAL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditMeetingCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.testutil.MeetingBuilder;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EditMeetingCommandParserTest {
 
@@ -42,6 +63,10 @@ public class EditMeetingCommandParserTest {
         // no datetime specified
         String testInputDateTime = CLIENT_INDEX + MEETING_INDEX + VALID_NAME_AMY;
         assertParseFailure(parser, testInputDateTime, MESSAGE_INVALID_FORMAT);
+
+        // no description specified
+        String testInputDescription = CLIENT_INDEX + MEETING_INDEX + DATETIME;
+        assertParseFailure(parser, testInputDescription, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -63,6 +88,15 @@ public class EditMeetingCommandParserTest {
     }
 
     @Test
+    public void parse_missingDescription_failure() {
+        Meeting editedMeeting = new MeetingBuilder().withClient(JAMAL).buildMeeting();
+
+        // no description specified
+        String testInputDescription = CLIENT_INDEX + MEETING_INDEX + DATETIME;
+        assertParseFailure(parser, testInputDescription, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
     public void parse_invalidPreamble_failure() {
         String testInput = CLIENT_INDEX + MEETING_INDEX + VALID_NAME_AMY + DATETIME;
         // negative index
@@ -76,6 +110,27 @@ public class EditMeetingCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_allFieldsSpecified_success() {
+
+        String targetClientIndex = CLIENT_INDEX;
+        String targetMeetingIndex = MEETING_INDEX;
+        String description = PREFIX_NAME + VALID_NAME_AMY;
+        String dateTime = DATETIME;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime parsedDateTime = LocalDateTime.parse(VALID_DATETIME, formatter);
+
+        EditMeetingCommand expectedCommand = new EditMeetingCommand(
+                Index.fromOneBased(Integer.parseInt(VALID_CLIENT_INDEX)),
+                Index.fromOneBased(Integer.parseInt(VALID_MEETING_INDEX)),
+                VALID_NAME_AMY, parsedDateTime);
+
+        String userInput = "editMeeting clientIndex/1 meetingIndex/1 n/Amy Bee dt/01-01-2030 17:00";
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
 }
