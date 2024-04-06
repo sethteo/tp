@@ -25,7 +25,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    - `list` : Lists all clients.
+    - `list` : List all clients.
 
     - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -33,7 +33,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
     - `clear` : Deletes all clients.
 
-    - `exit` : Exits the app.
+    - `exit` : Exit the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -160,7 +160,7 @@ Examples:
 
 ## Meeting Functions
 
-### Adding a Meeting: `add`
+### Adding a Meeting: `addMeeting`
 
 Adds a meeting for a specific client in the address book.
 
@@ -189,24 +189,23 @@ Example:
 - `view c 2` Lists all meetings of the first client.<br>
   ![result for 'view c 2'](images/resultImages/viewClientResult.png)
 
-### Editing a Meeting: `edit`
+### Editing a Meeting: `editMeeting`
 
 Edits an existing meeting for a client.
 
-Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
+Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX d/DESCRIPTION dt/DATE_TIME`
 
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
-- At least one of the optional fields must be provided.
+- All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
 - When editing descriptions, the existing descriptions of the meeting will be removed i.e adding of descriptions is not cumulative.
-- You can remove all the meeting’s descriptions by typing `d/` without specifying any descriptions after it.
 
 Examples:
 
-- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
+- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
   ![edit meeting result](images/resultImages/editMeetingResult.png)
 
-### Deleting a Meeting: `delete`
+### Deleting a Meeting: `deleteMeeting`
 
 Deletes a specific meeting for a client.
 
@@ -216,12 +215,12 @@ Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 
 Example:
 
-- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the first client.<br>
+- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the second client.<br>
   ![delete meeting result](images/resultImages/deleteMeetingResult.png)
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clear all entries from the address book.
 
 Format: `clear`
 
@@ -244,10 +243,6 @@ If your changes to the data file makes its format invalid, FinCliq will discard 
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ---
 
 ## FAQ
@@ -258,6 +253,9 @@ To keep track of your clients/meetings, you can follow the various commands in t
 
 **Q**: Is there a limit to the number of clients/meetings I can store in the app<br>
 **A**: No, there is no limit to the number.
+
+**Q**: Are the clients/meetings storage persistent between application restarts?<br>
+**A**: Yes. We have implemented a storage feature that would populate the information inside the address book based on a .json file.
 
 ---
 

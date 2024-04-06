@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,13 +30,13 @@ public class EditMeetingCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_CLIENT_INDEX + "CLIENT INDEX "
             + PREFIX_MEETING_INDEX + "MEETING INDEX "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATETIME + "DATETIME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_MEETING_INDEX + "2 "
-            + PREFIX_NAME + "starbucks meeting "
-            + PREFIX_DATETIME + "01-01-2024 12:00 ";
+            + PREFIX_DESCRIPTION + "starbucks meeting "
+            + PREFIX_DATETIME + "01-01-2025 12:00 ";
 
     public static final String MESSAGE_EDIT_MEETING_SUCCESS = "Edited Meeting: %1$s";
     public static final String MEETING_NOT_EDITED = "At least one field to edit must be provided.";
