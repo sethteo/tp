@@ -180,8 +180,8 @@ Examples:
 
 - `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan` Adds a meeting with description "Sign life plan" and meeting date 02-01-2025 12:00 to client with index 1.
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
-  ![result for second add](images/resultImages/addMeetingResult.png)
-
+  ![result for first add](images/release_images/addMeeting.png)
+- 
 ### Listing all Meetings for a Client: `view`
 
 Shows a list of all meetings for a specific client.
@@ -193,23 +193,24 @@ Format: `view c CLIENT_INDEX`
 Example:
 
 - `view c 2` Lists all meetings of the first client.<br>
-  ![result for 'view c 2'](images/resultImages/viewClientResult.png)
+  ![result for 'view c 2'](images/release_images/viewMeeting.png)
 
 ### Editing a Meeting: `editMeeting`
 
 Edits an existing meeting for a client.
 
-Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX d/DESCRIPTION dt/DATE_TIME`
+Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
 
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
 - All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
 - When editing descriptions, the existing descriptions of the meeting will be removed i.e adding of descriptions is not cumulative.
+- Do note that the prefix for meeting description here is "n/", not "d/". Future enhancements will include standardising prefixes across different commands.
 
 Examples:
 
 - `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
-  ![edit meeting result](images/resultImages/editMeetingResult.png)
+  ![edit meeting result](images/release_images/editMeeting.png)
 
 ### Deleting a Meeting: `deleteMeeting`
 
