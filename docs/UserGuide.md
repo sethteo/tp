@@ -160,7 +160,7 @@ Examples:
 
 ## Meeting Functions
 
-### Adding a Meeting: `add`
+### Adding a Meeting: `addMeeting`
 
 Adds a meeting for a specific client in the address book.
 
@@ -189,24 +189,23 @@ Example:
 - `view c 2` Lists all meetings of the first client.<br>
   ![result for 'view c 2'](images/resultImages/viewClientResult.png)
 
-### Editing a Meeting: `edit`
+### Editing a Meeting: `editMeeting`
 
 Edits an existing meeting for a client.
 
-Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
+Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX d/DESCRIPTION dt/DATE_TIME`
 
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
-- At least one of the optional fields must be provided.
+- All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
 - When editing descriptions, the existing descriptions of the meeting will be removed i.e adding of descriptions is not cumulative.
-- You can remove all the meeting’s descriptions by typing `d/` without specifying any descriptions after it.
 
 Examples:
 
-- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
+- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
   ![edit meeting result](images/resultImages/editMeetingResult.png)
 
-### Deleting a Meeting: `delete`
+### Deleting a Meeting: `deleteMeeting`
 
 Deletes a specific meeting for a client.
 
@@ -216,7 +215,7 @@ Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 
 Example:
 
-- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the first client.<br>
+- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the second client.<br>
   ![delete meeting result](images/resultImages/deleteMeetingResult.png)
 
 ### Clearing all entries : `clear`

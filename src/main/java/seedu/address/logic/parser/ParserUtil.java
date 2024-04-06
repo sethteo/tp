@@ -133,7 +133,7 @@ public class ParserUtil {
     public static String parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Meeting.isValidDescription(trimmedDescription)) {
+        if (!Meeting.isValidDescription(trimmedDescription) || description.equals("")) {
             throw new ParseException(Meeting.MESSAGE_CONSTRAINTS);
         }
         return trimmedDescription;

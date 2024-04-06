@@ -5,8 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,12 +30,14 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_INDEX, PREFIX_MEETING_INDEX,
-                        PREFIX_NAME, PREFIX_DATETIME);
+                        PREFIX_DESCRIPTION, PREFIX_DATETIME);
 
         Map<Prefix, List<String>> map = argMultimap.getMap();
 
         Index meetingIndex;
         Index clientIndex;
+        String description;
+        LocalDateTime dateTime;
 
         try {
             meetingIndex = ParserUtil.parseMeetingIndex(argMultimap.getValue(PREFIX_MEETING_INDEX)
@@ -52,10 +54,24 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
                     EditMeetingCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATETIME, PREFIX_CLIENT);
+        try {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).orElse(""));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditMeetingCommand.MESSAGE_USAGE), pe);
+        }
 
-        LocalDateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-        String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_NAME).get());
+        try {
+            dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).orElse(""));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditMeetingCommand.MESSAGE_USAGE), pe);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTION, PREFIX_DATETIME, PREFIX_CLIENT);
+
+        dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         clientIndex = ParserUtil.parseClientIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
         meetingIndex = ParserUtil.parseMeetingIndex(argMultimap.getValue(PREFIX_MEETING_INDEX).get());
 
