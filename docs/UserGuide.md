@@ -5,12 +5,8 @@ title: User Guide
 
 FinCliq is a **desktop app for financial advisors to manage contacts and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FinCliQ can get your contact management tasks done faster than traditional GUI apps.
 
----
-## Table of contents
-<div class="reset-page-break-defaults" markdown="1">
-* Table of Contents
-{:toc}
-</div>
+- Table of Contents
+  {:toc}
 
 ---
 
@@ -20,8 +16,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/fincliq/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your own personal
-   FinCliq application.
+1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq!.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fincliq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -162,26 +157,24 @@ Format: `filter TAG_NAME`
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
-  ![result for filter](images/release_images/filterMeeting.png)
 
 ## Meeting Functions
 
-### Adding a Meeting: `add`
+### Adding a Meeting: `addMeeting`
 
 Adds a meeting for a specific client in the address book.
 
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
-- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`. It should also not
-  be before the current date and time.
+- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`.
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string.
 
 Examples:
 
 - `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan` Adds a meeting with description "Sign life plan" and meeting date 02-01-2025 12:00 to client with index 1.
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
-  ![result for first add](images/release_images/addMeeting.png)
+  ![result for second add](images/resultImages/addMeetingResult.png)
 
 ### Listing all Meetings for a Client: `view`
 
@@ -194,26 +187,25 @@ Format: `view c CLIENT_INDEX`
 Example:
 
 - `view c 2` Lists all meetings of the first client.<br>
-  ![result for 'view c 2'](images/release_images/viewMeeting.png)
+  ![result for 'view c 2'](images/resultImages/viewClientResult.png)
 
-### Editing a Meeting: `edit`
+### Editing a Meeting: `editMeeting`
 
 Edits an existing meeting for a client.
 
-Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
+Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX d/DESCRIPTION dt/DATE_TIME`
 
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
-- At least one of the optional fields must be provided.
+- All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
 - When editing descriptions, the existing descriptions of the meeting will be removed i.e adding of descriptions is not cumulative.
-- You can remove all the meeting’s descriptions by typing `d/` without specifying any descriptions after it.
 
 Examples:
 
-- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
-  ![edit meeting result](images/release_images/editMeeting.png)
+- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
+  ![edit meeting result](images/resultImages/editMeetingResult.png)
 
-### Deleting a Meeting: `delete`
+### Deleting a Meeting: `deleteMeeting`
 
 Deletes a specific meeting for a client.
 
@@ -223,8 +215,8 @@ Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 
 Example:
 
-- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the first client.<br>
-  ![delete meeting result](images/release_images/deleteMeeting.png)
+- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the second client.<br>
+  ![delete meeting result](images/resultImages/deleteMeetingResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -264,13 +256,6 @@ To keep track of your clients/meetings, you can follow the various commands in t
 
 **Q**: Are the clients/meetings storage persistent between application restarts?<br>
 **A**: Yes. We have implemented a storage feature that would populate the information inside the address book based on a .json file.
-
-**Q**: When entering my name, some characters do not show up. Is this the intended behaviour?<br>
-**A**: Yes, currently, only our app only supports english names, although we intend to support this in the future.
-
-**Q**: I entered a date and time that was before the current time and it fails to add. Is this
-the intended behaviour?<br>
-**A**: Yes. We implemented this so that people would not enter meetings that occur in the past.
 
 ---
 
