@@ -73,13 +73,6 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 * Spacing of values:
     * Leading and trailing spaces of input values will be removed.
-    * Extra spaces between values will remain unless otherwise specified.
-
-* Case sensitivity:
-    * All input values are case-sensitive unless otherwise specified.
-
-* Duplicate contacts:
-    * Contacts are considered duplicates if they share the same phone number.
 
 * `NAME` format:
     * Can only contain alphabetical characters and spaces.
