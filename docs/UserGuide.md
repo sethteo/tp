@@ -56,7 +56,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be us ed as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -67,9 +67,48 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about input values format:**<br>
+
+* Spacing of values:
+    * Leading and trailing spaces of input values will be removed.
+    * Extra spaces between values will remain unless otherwise specified.
+
+* Case sensitivity:
+    * All input values are case-sensitive unless otherwise specified.
+
+* Duplicate contacts:
+    * Contacts are considered duplicates if they share the same phone number.
+
+* `NAME` format:
+    * Can only contain alphabetical characters and spaces.
+    * Cannot be blank.
+    * Extra spaces between values will be processed as a single space.
+
+* `PHONE_NUMBER` format:
+    * Must follow the standard Singapore telephone numbers (i.e. 9XXXXXXX or 8XXXXXXX).
+    * Spaces between numbers will be ignored.
+
+* `EMAIL` format:
+    * Must follow the standard email address format (i.e. example@example.com).
+
+* `ADDRESS` format:
+    * Can only consist of alphanumeric characters, whitespace and the following set of characters: ``#-(),``.
+    * Cannot be blank.
+
+* `TAG` format:
+    * Can only consist of alphanumeric characters.
+    * Must be a single word
+
+* `DATE_TIME` format:
+    * Must follow the format `YYYY-MM-DD HH:MM` (i.e. `02-01-2025 12:00`).
+
+</div>
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -153,11 +192,12 @@ Examples:
 ### Filter client by tag : `filter`
 Filter through clients by a specific tag provided.
 
-Format: `filter TAG_NAME`
+Format: `filter TAG`
 
-- `TAG_NAME` refers to the tag given to clients
+- `TAG` refers to the tag given to clients
 - Displays all clients with the specified tag
 - There should only be one tag provided else an error would be shown
+- Tags should be a single word only 
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
@@ -182,7 +222,7 @@ Examples:
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
   ![result for first add](images/release_images/addMeeting.png)
 - 
-### Listing all Meetings for a Client: `view`
+### Listing all Meetings for a Client: `view c`
 
 Shows a list of all meetings for a specific client.
 
@@ -192,8 +232,8 @@ Format: `view c CLIENT_INDEX`
 
 Example:
 
-- `view c 2` Lists all meetings of the first client.<br>
-  ![result for 'view c 2'](images/release_images/viewMeeting.png)
+- `view c 1` Lists all meetings of the first client.<br>
+  ![result for 'view c 1'](images/release_images/viewMeeting.png)
 
 ### Editing a Meeting: `editMeeting`
 
@@ -300,7 +340,7 @@ the intended behaviour?<br>
 | Action     | Format, Examples                                                                                                                                                                       |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`<br>e.g., `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan`                                              |
-| **List**   | `view c CLIENT_INDEX`<br>e.g., `view c 2`                                                                                                                                              |
+| **View**   | `view c CLIENT_INDEX`<br>e.g., `view c 2`                                                                                                                                              |
 | **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` |
 | **Delete** | `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`<br>e.g., `deleteMeeting clientIndex/2 meetingIndex/1`                                                              |
 
