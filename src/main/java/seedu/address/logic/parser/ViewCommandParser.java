@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import java.math.BigInteger;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -57,7 +57,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             BigInteger index = new BigInteger(arguments[1]);
             if (!(index.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) <= 0
                     && index.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) >= 0) || index.signum() == -1) {
-                throw new ParseException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                         index));
             }
         }
