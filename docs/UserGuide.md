@@ -213,7 +213,7 @@ Examples:
 - `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
   ![edit meeting result](images/release_images/editMeeting.png)
 
-### Deleting a Meeting: `delete`
+### Deleting a Meeting: `deleteMeeting`
 
 Deletes a specific meeting for a client.
 
@@ -223,7 +223,7 @@ Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 
 Example:
 
-- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the first client.<br>
+- `deleteMeeting clientIndex/1 meetingIndex/1` Deletes the first meeting for the first client.<br>
   ![delete meeting result](images/release_images/deleteMeeting.png)
 
 ### Clearing all entries : `clear`
