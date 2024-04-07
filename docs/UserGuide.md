@@ -95,7 +95,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
     * Must be a single word
 
 * `DATE_TIME` format:
-    * Must follow the format `YYYY-MM-DD HH:MM` (i.e. `02-01-2025 12:00`).
+    * Must follow the format `dd-MM-YYYY HH:MM` (i.e. `02-01-2025 12:00`).
 
 </div>
 
@@ -205,9 +205,14 @@ Adds a meeting for a specific client in the address book.
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
-- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`. It should also not
-  be before the current date and time.
-- `DESCRIPTION` refers to what the meeting is about. Format should be a single string.
+- `DATE_TIME` format should be `dd-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`. **It should also not
+  be before the current date and time.** 
+- `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
+
+Rejected Scenarios:
+- Different clients with the same meeting date and time but different description.
+- Same client with the same meeting date and time but different description.
+- Same client with the same meeting date and time and description.
 
 Examples:
 
@@ -307,6 +312,12 @@ To keep track of your clients/meetings, you can follow the various commands in t
 the intended behaviour?<br>
 **A**: Yes. We implemented this so that people would not enter meetings that occur in the past.
 
+**Q**: I entered a meeting for the same client with the same date and time but different description and it fails to add. Is this the intended behaviour?<br>
+**A**: Yes. We implemented this with the intention that our user(financial advisor) is only booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
+
+**Q**: I entered a meeting for a different client with the same date and time and description and it succeeds to add. Is this the intended behaviour?<br>
+**A**: Yes. We implemented this with the intention that our user(financial advisor) can be meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
+
 ---
 
 ## Known issues
@@ -336,7 +347,7 @@ the intended behaviour?<br>
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`<br>e.g., `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan`                                              |
 | **View**   | `view c CLIENT_INDEX`<br>e.g., `view c 2`                                                                                                                                              |
-| **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` |
+| **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2025 12:00` |
 | **Delete** | `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`<br>e.g., `deleteMeeting clientIndex/2 meetingIndex/1`                                                              |
 
 
