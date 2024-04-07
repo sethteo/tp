@@ -69,7 +69,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about input values format:**<br>
+**:information_source: Notes about the command input format:**<br>
 
 * Spacing of values:
     * Leading and trailing spaces of input values will be removed.
@@ -226,7 +226,9 @@ Shows a list of all meetings for a specific client.
 
 Format: `view c CLIENT_INDEX`
 
-- `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list. 
+- `CLIENT_INDEX` **must be a positive integer** 1, 2, 3, …​.
+- For `CLIENT_INDEX` to be valid, `CLIENT_INDEX` must be the index number shown of a valid client in the clients list 
 
 Example:
 

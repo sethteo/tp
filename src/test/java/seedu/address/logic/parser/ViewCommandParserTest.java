@@ -1,13 +1,17 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.math.BigInteger;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewClientCommand;
+
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -33,6 +37,18 @@ public class ViewCommandParserTest {
     @Test
     public void parse_invalidArgsViewClient_throwsParseException() {
         assertParseFailure(parser, "c", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_negativeIndex_throwsParseException() {
+        assertParseFailure(parser, "c -1", String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, -1));
+    }
+
+    @Test
+    public void parse_bigInt_throwsParseException() {
+        assertParseFailure(parser, "c 1111111111111111111111111111111",
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        new BigInteger("1111111111111111111111111111111").toString()));
     }
 
     // test for many white spaces
