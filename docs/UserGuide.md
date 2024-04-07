@@ -20,8 +20,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/fincliq/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your own personal
-   FinCliq application.
+1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fincliq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -162,7 +161,7 @@ Format: `filter TAG_NAME`
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
-  ![result for filter](images/release_images/filterMeeting.png)
+- ![result for filter](images/release_images/filterMeeting.png)
 
 ## Meeting Functions
 
@@ -182,7 +181,7 @@ Examples:
 - `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan` Adds a meeting with description "Sign life plan" and meeting date 02-01-2025 12:00 to client with index 1.
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
   ![result for first add](images/release_images/addMeeting.png)
-
+- 
 ### Listing all Meetings for a Client: `view`
 
 Shows a list of all meetings for a specific client.
@@ -203,14 +202,14 @@ Edits an existing meeting for a client.
 Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
 
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
-- At least one of the optional fields must be provided.
+- All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
 - When editing descriptions, the existing descriptions of the meeting will be removed i.e adding of descriptions is not cumulative.
-- You can remove all the meeting’s descriptions by typing `d/` without specifying any descriptions after it.
+- Do note that the prefix for meeting description here is "n/", not "d/". Future enhancements will include standardising prefixes across different commands.
 
 Examples:
 
-- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
+- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
   ![edit meeting result](images/release_images/editMeeting.png)
 
 ### Deleting a Meeting: `deleteMeeting`
@@ -225,6 +224,7 @@ Example:
 
 - `deleteMeeting clientIndex/1 meetingIndex/1` Deletes the first meeting for the first client.<br>
   ![delete meeting result](images/release_images/deleteMeeting.png)
+
 
 ### Clearing all entries : `clear`
 
