@@ -56,7 +56,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be us ed as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -222,7 +222,7 @@ Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 
 Example:
 
-- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the second client.<br>
+- `deleteMeeting clientIndex/1 meetingIndex/1` Deletes the first meeting for the first client.<br>
   ![delete meeting result](images/release_images/deleteMeeting.png)
 
 
