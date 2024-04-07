@@ -221,7 +221,9 @@ Shows a list of all meetings for a specific client.
 
 Format: `view c CLIENT_INDEX`
 
-- `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list. 
+- `CLIENT_INDEX` **must be a positive integer** 1, 2, 3, …​.
+- For `CLIENT_INDEX` to be valid, `CLIENT_INDEX` must be the index number shown of a valid client in the clients list 
 
 Example:
 
