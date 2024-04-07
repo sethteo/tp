@@ -69,7 +69,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about input values format:**<br>
+**:information_source: Notes about the command input format:**<br>
 
 * Spacing of values:
     * Leading and trailing spaces of input values will be removed.
