@@ -18,7 +18,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/fincliq/releases).
+1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq application.
 
@@ -31,7 +31,8 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
     - `list` : List all clients.
 
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
+      contact named `John Doe` to FinCliq.
 
     - `delete 3` : Deletes the 3rd clients shown in the current list.
 
@@ -43,7 +44,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 ---
 
-## Features
+## Features & Commands
 
 <div markdown="block" class="alert alert-info">
 
@@ -53,7 +54,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -95,11 +96,13 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
     * Must be a single word
 
 * `DATE_TIME` format:
-    * Must follow the format `dd-MM-YYYY HH:MM` (i.e. `02-01-2025 12:00`).
+    * Must follow the format `DD-MM-YYYY HH:MM` (i.e. `02-01-2025 12:00`).
 
 </div>
 
-### Viewing help : `help`
+### General Functions
+
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -107,13 +110,43 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-## Client Functions
+#### Clearing all entries : `clear`
 
-### Adding a client: `add`
+Clear all entries from FinCliq.
 
-Adds a client to the address book.
+Format: `clear`
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### Saving the data
+
+FinCliq data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
+
+#### Editing the data file
+
+FinCliq data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value 
+entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+### Client Functions
+
+#### Adding a client: `add`
+
+Adds a client to FinCliq.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+
+- The client’s name must be provided and must be alphanumeric.
+- Duplicate clients with the same name are not allowed.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0)
@@ -124,22 +157,23 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all clients : `list`
+#### Listing all clients : `list`
 
-Shows a list of all clients in the address book.
+Shows a list of all clients in FinCliq.
 
 Format: `list`
 
-### Editing a client : `edit`
+#### Editing a client : `edit`
 
-Edits an existing client in the address book!
+Edits an existing client in FinCliq.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 - Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the client will be removed i.e. adding of tags is not 
+  cumulative.
 - You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -148,13 +182,13 @@ Examples:
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Locating clients by name: `find`
+#### Locating clients by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -167,9 +201,9 @@ Examples:
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a client : `delete`
+#### Deleting a client : `delete`
 
-Deletes the specified client from the address book.
+Deletes the specified client from FinCliq.
 
 Format: `delete INDEX`
 
@@ -179,10 +213,10 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd client in the address book.
+- `list` followed by `delete 2` deletes the 2nd client in FinCliq.
 - `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
-### Filter client by tag : `filter`
+#### Filter client by tag : `filter`
 Filter through clients by a specific tag provided.
 
 Format: `filter TAG`
@@ -194,19 +228,19 @@ Format: `filter TAG`
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
-- ![result for filter](images/release_images/filterMeeting.png)
+![result for filter](images/release_images/filterMeeting.png)
 
-## Meeting Functions
+### Meeting Functions
 
-### Adding a Meeting: `addMeeting`
+#### Adding a Meeting: `addMeeting`
 
-Adds a meeting for a specific client in the address book.
+Adds a meeting for a specific client in FinCliq.
 
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
-- `DATE_TIME` format should be `dd-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`. **It should also not
-  be before the current date and time.** 
+- `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
+  the current time.**
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
 
 Rejected Scenarios:
@@ -219,8 +253,8 @@ Examples:
 - `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan` Adds a meeting with description "Sign life plan" and meeting date 02-01-2025 12:00 to client with index 1.
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
   ![result for first add](images/release_images/addMeeting.png)
-- 
-### Listing all Meetings for a Client: `view c`
+
+#### Listing all Meetings for a Client: `view c`
 
 Shows a list of all meetings for a specific client.
 
@@ -235,7 +269,7 @@ Example:
 - `view c 1` Lists all meetings of the first client.<br>
   ![result for 'view c 1'](images/release_images/viewMeeting.png)
 
-### Editing a Meeting: `editMeeting`
+#### Editing a Meeting: `editMeeting`
 
 Edits an existing meeting for a client.
 
@@ -244,7 +278,8 @@ Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCR
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
 - All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
-- When editing descriptions, the existing descriptions of the meeting will be removed i.e adding of descriptions is not cumulative.
+- When editing descriptions, the existing descriptions of the meeting will be removed i.e. 
+  adding of descriptions is not cumulative.
 - Do note that the prefix for meeting description here is "n/", not "d/". Future enhancements will include standardising prefixes across different commands.
 
 Examples:
@@ -252,7 +287,7 @@ Examples:
 - `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
   ![edit meeting result](images/release_images/editMeeting.png)
 
-### Deleting a Meeting: `deleteMeeting`
+#### Deleting a Meeting: `deleteMeeting`
 
 Deletes a specific meeting for a client.
 
@@ -265,35 +300,13 @@ Example:
 - `deleteMeeting clientIndex/1 meetingIndex/1` Deletes the first meeting for the first client.<br>
   ![delete meeting result](images/release_images/deleteMeeting.png)
 
-
-### Clearing all entries : `clear`
-
-Clear all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-FinCliq data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
 ---
 
 ## FAQ
+
+**Q**: I realised that persons and clients are both used in the user guide. What is the difference 
+between them?<br>
+**A**: In FinCliq, persons and clients are used interchangeably. A person is a client in FinCliq.
 
 **Q**: How do I use the app?<br>
 **A**: This app is designed to help you keep track of your clients and meetings with them. <br>
@@ -303,19 +316,21 @@ To keep track of your clients/meetings, you can follow the various commands in t
 **A**: No, there is no limit to the number.
 
 **Q**: Are the clients/meetings storage persistent between application restarts?<br>
-**A**: Yes. We have implemented a storage feature that would populate the information inside the address book based on a .json file.
+**A**: Yes. We have implemented a storage feature that would populate the information inside FinCliq based on a .json file.
 
 **Q**: When entering my name, some characters do not show up. Is this the intended behaviour?<br>
 **A**: Yes, currently, only our app only supports english names, although we intend to support this in the future.
 
-**Q**: I entered a date and time that was before the current time and it fails to add. Is this
+**Q**: I entered a date and time that was before the current time, and it fails to add. Is this
 the intended behaviour?<br>
 **A**: Yes. We implemented this so that people would not enter meetings that occur in the past.
 
-**Q**: I entered a meeting for the same client with the same date and time but different description and it fails to add. Is this the intended behaviour?<br>
+**Q**: I entered a meeting for the same client with the same date and time but different 
+description, and it fails to add. Is this the intended behaviour?<br>
 **A**: Yes. We implemented this with the intention that our user(financial advisor) is only booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
 
-**Q**: I entered a meeting for a different client with the same date and time and description and it succeeds to add. Is this the intended behaviour?<br>
+**Q**: I entered a meeting for a different client with the same date and time and description, 
+and it succeeds to add. Is this the intended behaviour?<br>
 **A**: Yes. We implemented this with the intention that our user(financial advisor) can be meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
 
 ---
@@ -357,3 +372,4 @@ the intended behaviour?<br>
 |-----------|------------------|
 | **Clear** | `clear`          |
 | **Help**  | `help`           |
+| **Exit**  | `exit`           |
