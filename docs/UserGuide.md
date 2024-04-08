@@ -68,6 +68,11 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list. In the example below `CLIENT_INDEX` is circled in red for added clarity.
+  ![circled client index](images/clientIndex.png)
+
+
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command input format:**<br>
@@ -79,24 +84,30 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
     * Can only contain alphabetical characters and spaces.
     * Cannot be blank.
     * Extra spaces between values will be processed as a single space.
+    * Example: "John Doe"
 
 * `PHONE_NUMBER` format:
     * Must follow the standard Singapore telephone numbers (i.e. 9XXXXXXX or 8XXXXXXX).
     * Spaces between numbers will be ignored.
+    * Example: 91234567
 
 * `EMAIL` format:
-    * Must follow the standard email address format (i.e. example@example.com).
+    * Must follow the standard email address format
+    * Example: alexyeoh@example.com
 
 * `ADDRESS` format:
     * Can only consist of alphanumeric characters, whitespace and the following set of characters: ``#-(),``.
     * Cannot be blank.
+    * Example: `Blk 30 Geylang Street 29, #06-40`
 
 * `TAG` format:
     * Can only consist of alphanumeric characters.
     * Must be a single word
+    * Example: `friends`
 
 * `DATE_TIME` format:
-    * Must follow the format `DD-MM-YYYY HH:MM` (i.e. `02-01-2025 12:00`).
+    * Must follow the format `DD-MM-YYYY HH:MM` 
+    * Example: `02-01-2025 12:00`
 
 </div>
 
@@ -167,9 +178,9 @@ Format: `list`
 
 Edits an existing client in FinCliq.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the client at the specified `CLIENT_INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the client will be removed i.e. adding of tags is not 
@@ -205,9 +216,9 @@ Examples:
 
 Deletes the specified client from FinCliq.
 
-Format: `delete INDEX`
+Format: `delete CLIENT_INDEX`
 
-- Deletes the client at the specified `INDEX`.
+- Deletes the client at the specified `CLIENT_INDEX`.
 - The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
@@ -238,7 +249,8 @@ Adds a meeting for a specific client in FinCliq.
 
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
-- `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list. 
+- `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, …​.
 - `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
   the current time.**
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
@@ -261,8 +273,8 @@ Shows a list of all meetings for a specific client.
 Format: `view c CLIENT_INDEX`
 
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list. 
-- `CLIENT_INDEX` **must be a positive integer** 1, 2, 3, …​.
-- For `CLIENT_INDEX` to be valid, `CLIENT_INDEX` must be the index number shown of a valid client in the clients list 
+- `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, …​.
+- For `CLIENT_INDEX` to be valid, `CLIENT_INDEX` must be the index number belonging to a client in the displayed client list
 
 Example:
 
