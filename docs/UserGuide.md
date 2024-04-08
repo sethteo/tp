@@ -68,9 +68,6 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-- `CLIENT_INDEX` refers to the index number shown in the displayed client list. In the example below `CLIENT_INDEX` is circled in red for added clarity.
-  ![circled client index](images/clientIndex.png)
-
 
 
 <div markdown="block" class="alert alert-info">
@@ -108,6 +105,13 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 * `DATE_TIME` format:
     * Must follow the format `DD-MM-YYYY HH:MM` 
     * Example: `02-01-2025 12:00`
+  
+* `CLIENT_INDEX` format: 
+    * Refers to the index number shown in the displayed client list. In the example below `CLIENT_INDEX` is circled in red for added clarity.
+      ![circled client index](images/clientIndex.png)
+    * Must be a **positive integer** 1, 2, 3, …​.
+    * For `CLIENT_INDEX` to be valid, `CLIENT_INDEX` must be the index number belonging to a client in the displayed client list
+  
 
 </div>
 
