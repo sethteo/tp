@@ -14,7 +14,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/fincliq/releases).
+1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq!.
 
@@ -27,7 +27,8 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
     - `list` : List all clients.
 
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
+      contact named `John Doe` to FinCliq.
 
     - `delete 3` : Deletes the 3rd clients shown in the current list.
 
@@ -65,7 +66,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -75,7 +76,7 @@ Format: `help`
 
 ### Adding a client: `add`
 
-Adds a client to the address book.
+Adds a client to FinCliq.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -90,13 +91,13 @@ Examples:
 
 ### Listing all clients : `list`
 
-Shows a list of all clients in the address book.
+Shows a list of all clients in FinCliq.
 
 Format: `list`
 
 ### Editing a client : `edit`
 
-Edits an existing client in the address book!
+Edits an existing client in FinCliq.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -133,7 +134,7 @@ Examples:
 
 ### Deleting a client : `delete`
 
-Deletes the specified client from the address book.
+Deletes the specified client from FinCliq.
 
 Format: `delete INDEX`
 
@@ -143,7 +144,7 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd client in the address book.
+- `list` followed by `delete 2` deletes the 2nd client in FinCliq.
 - `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Filter client by tag : `filter`
@@ -161,14 +162,15 @@ Examples:
 
 ## Meeting Functions
 
-### Adding a Meeting: `add`
+### Adding a Meeting: `addMeeting`
 
-Adds a meeting for a specific client in the address book.
+Adds a meeting for a specific client in FinCliq.
 
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
-- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`.
+- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`, and should be after 
+  the current time.
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string.
 
 Examples:
@@ -177,7 +179,7 @@ Examples:
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
   ![result for first add](images/release_images/addMeeting.png)
 
-### Listing all Meetings for a Client: `view`
+### Listing all Meetings for a Client: `view c`
 
 Shows a list of all meetings for a specific client.
 
@@ -190,7 +192,7 @@ Example:
 - `view c 2` Lists all meetings of the first client.<br>
   ![result for 'view c 2'](images/release_images/viewMeeting.png)
 
-### Editing a Meeting: `edit`
+### Editing a Meeting: `editMeeting`
 
 Edits an existing meeting for a client.
 
@@ -207,7 +209,7 @@ Examples:
 - `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
   ![edit meeting result](images/release_images/editMeeting.png)
 
-### Deleting a Meeting: `delete`
+### Deleting a Meeting: `deleteMeeting`
 
 Deletes a specific meeting for a client.
 
@@ -220,9 +222,11 @@ Example:
 - `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the first client.<br>
   ![delete meeting result](images/release_images/deleteMeeting.png)
 
+## General Functions
+
 ### Clearing all entries : `clear`
 
-Clear all entries from the address book.
+Clear all entries from FinCliq.
 
 Format: `clear`
 
@@ -234,7 +238,8 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FinCliq data is saved in the hard disk automatically after any command that changes the data. 
+There is no need to save manually.
 
 ### Editing the data file
 
@@ -242,7 +247,8 @@ FinCliq data are saved automatically as a JSON file `[JAR file location]/data/ad
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value 
+entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ---
@@ -257,7 +263,7 @@ To keep track of your clients/meetings, you can follow the various commands in t
 **A**: No, there is no limit to the number.
 
 **Q**: Are the clients/meetings storage persistent between application restarts?<br>
-**A**: Yes. We have implemented a storage feature that would populate the information inside the address book based on a .json file.
+**A**: Yes. We have implemented a storage feature that would populate the information inside FinCliq based on a .json file.
 
 ---
 
@@ -287,7 +293,7 @@ To keep track of your clients/meetings, you can follow the various commands in t
 | Action     | Format, Examples                                                                                                                                                                       |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`<br>e.g., `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan`                                              |
-| **List**   | `view c CLIENT_INDEX`<br>e.g., `view c 2`                                                                                                                                              |
+| **View**   | `view c CLIENT_INDEX`<br>e.g., `view c 2`                                                                                                                                              |
 | **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` |
 | **Delete** | `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`<br>e.g., `deleteMeeting clientIndex/2 meetingIndex/1`                                                              |
 
@@ -298,3 +304,4 @@ To keep track of your clients/meetings, you can follow the various commands in t
 |-----------|------------------|
 | **Clear** | `clear`          |
 | **Help**  | `help`           |
+| **Exit**  | `exit`           |
