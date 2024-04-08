@@ -44,7 +44,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 ---
 
-## Features
+## Features & Commands
 
 <div markdown="block" class="alert alert-info">
 
@@ -96,11 +96,13 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
     * Must be a single word
 
 * `DATE_TIME` format:
-    * Must follow the format `dd-MM-YYYY HH:MM` (i.e. `02-01-2025 12:00`).
+    * Must follow the format `DD-MM-YYYY HH:MM` (i.e. `02-01-2025 12:00`).
 
 </div>
 
-### Viewing help : `help`
+### General Functions
+
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -108,13 +110,43 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-## Client Functions
+#### Clearing all entries : `clear`
 
-### Adding a client: `add`
+Clear all entries from FinCliq.
+
+Format: `clear`
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### Saving the data
+
+FinCliq data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
+
+#### Editing the data file
+
+FinCliq data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value 
+entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+### Client Functions
+
+#### Adding a client: `add`
 
 Adds a client to FinCliq.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+
+- The client’s name must be provided and must be alphanumeric.
+- Duplicate clients with the same name are not allowed.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0)
@@ -125,13 +157,13 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all clients : `list`
+#### Listing all clients : `list`
 
 Shows a list of all clients in FinCliq.
 
 Format: `list`
 
-### Editing a client : `edit`
+#### Editing a client : `edit`
 
 Edits an existing client in FinCliq.
 
@@ -150,7 +182,7 @@ Examples:
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Locating clients by name: `find`
+#### Locating clients by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -169,7 +201,7 @@ Examples:
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a client : `delete`
+#### Deleting a client : `delete`
 
 Deletes the specified client from FinCliq.
 
@@ -184,7 +216,7 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd client in FinCliq.
 - `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
-### Filter client by tag : `filter`
+#### Filter client by tag : `filter`
 Filter through clients by a specific tag provided.
 
 Format: `filter TAG`
@@ -196,11 +228,11 @@ Format: `filter TAG`
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
-- ![result for filter](images/release_images/filterMeeting.png)
+![result for filter](images/release_images/filterMeeting.png)
 
-## Meeting Functions
+### Meeting Functions
 
-### Adding a Meeting: `addMeeting`
+#### Adding a Meeting: `addMeeting`
 
 Adds a meeting for a specific client in FinCliq.
 
@@ -222,7 +254,7 @@ Examples:
 - `addMeeting clientIndex/2 dt/06-01-2025 15:00 d/Meeting to discuss finances` Adds a meeting with description "Meeting to discuss finances" and meeting date 06-01-2025 15:00 to client with index 2.<br>
   ![result for first add](images/release_images/addMeeting.png)
 
-### Listing all Meetings for a Client: `view c`
+#### Listing all Meetings for a Client: `view c`
 
 Shows a list of all meetings for a specific client.
 
@@ -237,7 +269,7 @@ Example:
 - `view c 1` Lists all meetings of the first client.<br>
   ![result for 'view c 1'](images/release_images/viewMeeting.png)
 
-### Editing a Meeting: `editMeeting`
+#### Editing a Meeting: `editMeeting`
 
 Edits an existing meeting for a client.
 
@@ -255,7 +287,7 @@ Examples:
 - `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
   ![edit meeting result](images/release_images/editMeeting.png)
 
-### Deleting a Meeting: `deleteMeeting`
+#### Deleting a Meeting: `deleteMeeting`
 
 Deletes a specific meeting for a client.
 
@@ -268,38 +300,13 @@ Example:
 - `deleteMeeting clientIndex/1 meetingIndex/1` Deletes the first meeting for the first client.<br>
   ![delete meeting result](images/release_images/deleteMeeting.png)
 
-## General Functions
-
-### Clearing all entries : `clear`
-
-Clear all entries from FinCliq.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-FinCliq data is saved in the hard disk automatically after any command that changes the data. 
-There is no need to save manually.
-
-### Editing the data file
-
-FinCliq data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value 
-entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
 ---
 
 ## FAQ
+
+**Q**: I realised that persons and clients are both used in the user guide. What is the difference 
+between them?<br>
+**A**: In FinCliq, persons and clients are used interchangeably. A person is a client in FinCliq.
 
 **Q**: How do I use the app?<br>
 **A**: This app is designed to help you keep track of your clients and meetings with them. <br>
@@ -355,11 +362,7 @@ and it succeeds to add. Is this the intended behaviour?<br>
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`<br>e.g., `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan`                                              |
 | **View**   | `view c CLIENT_INDEX`<br>e.g., `view c 2`                                                                                                                                              |
-<<<<<<< HEAD
-| **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` |
-=======
 | **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2025 12:00` |
->>>>>>> master
 | **Delete** | `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`<br>e.g., `deleteMeeting clientIndex/2 meetingIndex/1`                                                              |
 
 
