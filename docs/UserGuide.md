@@ -5,8 +5,12 @@ title: User Guide
 
 FinCliq is a **desktop app for financial advisors to manage contacts and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FinCliQ can get your contact management tasks done faster than traditional GUI apps.
 
-- Table of Contents
-  {:toc}
+---
+## Table of contents
+<div class="reset-page-break-defaults" markdown="1">
+* Table of Contents
+{:toc}
+</div>
 
 ---
 
@@ -16,7 +20,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 1. Download the latest `fincliq.jar` from [here](https://github.com/AY2324S2-CS2103-F08-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq!.
+1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fincliq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -50,7 +54,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -62,6 +66,38 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command input format:**<br>
+
+* Spacing of values:
+    * Leading and trailing spaces of input values will be removed.
+
+* `NAME` format:
+    * Can only contain alphabetical characters and spaces.
+    * Cannot be blank.
+    * Extra spaces between values will be processed as a single space.
+
+* `PHONE_NUMBER` format:
+    * Must follow the standard Singapore telephone numbers (i.e. 9XXXXXXX or 8XXXXXXX).
+    * Spaces between numbers will be ignored.
+
+* `EMAIL` format:
+    * Must follow the standard email address format (i.e. example@example.com).
+
+* `ADDRESS` format:
+    * Can only consist of alphanumeric characters, whitespace and the following set of characters: ``#-(),``.
+    * Cannot be blank.
+
+* `TAG` format:
+    * Can only consist of alphanumeric characters.
+    * Must be a single word
+
+* `DATE_TIME` format:
+    * Must follow the format `dd-MM-YYYY HH:MM` (i.e. `02-01-2025 12:00`).
+
 </div>
 
 ### Viewing help : `help`
@@ -104,7 +140,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the client will be removed i.e. adding of tags is not 
+  cumulative.
 - You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -119,7 +156,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -150,15 +187,16 @@ Examples:
 ### Filter client by tag : `filter`
 Filter through clients by a specific tag provided.
 
-Format: `filter TAG_NAME`
+Format: `filter TAG`
 
-- `TAG_NAME` refers to the tag given to clients
+- `TAG` refers to the tag given to clients
 - Displays all clients with the specified tag
 - There should only be one tag provided else an error would be shown
+- Tags should be a single word only 
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
-  ![result for filter](images/release_images/filterMeeting.png)
+- ![result for filter](images/release_images/filterMeeting.png)
 
 ## Meeting Functions
 
@@ -169,9 +207,14 @@ Adds a meeting for a specific client in FinCliq.
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
-- `DATE_TIME` format should be `YYYY-MM-DD HH:MM`, e.g., `02-01-2025 12:00`, and should be after 
-  the current time.
-- `DESCRIPTION` refers to what the meeting is about. Format should be a single string.
+- `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
+  the current time.**
+- `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
+
+Rejected Scenarios:
+- Different clients with the same meeting date and time but different description.
+- Same client with the same meeting date and time but different description.
+- Same client with the same meeting date and time and description.
 
 Examples:
 
@@ -185,12 +228,14 @@ Shows a list of all meetings for a specific client.
 
 Format: `view c CLIENT_INDEX`
 
-- `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​.
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list. 
+- `CLIENT_INDEX` **must be a positive integer** 1, 2, 3, …​.
+- For `CLIENT_INDEX` to be valid, `CLIENT_INDEX` must be the index number shown of a valid client in the clients list 
 
 Example:
 
-- `view c 2` Lists all meetings of the first client.<br>
-  ![result for 'view c 2'](images/release_images/viewMeeting.png)
+- `view c 1` Lists all meetings of the first client.<br>
+  ![result for 'view c 1'](images/release_images/viewMeeting.png)
 
 ### Editing a Meeting: `editMeeting`
 
@@ -199,14 +244,15 @@ Edits an existing meeting for a client.
 Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
 
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
-- At least one of the optional fields must be provided.
+- All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
-- When editing descriptions, the existing descriptions of the meeting will be removed i.e adding of descriptions is not cumulative.
-- You can remove all the meeting’s descriptions by typing `d/` without specifying any descriptions after it.
+- When editing descriptions, the existing descriptions of the meeting will be removed i.e. 
+  adding of descriptions is not cumulative.
+- Do note that the prefix for meeting description here is "n/", not "d/". Future enhancements will include standardising prefixes across different commands.
 
 Examples:
 
-- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 1st meeting of the 1st client.<br>
+- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
   ![edit meeting result](images/release_images/editMeeting.png)
 
 ### Deleting a Meeting: `deleteMeeting`
@@ -219,7 +265,7 @@ Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 
 Example:
 
-- `deleteMeeting clientIndex/2 meetingIndex/1` Deletes the first meeting for the first client.<br>
+- `deleteMeeting clientIndex/1 meetingIndex/1` Deletes the first meeting for the first client.<br>
   ![delete meeting result](images/release_images/deleteMeeting.png)
 
 ## General Functions
@@ -248,7 +294,7 @@ FinCliq data are saved automatically as a JSON file `[JAR file location]/data/ad
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value 
-entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ---
@@ -264,6 +310,21 @@ To keep track of your clients/meetings, you can follow the various commands in t
 
 **Q**: Are the clients/meetings storage persistent between application restarts?<br>
 **A**: Yes. We have implemented a storage feature that would populate the information inside FinCliq based on a .json file.
+
+**Q**: When entering my name, some characters do not show up. Is this the intended behaviour?<br>
+**A**: Yes, currently, only our app only supports english names, although we intend to support this in the future.
+
+**Q**: I entered a date and time that was before the current time, and it fails to add. Is this
+the intended behaviour?<br>
+**A**: Yes. We implemented this so that people would not enter meetings that occur in the past.
+
+**Q**: I entered a meeting for the same client with the same date and time but different 
+description, and it fails to add. Is this the intended behaviour?<br>
+**A**: Yes. We implemented this with the intention that our user(financial advisor) is only booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
+
+**Q**: I entered a meeting for a different client with the same date and time and description, 
+and it succeeds to add. Is this the intended behaviour?<br>
+**A**: Yes. We implemented this with the intention that our user(financial advisor) can be meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
 
 ---
 
@@ -294,7 +355,11 @@ To keep track of your clients/meetings, you can follow the various commands in t
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`<br>e.g., `addMeeting clientIndex/1 dt/02-01-2025 12:00 d/Sign life plan`                                              |
 | **View**   | `view c CLIENT_INDEX`<br>e.g., `view c 2`                                                                                                                                              |
+<<<<<<< HEAD
 | **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` |
+=======
+| **Edit**   | `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION d/DATE_TIME`<br>e.g.,`editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2025 12:00` |
+>>>>>>> master
 | **Delete** | `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`<br>e.g., `deleteMeeting clientIndex/2 meetingIndex/1`                                                              |
 
 

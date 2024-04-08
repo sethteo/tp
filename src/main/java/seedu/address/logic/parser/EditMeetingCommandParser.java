@@ -36,6 +36,8 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
 
         Index meetingIndex;
         Index clientIndex;
+        String description;
+        LocalDateTime dateTime;
 
         try {
             meetingIndex = ParserUtil.parseMeetingIndex(argMultimap.getValue(PREFIX_MEETING_INDEX)
@@ -52,10 +54,24 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
                     EditMeetingCommand.MESSAGE_USAGE), pe);
         }
 
+        try {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_NAME).orElse(""));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditMeetingCommand.MESSAGE_USAGE), pe);
+        }
+
+        try {
+            dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).orElse(""));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditMeetingCommand.MESSAGE_USAGE), pe);
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATETIME, PREFIX_CLIENT);
 
-        LocalDateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-        String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_NAME).get());
+        dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_NAME).get());
         clientIndex = ParserUtil.parseClientIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
         meetingIndex = ParserUtil.parseMeetingIndex(argMultimap.getValue(PREFIX_MEETING_INDEX).get());
 

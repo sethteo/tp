@@ -20,7 +20,8 @@ import seedu.address.model.person.Person;
  */
 public class Meeting {
 
-    public static final String MESSAGE_CONSTRAINTS = "Description must not be empty, Date must be in dd-MM-yyyy HH:mm";
+    public static final String MESSAGE_CONSTRAINTS = "Description must not be empty and must be alphanumeric. \n"
+           + "Date must be in dd-MM-yyyy HH:mm format and must not be in the past.";
     public static final String MESSAGE_INVALID_DATE_TIME = "Date must be in dd-MM-yyyy HH:mm format.\n"
             + "Date & time must be after the current time.\n"
             + "Time of appointment must be on the hour.";

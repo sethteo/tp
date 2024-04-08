@@ -36,11 +36,13 @@ public class EditMeetingCommand extends Command {
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_MEETING_INDEX + "2 "
             + PREFIX_NAME + "starbucks meeting "
-            + PREFIX_DATETIME + "01-01-2024 12:00 ";
+            + PREFIX_DATETIME + "01-01-2025 12:00 ";
 
     public static final String MESSAGE_EDIT_MEETING_SUCCESS = "Edited Meeting: %1$s";
     public static final String MEETING_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting already exists in the address book.";
+    public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "Error: Meeting not found";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "Error: Client not found";
 
     private final Index meetingIndex;
     private final Index clientIndex;
@@ -74,14 +76,14 @@ public class EditMeetingCommand extends Command {
         List<Person> clientList = model.getFilteredPersonList();
 
         if (clientIndex.getZeroBased() >= clientList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person selectedClient = clientList.get(clientIndex.getZeroBased());
         List<Meeting> clientMeetingList = selectedClient.getMeetings();
 
         if (meetingIndex.getZeroBased() >= clientMeetingList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
         }
 
         Meeting meetingToEdit = clientList.get(clientIndex.getZeroBased())
