@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/sethteo.png" width="200px">
 
 [[github](https://github.com/sethteo)]
-[[portfolio](team/hongrui.md)]
+[[portfolio](team/sethteo.md)]
 
 - Role: Developer
 - Responsibilities: UI

@@ -27,6 +27,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter through clients. \n"
             + "Parameters: \n"
             + "tag - The tag you wish to filter your clients by\n"
+            + "tag should only contain alphanumeric characters and consist of a single word only\n"
             + "Example: " + COMMAND_WORD + " family";
 
     public static final String MESSAGE_SUCCESS = "Displaying all clients filtered by the tag: %s";
