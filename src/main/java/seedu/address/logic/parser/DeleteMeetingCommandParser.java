@@ -30,8 +30,21 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CLIENT_INDEX, PREFIX_MEETING_INDEX);
-        Index clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
-        Index meetingIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEETING_INDEX).get());
+        Index clientIndex;
+        try {
+            clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage(), "client",
+                    argMultimap.getValue(PREFIX_CLIENT_INDEX).get()));
+        }
+
+        Index meetingIndex;
+        try {
+            meetingIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEETING_INDEX).get());
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage(), "meeting",
+                    argMultimap.getValue(PREFIX_CLIENT_INDEX).get()));
+        }
         return new DeleteMeetingCommand(clientIndex, meetingIndex);
     }
 

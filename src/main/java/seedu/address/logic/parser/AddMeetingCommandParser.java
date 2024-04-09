@@ -33,7 +33,12 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CLIENT_INDEX, PREFIX_DATETIME, PREFIX_DESCRIPTION);
-        Index clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+        Index clientIndex;
+        try {
+             clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage(), "client", argMultimap.getValue(PREFIX_CLIENT_INDEX).get()));
+        }
         LocalDateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
         String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
 
