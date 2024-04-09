@@ -46,15 +46,16 @@ public class DeleteMeetingCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (clientIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    clientIndex.getOneBased()));
         }
 
         Person targetClient = lastShownList.get(clientIndex.getZeroBased());
         List<Meeting> lastShownMeetings = targetClient.getMeetings();
 
         if (meetingIndex.getZeroBased() >= lastShownMeetings.size()) {
-            throw new CommandException(String.format(
-                    Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX, meetingIndex.getOneBased()));
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX,
+                    meetingIndex.getOneBased()));
         }
 
         model.deleteSpecificMeetingForClient(clientIndex, meetingIndex);
