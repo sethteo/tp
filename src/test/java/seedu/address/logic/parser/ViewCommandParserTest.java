@@ -37,7 +37,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_invalidArgsViewClient_throwsParseException() {
-        assertParseFailure(parser, "c", "Error: No index detected!");
+        assertParseFailure(parser, "c", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     @Test

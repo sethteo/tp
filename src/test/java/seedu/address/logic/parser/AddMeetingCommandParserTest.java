@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.model.meeting.Meeting;
 
@@ -54,7 +54,7 @@ public class AddMeetingCommandParserTest {
     public void parse_invalidValue_failure() {
         String userInput = " " + PREFIX_CLIENT_INDEX + "0 " + DATETIME + DESCRIPTION;
         // Invalid client index
-        assertParseFailure(parser, userInput, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 0));
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
 
         String userInputDateTime = " " + CLIENT_INDEX + " " + PREFIX_DATETIME + "01-01-2024 17:00 " + DESCRIPTION;
         // Invalid date time
