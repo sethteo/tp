@@ -75,13 +75,13 @@ public class AddMeetingCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (clientIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    clientIndex.getOneBased()));
         }
 
         Person client = lastShownList.get(clientIndex.getZeroBased());
         Meeting meetingToAdd = new Meeting(description, dateTime, client);
-
-        if (model.hasMeeting(meetingToAdd) && client.hasExistingMeeting(meetingToAdd)) {
+        if (model.hasMeeting(meetingToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
         client.addMeeting(meetingToAdd);

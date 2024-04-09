@@ -66,7 +66,8 @@ public class DeleteMeetingCommandTest {
 
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(testClientIndex, testMeetingIndex);
 
-        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                testClientIndex.getOneBased());
         assertCommandFailure(deleteMeetingCommand, model, expectedMessage);
         model.deletePerson(JAMAL_WITH_MEETING);
     }
@@ -99,7 +100,8 @@ public class DeleteMeetingCommandTest {
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(testClientIndex, testMeetingIndex);
 
         // invalid client index should be caught before invalid meeting index
-        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                testClientIndex.getOneBased());
         assertCommandFailure(deleteMeetingCommand, model, expectedMessage);
         model.deletePerson(JAMAL_WITH_MEETING);
     }
