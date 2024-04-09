@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
-import java.math.BigInteger;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -50,15 +48,15 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
         if (arguments.length == 2) {
             if (!arguments[0].equals(VIEW_CLIENT_ARGUMENT)) {
-                //invalid argument
+                //Checks if view is followed by 'c'
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ViewClientCommand.MESSAGE_USAGE));
             }
-            BigInteger index = new BigInteger(arguments[1]);
-            if (!(index.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) <= 0
-                    && index.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) >= 0) || index.signum() == -1) {
-                throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        index));
+
+            try {
+                Index clientIndex = ParserUtil.parseIndex(arguments[1]);
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, arguments[1]));
             }
         }
         return arguments;
