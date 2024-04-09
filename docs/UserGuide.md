@@ -109,6 +109,10 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
     * Must follow the format `DD-MM-YYYY HH:MM` 
     * Example: `02-01-2025 12:00`
 
+* `CLIENT_INDEX` format:
+    * Must be a positive integer from 1 to 2147483647
+    * Example: `1`
+
 
 </div>
 
