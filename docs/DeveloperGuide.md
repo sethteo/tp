@@ -235,7 +235,7 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                | I want to …                         | So that I can…                                              |
+| Priority | As a …                 | I want to …                          | So that I can…                                               |
 |----------|------------------------|--------------------------------------|--------------------------------------------------------------|
 | `* * *`  | As a financial advisor | add new clients profiles to my list  | keep track of the clients under me                           |
 | `* * *`  | As a financial advisor | edit the profiles of my clients      | keep their information up to date                            |
@@ -632,4 +632,33 @@ To implement this, the check for duplicate clients in the `Person` class will ha
 * Update the check for duplicate clients in the `Person` class to prevent clients with the same phone number or email from being added.
     * Pros: Easy to implement.
     * Cons: May cause confusion for users who are used to the current behaviour.
+
+### Make the flag for DESCRIPTION for `addMeeting` `editMeeting` consistent.
+
+Currently, the flag for the description of a meeting is `d/` for `addMeeting` and `n/` 
+for `editMeeting`. This is not ideal as the flag for the description should be consistent across 
+all commands. In the future, we hope to make the flag for the description for `addMeeting` and 
+`editMeeting` consistent.
+
+To implement this, the flag for the description for `addMeeting` and `editMeeting` will have to 
+be updated in the `Command` classes.
+
+#### Design consideration:
+
+**Aspect: How to make the flag for `DESCRIPTION` for `addMeeting` `editMeeting` consistent:**
+
+* Update the flag for the description for `addMeeting` and `editMeeting` to be consistent.
+    * Pros: Easy to implement.
+    * Cons: May cause confusion for users who are used to the current behaviour.
+
+### Validate the email format for `Person` objects
+
+Currently, the app does not validate the email format for `Person` objects. This is not ideal as the email format should be validated to ensure that the email is in the correct format. In the future, we hope to validate the email format for `Person` objects.
+
+** Aspect: How to validate the email format for `Person` objects:**
+
+* Update the `Person` class to have a validation regex for the email field.
+    * Pros: Easy to implement.
+    * Cons: May cause confusion for users who are used to the current behaviour.
+
 ---
