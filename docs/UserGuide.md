@@ -22,7 +22,8 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fincliq.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the <br>`java
+   -jar fincliq.jar` <br> command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -31,7 +32,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
     - `list` : List all clients.
 
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
       contact named `John Doe` to FinCliq.
 
     - `delete 3` : Deletes the 3rd clients shown in the current list.
@@ -56,8 +57,8 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 - Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-- Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -68,7 +69,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 - `CLIENT_INDEX` Refers to the index number shown in the displayed client list. In the example below `CLIENT_INDEX` is circled in red for added clarity.
-      ![circled client index](images/clientIndex.png)
+  ![circled client index](images/clientIndex.png)
 </div>
 
 
@@ -106,7 +107,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
     * Example: `friends`
 
 * `DATE_TIME` format:
-    * Must follow the format `DD-MM-YYYY HH:MM` 
+    * Must follow the format `DD-MM-YYYY HH:MM`
     * Example: `02-01-2025 12:00`
 
 * `CLIENT_INDEX` format:
@@ -159,7 +160,7 @@ entered is outside the acceptable range). Therefore, edit the data file only if 
 
 Adds a client to FinCliq.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 
 - The client’s name must be provided and must be alphanumeric.
 - Duplicate clients with the same name are not allowed.
@@ -170,8 +171,12 @@ A client can have any number of tags (including 0)
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a client
+  named `John Doe` with phone number `98765432`, email `johnd@example.com`, and address `John
+  street, block 123, #01-01` to FinCliq.
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+  adds a client named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate
+  Prison`, phone number `1234567` and tag `criminal` to FinCliq.<br>
 
 #### Listing all clients : `list`
 
@@ -183,12 +188,12 @@ Format: `list`
 
 Edits an existing client in FinCliq.
 
-Format: `edit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
-- Edits the client at the specified `CLIENT_INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the client at the specified `CLIENT_INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the client will be removed i.e. adding of tags is not 
+- When editing tags, the existing tags of the client will be removed i.e. adding of tags is not
   cumulative.
 - You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
@@ -225,7 +230,7 @@ Format: `delete CLIENT_INDEX`
 
 - Deletes the client at the specified `CLIENT_INDEX`.
 - The index refers to the index number shown in the displayed client list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 
@@ -240,11 +245,11 @@ Format: `filter TAG`
 - `TAG` refers to the tag given to clients
 - Displays all clients with the specified tag
 - There should only be one tag provided else an error would be shown
-- Tags should be a single word only 
+- Tags should be a single word only
 
 Examples:
 - `filter friends` Displays all clients with the tag `friends`
-![result for filter](images/release_images/filterMeeting.png)
+  ![result for filter](images/release_images/filterMeeting.png)
 
 ### Meeting Functions
 
@@ -254,8 +259,8 @@ Adds a meeting for a specific client in FinCliq.
 
 Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 
-- `CLIENT_INDEX` refers to the index number shown in the displayed client list. 
-- `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, …​.
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list.
+- `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, ….
 - `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
   the current time.**
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
@@ -277,8 +282,8 @@ Shows a list of all meetings for a specific client.
 
 Format: `view c CLIENT_INDEX`
 
-- `CLIENT_INDEX` refers to the index number shown in the displayed client list. 
-- `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, …​.
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list.
+- `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, ….
 - For `CLIENT_INDEX` to be valid, `CLIENT_INDEX` must be the index number belonging to a client in the displayed client list
 
 Example:
@@ -292,10 +297,10 @@ Edits an existing meeting for a client.
 
 Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
 
-- Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
+- Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, ….
 - All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
-- When editing descriptions, the existing descriptions of the meeting will be removed i.e. 
+- When editing descriptions, the existing descriptions of the meeting will be removed i.e.
   adding of descriptions is not cumulative.
 - Do note that the prefix for meeting description here is "n/", not "d/". Future enhancements will include standardising prefixes across different commands.
 
@@ -310,7 +315,7 @@ Deletes a specific meeting for a client.
 
 Format: `deleteMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX`
 
-- Deletes the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, …​.
+- Deletes the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, ….
 
 Example:
 
@@ -321,7 +326,7 @@ Example:
 
 ## FAQ
 
-**Q**: I realised that persons and clients are both used in the user guide. What is the difference 
+**Q**: I realised that persons and clients are both used in the user guide. What is the difference
 between them?<br>
 **A**: In FinCliq, persons and clients are used interchangeably. A person is a client in FinCliq.
 
@@ -342,11 +347,11 @@ To keep track of your clients/meetings, you can follow the various commands in t
 the intended behaviour?<br>
 **A**: Yes. We implemented this so that people would not enter meetings that occur in the past.
 
-**Q**: I entered a meeting for the same client with the same date and time but different 
+**Q**: I entered a meeting for the same client with the same date and time but different
 description, and it fails to add. Is this the intended behaviour?<br>
 **A**: Yes. We implemented this with the intention that our user(financial advisor) is only booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
 
-**Q**: I entered a meeting for a different client with the same date and time and description, 
+**Q**: I entered a meeting for a different client with the same date and time and description,
 and it succeeds to add. Is this the intended behaviour?<br>
 **A**: Yes. We implemented this with the intention that our user(financial advisor) can be meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
 

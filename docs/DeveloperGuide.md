@@ -7,12 +7,12 @@ title: Developer Guide
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)
-   1. [Architecture](#architecture)
-   2. [UI Component](#ui-component)
-   3. [Logic Component](#logic-component)
-   4. [Model Component](#model-component)
-   5. [Storage Component](#storage-component)
-   6. [Common Classes](#common-classes)
+    1. [Architecture](#architecture)
+    2. [UI Component](#ui-component)
+    3. [Logic Component](#logic-component)
+    4. [Model Component](#model-component)
+    5. [Storage Component](#storage-component)
+    6. [Common Classes](#common-classes)
 4. [Appendix](#appendix-requirements)
 
 
@@ -23,9 +23,9 @@ title: Developer Guide
 - {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 - Third-party libraries used:
-  - [JavaFX](https://openjfx.io/) for the GUI
-  - [JUnit 5](https://junit.org/junit5/) for testing
-  - [Jackson](https://github.com/FasterXML/jackson) for serializing and deserializing JSON data
+    - [JavaFX](https://openjfx.io/) for the GUI
+    - [JUnit 5](https://junit.org/junit5/) for testing
+    - [Jackson](https://github.com/FasterXML/jackson) for serializing and deserializing JSON data
 
 ---
 
@@ -177,7 +177,7 @@ This section describes some noteworthy details on how certain features are imple
 **The `FilterCommand` is implemented as such:**
 
 - `LogicManager`'s execute method is called with the command string which then calls the `parseCommand()` method of `AddressBookParser`
-- `AddressBookParser` then creates a `FilterCommandParser` which parses the user input and returns a `FilterCommand` 
+- `AddressBookParser` then creates a `FilterCommandParser` which parses the user input and returns a `FilterCommand`
 - The created `FilterCommand` is then executed by the `LogicManager`
 - `FilterCommand` filters the list of `Person` based on the tag provided by the user
 - `FilterCommand` creates a `CommandResult` object and returns it to `LogicManager`
@@ -187,9 +187,9 @@ This section describes some noteworthy details on how certain features are imple
 
 - Takes in a `String` input from the user
 - Splits the given `String` and checks if there is more than 1 string provided
-  - If more than 1 string was provided, throws `ParseException`
+    - If more than 1 string was provided, throws `ParseException`
 - Parser then checks if an empty string was provided
-  - If yes, throws `ParseException`
+    - If yes, throws `ParseException`
 - If no exception was thrown, a `Tag` object is created which is then used to create a `FilterCommand` object
 
 #### Design considerations:
@@ -198,12 +198,12 @@ This section describes some noteworthy details on how certain features are imple
 
 - **Alternative 1 (current choice):** Filters based on only one `Tag`
 
-  - Pros: Easy to implement.
-  - Cons: Unable to search for clients who possess more than one `Tag`
+    - Pros: Easy to implement.
+    - Cons: Unable to search for clients who possess more than one `Tag`
 
 - **Alternative 2:** Filters by multiple `Tag`
-  - Pros: Able to search for client with multiple `Tag`
-  - Cons: Error prone for a method used for a niche instance.
+    - Pros: Able to search for client with multiple `Tag`
+    - Cons: Error prone for a method used for a niche instance.
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -235,7 +235,7 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                | I want to …​                         | So that I can…​                                              |
+| Priority | As a …                | I want to …                         | So that I can…                                              |
 |----------|------------------------|--------------------------------------|--------------------------------------------------------------|
 | `* * *`  | As a financial advisor | add new clients profiles to my list  | keep track of the clients under me                           |
 | `* * *`  | As a financial advisor | edit the profiles of my clients      | keep their information up to date                            |
@@ -253,7 +253,7 @@ _{More to be added}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `FinCliq` and the **Actor** is the `targeted 
+(For all use cases below, the **System** is the `FinCliq` and the **Actor** is the `targeted
 financial advisor`, unless specified otherwise)
 
 **Use Case: Add New Client Profiles**
@@ -262,17 +262,17 @@ financial advisor`, unless specified otherwise)
 1. Financial advisor requests to add a new client profile to their list.
 2. FinCliq adds the new client profile to the advisor's list.
 3. FinCliq confirms the successful addition of the client profile.
-   - Use case ends.
+    - Use case ends.
 
 **Extensions:**
 - 1a. The financial advisor does not provide necessary client information.
-   - 1a1. FinCliq detects missing information.
-   - 1a2. FinCliq prompts the financial advisor to provide the missing information.
-   - Use case resumes from step 1.
+    - 1a1. FinCliq detects missing information.
+    - 1a2. FinCliq prompts the financial advisor to provide the missing information.
+    - Use case resumes from step 1.
 - 1b. The financial advisor attempts to add a client profile that already exists.
-   - 1b1. FinCliq detects duplicate profile.
-   - 1b2. FinCliq notifies the financial advisor about the existing profile.
-   - Use case ends.
+    - 1b1. FinCliq detects duplicate profile.
+    - 1b2. FinCliq notifies the financial advisor about the existing profile.
+    - Use case ends.
 
 **Use Case: Edit Client Profiles**
 
@@ -282,17 +282,17 @@ financial advisor`, unless specified otherwise)
 3. Financial advisor updates the necessary information.
 4. FinCliq saves the changes to the client's profile.
 5. FinCliq confirms the successful update of the client's profile.
-   - Use case ends.
+    - Use case ends.
 
 **Extensions:**
 - 1a. The financial advisor tries to edit a non-existent client profile.
-   - 1a1. FinCliq detects the absence of the client profile.
-   - 1a2. FinCliq notifies the financial advisor about the non-existence of the client profile.
-   - Use case ends.
+    - 1a1. FinCliq detects the absence of the client profile.
+    - 1a2. FinCliq notifies the financial advisor about the non-existence of the client profile.
+    - Use case ends.
 - 1b. The financial advisor attempts to edit the profile with invalid information.
-   - 1b1. FinCliq detects invalid information.
-   - 1b2. FinCliq prompts the financial advisor to provide valid information.
-   - Use case resumes from step 3.
+    - 1b1. FinCliq detects invalid information.
+    - 1b2. FinCliq prompts the financial advisor to provide valid information.
+    - Use case resumes from step 3.
 
 **Use Case: Delete Clients**
 
@@ -300,20 +300,20 @@ financial advisor`, unless specified otherwise)
 1. Financial advisor requests to delete a client from their list.
 2. FinCliq removes the specified client from the advisor's list.
 3. FinCliq confirms the successful deletion of the client.
-   - Use case ends.
+    - Use case ends.
 
 **Extensions:**
 - 1a. The financial advisor tries to delete a non-existent client.
-   - 1a1. FinCliq detects the absence of the client.
-   - 1a2. FinCliq notifies the financial advisor about the non-existence of the client.
-   - Use case ends.
+    - 1a1. FinCliq detects the absence of the client.
+    - 1a2. FinCliq notifies the financial advisor about the non-existence of the client.
+    - Use case ends.
 
 **Use Case: View All Client Profiles**
 
 **MSS:**
 1. Financial advisor requests to view all client profiles.
 2. FinCliq retrieves and displays all client profiles associated with the advisor.
-   - Use case ends.
+    - Use case ends.
 
 **Use Case: Add Client Meetings**
 
@@ -321,24 +321,24 @@ financial advisor`, unless specified otherwise)
 1. Financial advisor requests to add a meeting with a client to their schedule.
 2. FinCliq adds the meeting to the list of meeting as well as to the client's list of meetings
 3. FinCliq confirms the successful addition of the meeting
-   - Use case ends.
-   
+    - Use case ends.
+
 **Extensions**
 - 1a. Financial Advisor tries to add a duplicate meeting
-  - 1a1. FinCliq detects the duplicate meeting entry
-  - 1a2. FinCliq notifies the financial advisor and does not add the meeting
-  - Use case ends
+    - 1a1. FinCliq detects the duplicate meeting entry
+    - 1a2. FinCliq notifies the financial advisor and does not add the meeting
+    - Use case ends
 - 1b. Financial Advisor tries to add meeting with date earlier than current date
-  - 1b1. FinCliq detects the invalid date
-  - 1b2. FinCliq informs financial advisor of the invalid date
-  - Use case ends
+    - 1b1. FinCliq detects the invalid date
+    - 1b2. FinCliq informs financial advisor of the invalid date
+    - Use case ends
 
 **Use Case: View A Specific Client Meetings**
 
 **MSS:**
 1. Financial advisor requests to view all upcoming meetings.
 2. FinCliq retrieves and displays all upcoming meetings for that client.
-   - Use case ends.
+    - Use case ends.
 
 **Use Case: Update existing Meetings**
 
@@ -402,81 +402,81 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+    1. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The most recent window size and location is retained.
 
 ### Adding a client
 
 1. Adding a client with all fields
 
-   1. Prerequisites: Adding the client should not result in duplicate clients.
+    1. Prerequisites: Adding the client should not result in duplicate clients.
 
-   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
-      t/friends t/owesMoney` <br>
-      Expected: A new client is added to the list. The client's details are shown in the 
-      list, and the status bar shows the client's details.
-   
-   1. Test case: `add n/Jane Doe p/87654321`<br>
-      Expected: Given client is not added. Error details shown in status message.
-   
-   1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add n/John Doe o/98765432`, 
-      `...`<br>
-      Expected: Similar to previous.
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
+       t/friends t/owesMoney` <br>
+       Expected: A new client is added to the list. The client's details are shown in the
+       list, and the status bar shows the client's details.
+
+    1. Test case: `add n/Jane Doe p/87654321`<br>
+       Expected: Given client is not added. Error details shown in status message.
+
+    1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add n/John Doe o/98765432`,
+       `...`<br>
+       Expected: Similar to previous.
 
 ### Editing a client
 
 1. Editing a client's details in the client list
 
-   1. Prerequisites: At least 1 client in the client list
-   
-   1. Test case: `edit 1 p/91234567 e/johndoe@example.com` <br>
-      Expected: The client's details are updated in the list. The updated meeting's 
-      details are shown in the list, and the status bar shows the client's details.
+    1. Prerequisites: At least 1 client in the client list
 
-   1. Test case: `edit 0 p/91234567` <br>
-      Expected: No client is edited. Error details shown in the status message. Status bar 
-      remains the same.
-   
-   1. Other incorrect edit commands to try: `edit`, `edit x`, `edit x p/91234567` (where x is 
-      larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Test case: `edit 1 p/91234567 e/johndoe@example.com` <br>
+       Expected: The client's details are updated in the list. The updated meeting's
+       details are shown in the list, and the status bar shows the client's details.
+
+    1. Test case: `edit 0 p/91234567` <br>
+       Expected: No client is edited. Error details shown in the status message. Status bar
+       remains the same.
+
+    1. Other incorrect edit commands to try: `edit`, `edit x`, `edit x p/91234567` (where x is
+       larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First client is deleted from the list. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First client is deleted from the list. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### View a specific client
 
 1. View a client based on an index provided
-    
-   1. Prerequisites: At least 1 client in client list
 
-   2. Test case: `view c [index not in list]`
-      Expected: No client is shown. Error details that index provided is invalid in status message.
-   3. Test case: `view c [valid index]` followed by `view c [valid index]`
-      Expected: No new client is shown. Error details to request user to go back to home page by using `list` command
-   4. Test case: `view c [valid index]`
-      Expected: Shows the client with the index provided as well as all his/her associated meetings.
-   5. Other incorrect view commands to try: `view`, `view [any character] [any number]` 
+    1. Prerequisites: At least 1 client in client list
+
+    2. Test case: `view c [index not in list]`
+       Expected: No client is shown. Error details that index provided is invalid in status message.
+    3. Test case: `view c [valid index]` followed by `view c [valid index]`
+       Expected: No new client is shown. Error details to request user to go back to home page by using `list` command
+    4. Test case: `view c [valid index]`
+       Expected: Shows the client with the index provided as well as all his/her associated meetings.
+    5. Other incorrect view commands to try: `view`, `view [any character] [any number]`
 
 ### Filter client by tag
 
@@ -486,7 +486,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `filter friends`
        Expected: Shows all clients who have the tag "friends"
-   
+
     3. Test case: `filter [invalid tag]`
        Expected: Shows all clients. Error details that tag provided does not belong to any client.
 
@@ -494,54 +494,54 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a meeting with all fields
 
-   1. Prerequisites: Adding the meeting should not result in duplicate meetings, and the client
-      index should be listed in the client list.
+    1. Prerequisites: Adding the meeting should not result in duplicate meetings, and the client
+       index should be listed in the client list.
 
-   1. Test case: ` addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`<br>
-      Expected: A new meeting is added to the list. The meeting's details are shown in the list, 
-      and the status bar shows the meeting's details.
+    1. Test case: ` addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`<br>
+       Expected: A new meeting is added to the list. The meeting's details are shown in the list,
+       and the status bar shows the meeting's details.
 
-   1. Test case: `addMeeting clientIndex/1 dt/02-01-2024 12:00 d/sign life plan`<br>
-      Expected: Meeting is not added because the date has already elapsed. Error details shown in 
-      status message.
+    1. Test case: `addMeeting clientIndex/1 dt/02-01-2024 12:00 d/sign life plan`<br>
+       Expected: Meeting is not added because the date has already elapsed. Error details shown in
+       status message.
 
-   1. Other incorrect addMeeting commands to try: `addMeeting`, `addMeeting n/John Doe`, `addMeeting n/John Doe d/2021-10-10`, `...`<br>
-      Expected: Similar to previous.
-   
+    1. Other incorrect addMeeting commands to try: `addMeeting`, `addMeeting n/John Doe`, `addMeeting n/John Doe d/2021-10-10`, `...`<br>
+       Expected: Similar to previous.
+
 ### Editing a meeting
 
 1. Editing a meeting's details in the meeting list
 
-   1. Prerequisites: At least 1 meeting in the meeting list
-   
-   1. Test case: `editMeeting clientIndex/1 meetingIndex/1 n/starbucks meeting dt/02-01-2025 12:00` <br>
-      Expected: The meeting's details are updated in the list. The updated meeting's 
-      details are shown in the list, and the status bar shows the meeting's details.
+    1. Prerequisites: At least 1 meeting in the meeting list
 
-   1. Test case: `editMeeting clientIndex/0 dt/02-01-2030 12:00` <br>
-      Expected: No meeting is edited. Error details shown in the status message. Status bar 
-      remains the same.
-   
-   1. Other incorrect editMeeting commands to try: `editMeeting`, `editMeeting clientIndex/x`, 
-      `editMeeting clientIndex/x meetingIndex/y dt/02-01-2030 12:00` (where x is larger than the client list size, and y is larger than the meeting list size, or x and y are less than or equals to zero.)<br>
-      Expected: Similar to previous.
+    1. Test case: `editMeeting clientIndex/1 meetingIndex/1 n/starbucks meeting dt/02-01-2025 12:00` <br>
+       Expected: The meeting's details are updated in the list. The updated meeting's
+       details are shown in the list, and the status bar shows the meeting's details.
+
+    1. Test case: `editMeeting clientIndex/0 dt/02-01-2030 12:00` <br>
+       Expected: No meeting is edited. Error details shown in the status message. Status bar
+       remains the same.
+
+    1. Other incorrect editMeeting commands to try: `editMeeting`, `editMeeting clientIndex/x`,
+       `editMeeting clientIndex/x meetingIndex/y dt/02-01-2030 12:00` (where x is larger than the client list size, and y is larger than the meeting list size, or x and y are less than or equals to zero.)<br>
+       Expected: Similar to previous.
 
 ### Deleting a meeting
 
 1. Deleting a meeting while all meetings are being shown
 
-   1. Prerequisites: List all meetings using the `listMeetings` command.
+    1. Prerequisites: List all meetings using the `listMeetings` command.
 
-   1. Test case: `deleteMeeting clientIndex/1 meetingIndex/1`<br>
-      Expected: First meeting is deleted from the list. Details of the deleted meeting shown in the status message. 
+    1. Test case: `deleteMeeting clientIndex/1 meetingIndex/1`<br>
+       Expected: First meeting is deleted from the list. Details of the deleted meeting shown in the status message.
 
-   1. Test case: `deleteMeeting clientIndex/1 meetingIndex/0`<br>
-      Expected: No meeting is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `deleteMeeting clientIndex/1 meetingIndex/0`<br>
+       Expected: No meeting is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect deleteMeeting commands to try: `deleteMeeting clientIndex/x 
-      meetingIndex/y`, `deleteMeeting clientIndex/x`, `...` (where x is larger than the client 
-      list size, and y is larger than the meeting list size, or x and y are less than or equals to zero.) <br>
-      Expected: Similar to previous.
+    1. Other incorrect deleteMeeting commands to try: `deleteMeeting clientIndex/x
+       meetingIndex/y`, `deleteMeeting clientIndex/x`, `...` (where x is larger than the client
+       list size, and y is larger than the meeting list size, or x and y are less than or equals to zero.) <br>
+       Expected: Similar to previous.
 
 ### Saving data
 
@@ -552,12 +552,12 @@ testers are expected to do more *exploratory* testing.
         1. Prerequisites: Delete the data file `data/addressbook.json` if it exists.
 
         1. Test case: Launch the app<br>
-            Expected: A new data file is created. The app launches with a set of sample contacts.
-    
+           Expected: A new data file is created. The app launches with a set of sample contacts.
+
     1. Simulating a corrupted file
-       1. Prerequisites: Corrupt the data file `data/addressbook.json` by adding some random text.
-    
-       1. Test case: Launch the app<br>
+        1. Prerequisites: Corrupt the data file `data/addressbook.json` by adding some random text.
+
+        1. Test case: Launch the app<br>
            Expected: A new data file is created. The app launches with a set of sample contacts.
 
 ---
@@ -565,7 +565,7 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Possible Improvements**
 In future iterations of FinCliq, the following improvements could be made:
 
-### Prevent meeting slots at the same date and time 
+### Prevent meeting slots at the same date and time
 
 #### Implementation
 
@@ -581,36 +581,17 @@ To implement this, there has to be a check to ensure that the meeting timing doe
     * Pros: Easy to implement.
     * Cons: Additional check required when adding/editing meetings.
 
-### Change duration of each meeting to start in intervals of 30 minutes
-
-#### Implementation
-
-Currently, the duration of each meeting is fixed at 1 hour.
-
-In the future, we hope to be able to change the duration of each meeting to start in intervals 
-of 30 minutes. This will allow the financial advisors to have more flexibility in scheduling 
-meetings.
-
-To implement this, the validation check in the `Meeting` class will have to be updated to ensure 
-the duration of each meeting is in intervals of 30 minutes.
-
-#### Design consideration:
-
-**Aspect: How to ensure that the duration of each meeting is in intervals of 30 minutes:**
-
-* When a new meeting is added or edited, check if the duration of the meeting is in intervals of 30 minutes.
-    * Pros: Easy to implement.
-    * Cons: Additional check required when adding/editing meetings.
 
 ### Shorten command words to improve user experience
 
-Currently, the command words are quite long and may be difficult to remember. In the future, we 
-hope to shorten the command words to improve the user experience to optimise the user experience 
+Currently, the command words are quite long and may be difficult to remember. In the future, we
+hope to shorten the command words to improve the user experience to optimise the user experience
 for financial advisors who are comfortable with typing and using CLI apps.
 
-To implement this, the command words in the different `Command` classes will have to be updated to 
-shorter 
-command words, such as `am` for `addMeeting`, `dm` for `deleteMeeting`, `em` for `editMeeting`, etc.
+To implement this, the command words in the different `Command` classes will have to be updated to
+shorter
+command words, such as `am` for `addMeeting`, `dm` for `deleteMeeting`, `em` for `editMeeting`,
+`ci/` for `clientIndex/`, `mi/` for `meetingIndex/`, etc.
 
 #### Design consideration:
 
@@ -620,4 +601,35 @@ command words, such as `am` for `addMeeting`, `dm` for `deleteMeeting`, `em` for
     * Pros: Easy to implement.
     * Cons: May be confusing for users who are used to the current command words.
 
+### Allow different clients with same name but different phone number and email to be added
+
+Currently, the app does not allow different clients with the same name but different phone
+number to be added. This is not ideal as there may be multiple clients with the same name but
+are actually different people. In the future, we hope to allow different clients with the same
+but different phone number and email to be added.
+
+To implement this, the check for duplicate clients in the `Person` class will have to be updated to allow clients with the same name to be added to FinCliq.
+
+#### Design consideration:
+
+**Aspect: How to allow different clients with the same name but different phone number and email to be added:**
+
+* Update the check for duplicate clients in the `Person` class to allow clients with the same name but different phone number and email to be added.
+    * Pros: Easy to implement.
+    * Cons: May cause confusion for users who are used to the current behaviour.
+
+
+### Prevent the addition of clients with duplicate phone numbers and emails
+
+Currently, the app allows clients with duplicate phone numbers and emails to be added. This is not ideal as there should not be multiple clients with the same phone number or email. In the future, we hope to prevent the addition of clients with duplicate phone numbers and emails.
+
+To implement this, the check for duplicate clients in the `Person` class will have to be updated to prevent clients with the same phone number or email from being added to FinCliq.
+
+#### Design consideration:
+
+**Aspect: How to prevent the addition of clients with duplicate phone numbers and emails:**
+
+* Update the check for duplicate clients in the `Person` class to prevent clients with the same phone number or email from being added.
+    * Pros: Easy to implement.
+    * Cons: May cause confusion for users who are used to the current behaviour.
 ---
