@@ -88,7 +88,8 @@ public class AddMeetingCommandTest {
                 LocalDateTime.of(2024, 1, 1, 12, 0), "Sell Insurance", outOfBoundIndex);
 
         assertThrows(CommandException.class,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> addMeetingCommand.execute(modelStub));
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        outOfBoundIndex.getOneBased()), () -> addMeetingCommand.execute(modelStub));
     }
 
     private class ModelStub implements Model {

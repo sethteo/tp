@@ -133,7 +133,8 @@ public class EditMeetingCommandTest {
         EditMeetingCommand editMeetingCommand = new EditMeetingCommand(testClientIndex, INDEX_FIRST_MEETING,
                 editedMeeting.getDescription(), editedMeeting.getDateTime());
 
-        String expectedMessage = EditMeetingCommand.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                testClientIndex.getOneBased());
         assertCommandFailure(editMeetingCommand, model, expectedMessage);
         model.deletePerson(JAMAL_WITH_MEETING);
     }
@@ -152,7 +153,8 @@ public class EditMeetingCommandTest {
         EditMeetingCommand editMeetingCommand = new EditMeetingCommand(testClientIndex, testMeetingIndex,
                 testMeeting.getDescription(), testMeeting.getDateTime());
 
-        String expectedMessage = EditMeetingCommand.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX,
+                testMeetingIndex.getOneBased());
         assertCommandFailure(editMeetingCommand, model, expectedMessage);
         model.deletePerson(JAMAL_WITH_MEETING);
     }
@@ -171,7 +173,8 @@ public class EditMeetingCommandTest {
         EditMeetingCommand editMeetingCommand = new EditMeetingCommand(testClientIndex, testMeetingIndex,
                 testMeeting.getDescription(), testMeeting.getDateTime());
 
-        String expectedMessage = EditMeetingCommand.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                testClientIndex.getOneBased());
         assertCommandFailure(editMeetingCommand, model, expectedMessage);
         model.deletePerson(JAMAL_WITH_MEETING);
     }
