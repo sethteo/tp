@@ -43,7 +43,7 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
             meetingIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEETING_INDEX).get());
         } catch (ParseException e) {
             throw new ParseException(String.format(e.getMessage(), "meeting",
-                    argMultimap.getValue(PREFIX_CLIENT_INDEX).get()));
+                    argMultimap.getValue(PREFIX_MEETING_INDEX).get()));
         }
         return new DeleteMeetingCommand(clientIndex, meetingIndex);
     }

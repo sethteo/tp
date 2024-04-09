@@ -21,8 +21,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_FILTER_TAG = "Error: The tag %s provided does not belong to any client!";
     public static final String MESSAGE_RETURN_HOME = "If you wish to view another client please return home by "
             + "entering 'list' before viewing another client.";
-    public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "Error: The meeting index %1$s " +
-            "provided is invalid!";
+    public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "Error: The meeting index %1$s "
+            + "provided is invalid!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS = "Multiple values specified for "
             + "the following single-valued field(s): ";

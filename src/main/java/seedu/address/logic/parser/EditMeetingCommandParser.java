@@ -43,15 +43,15 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
             meetingIndex = ParserUtil.parseMeetingIndex(argMultimap.getValue(PREFIX_MEETING_INDEX)
                     .orElse("wrong"));
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(pe.getMessage(), "meeting",
+                    argMultimap.getValue(PREFIX_MEETING_INDEX).get()));
         }
 
         try {
             clientIndex = ParserUtil.parseClientIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).orElse("wrong"));
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(pe.getMessage(), "client",
+                    argMultimap.getValue(PREFIX_CLIENT_INDEX).get()));
         }
 
         try {
@@ -70,10 +70,10 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATETIME, PREFIX_CLIENT);
 
-        dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-        description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_NAME).get());
-        clientIndex = ParserUtil.parseClientIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
-        meetingIndex = ParserUtil.parseMeetingIndex(argMultimap.getValue(PREFIX_MEETING_INDEX).get());
+        //        dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        //        description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_NAME).get());
+        //        clientIndex = ParserUtil.parseClientIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+        //        meetingIndex = ParserUtil.parseMeetingIndex(argMultimap.getValue(PREFIX_MEETING_INDEX).get());
 
         EditMeetingCommand test = new EditMeetingCommand(clientIndex, meetingIndex, description, dateTime);
         return new EditMeetingCommand(clientIndex, meetingIndex, description, dateTime);

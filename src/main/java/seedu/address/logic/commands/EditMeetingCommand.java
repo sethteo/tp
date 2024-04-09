@@ -76,14 +76,16 @@ public class EditMeetingCommand extends Command {
         List<Person> clientList = model.getFilteredPersonList();
 
         if (clientIndex.getZeroBased() >= clientList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, clientIndex.getOneBased()));
         }
 
         Person selectedClient = clientList.get(clientIndex.getZeroBased());
         List<Meeting> clientMeetingList = selectedClient.getMeetings();
 
         if (meetingIndex.getZeroBased() >= clientMeetingList.size()) {
-            throw new CommandException(MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX, meetingIndex.getOneBased()));
         }
 
         Meeting meetingToEdit = clientList.get(clientIndex.getZeroBased())
