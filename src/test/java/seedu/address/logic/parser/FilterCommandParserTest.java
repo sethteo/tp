@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_TAGS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -19,8 +20,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_multipleArgs_throwsParseException() {
-        assertParseFailure(parser, "family friends", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "family friends", MESSAGE_MULTIPLE_TAGS);
     }
 
     @Test
