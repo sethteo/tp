@@ -1,12 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.math.BigInteger;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,16 +38,15 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_negativeIndex_throwsParseException() {
-        assertParseFailure(parser, "c -1", String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, -1));
+        assertParseFailure(parser, "c -1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewClientCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_bigInt_throwsParseException() {
         assertParseFailure(parser, "c 1111111111111111111111111111111",
-                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        new BigInteger("1111111111111111111111111111111").toString()));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
     }
-
     // test for many white spaces
     @Test
     public void parse_whitespaceArgsViewClient_throwsParseException() {
