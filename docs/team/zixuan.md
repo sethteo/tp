@@ -28,6 +28,7 @@ Given below are my contributions to the project.
         * Updated Commands 
         * Fixed bugs related to UG
         * Added rejection scenarios for addMeeting command
+        * Edited datetime format in UG
     * Developer Guide:
         * Updated Glossary to fit our project requirements: [\#42](https://github.com/AY2324S2-CS2103-F08-1/tp/issues/41)
 
