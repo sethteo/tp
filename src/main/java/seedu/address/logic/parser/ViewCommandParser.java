@@ -44,7 +44,13 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         String[] arguments = args.trim().split("\\s+");
 
         if (arguments.length < 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            if (arguments[0].equals(VIEW_CLIENT_ARGUMENT)) {
+                //Checks if view is followed by 'c'
+                throw new ParseException("Error: No index detected!");
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
+
         }
         if (arguments.length == 2) {
             if (!arguments[0].equals(VIEW_CLIENT_ARGUMENT)) {
