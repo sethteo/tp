@@ -80,8 +80,7 @@ public class AddMeetingCommand extends Command {
 
         Person client = lastShownList.get(clientIndex.getZeroBased());
         Meeting meetingToAdd = new Meeting(description, dateTime, client);
-
-        if (model.hasMeeting(meetingToAdd) && client.hasExistingMeeting(meetingToAdd)) {
+        if (model.hasMeeting(meetingToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
         client.addMeeting(meetingToAdd);
