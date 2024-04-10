@@ -631,7 +631,7 @@ To implement this, the check for duplicate clients in the `Person` class will ha
     * Pros: Easy to implement.
     * Cons: May cause confusion for users who are used to the current behaviour.
 
-### 5.Make the flag for DESCRIPTION for `addMeeting` `editMeeting` consistent.
+### 5.Make the flag for `DESCRIPTION` for `addMeeting` `editMeeting` consistent.
 
 Currently, the flag for the description of a meeting is `d/` for `addMeeting` and `n/` 
 for `editMeeting`. This is not ideal as the flag for the description should be consistent across 
@@ -643,7 +643,7 @@ be updated in the `Command` classes.
 
 #### Design consideration:
 
-**Aspect: How to make the flag for `DESCRIPTION` for `addMeeting` `editMeeting` consistent:**
+**Aspect: How to make the flag for `DESCRIPTION` for `addMeeting` and `editMeeting` consistent:**
 
 * Update the flag for the description for `addMeeting` and `editMeeting` to be consistent.
     * Pros: Easy to implement.
