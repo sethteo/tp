@@ -20,7 +20,6 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 - Third-party libraries used:
     - [JavaFX](https://openjfx.io/) for the GUI
@@ -249,7 +248,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | As a financial advisor | filter my meetings by date           | so I can know the meetings of that day                       |
 | `*`      | As a financial advisor | sort persons by name                 | locate a person easily                                       |
 
-_{More to be added}_
 
 ### Use cases
 
@@ -549,13 +547,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Simulating a missing file
 
-        1. Prerequisites: Delete the data file `data/addressbook.json` if it exists.
+        1. Prerequisites: Delete the data file `data/fincliq.json` if it exists.
 
         1. Test case: Launch the app<br>
            Expected: A new data file is created. The app launches with a set of sample contacts.
 
     1. Simulating a corrupted file
-        1. Prerequisites: Corrupt the data file `data/addressbook.json` by adding some random text.
+        1. Prerequisites: Corrupt the data file `data/fincliq.json` by adding some random text.
 
         1. Test case: Launch the app<br>
            Expected: A new data file is created. The app launches with a set of sample contacts.
