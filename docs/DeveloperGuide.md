@@ -562,10 +562,10 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-## **Appendix: Possible Improvements**
+## **Appendix: Planned Enhancements**
 In future iterations of FinCliq, the following improvements could be made:
 
-### Prevent meeting slots at the same date and time
+### 1.Prevent meeting slots at the same date and time
 
 #### Implementation
 
@@ -582,7 +582,7 @@ To implement this, there has to be a check to ensure that the meeting timing doe
     * Cons: Additional check required when adding/editing meetings.
 
 
-### Shorten command words to improve user experience
+### 2.Shorten command words to improve user experience
 
 Currently, the command words are quite long and may be difficult to remember. In the future, we
 hope to shorten the command words to improve the user experience to optimise the user experience
@@ -601,7 +601,7 @@ command words, such as `am` for `addMeeting`, `dm` for `deleteMeeting`, `em` for
     * Pros: Easy to implement.
     * Cons: May be confusing for users who are used to the current command words.
 
-### Allow different clients with same name but different phone number and email to be added
+### 3.Allow different clients with same name but different phone number and email to be added
 
 Currently, the app does not allow different clients with the same name but different phone
 number to be added. This is not ideal as there may be multiple clients with the same name but
@@ -619,7 +619,7 @@ To implement this, the check for duplicate clients in the `Person` class will ha
     * Cons: May cause confusion for users who are used to the current behaviour.
 
 
-### Prevent the addition of clients with duplicate phone numbers and emails
+### 4.Prevent the addition of clients with duplicate phone numbers and emails
 
 Currently, the app allows clients with duplicate phone numbers and emails to be added. This is not ideal as there should not be multiple clients with the same phone number or email. In the future, we hope to prevent the addition of clients with duplicate phone numbers and emails.
 
@@ -633,7 +633,7 @@ To implement this, the check for duplicate clients in the `Person` class will ha
     * Pros: Easy to implement.
     * Cons: May cause confusion for users who are used to the current behaviour.
 
-### Make the flag for DESCRIPTION for `addMeeting` `editMeeting` consistent.
+### 5.Make the flag for DESCRIPTION for `addMeeting` `editMeeting` consistent.
 
 Currently, the flag for the description of a meeting is `d/` for `addMeeting` and `n/` 
 for `editMeeting`. This is not ideal as the flag for the description should be consistent across 
@@ -651,14 +651,26 @@ be updated in the `Command` classes.
     * Pros: Easy to implement.
     * Cons: May cause confusion for users who are used to the current behaviour.
 
-### Validate the email format for `Person` objects
+### 6.Validate the email format for `Person` objects
 
 Currently, the app does not validate the email format for `Person` objects. This is not ideal as the email format should be validated to ensure that the email is in the correct format. In the future, we hope to validate the email format for `Person` objects.
 
-** Aspect: How to validate the email format for `Person` objects:**
+**Aspect: How to validate the email format for `Person` objects:**
 
 * Update the `Person` class to have a validation regex for the email field.
     * Pros: Easy to implement.
     * Cons: May cause confusion for users who are used to the current behaviour.
 
----
+### 7.Update the error message for `view c` for single client case 
+
+Currently, the `view c` command returns the error: `If you wish to view another client please return home by entering 'list' before viewing another client.` if there is only one client in the `Clients` list regardless of if the index is valid or invalid. This is not ideal as if there is only 1 `Client` in the list and user inputs `view c 1` it should
+not return an error.
+
+**Aspect: How to edit the error message to accommodate both scenarios**
+
+* Update the condition checking `execute()` method of the `ViewClientCommand` class to account for 2 scenarios
+  * Scenario 1: If user is already viewing that client and inputs the same index, in this case `1`
+  * Scenario 2: If there is only 1 client in the `Clients` list and user inputs that index, also by inputting `1`
+  * Pros: Easy to implement, clears up confusion of users when using the `view c` command and thinking that their inputs were valid.
+  * Cons: Additional variable has to be added in order to account for Scenario 2
+
