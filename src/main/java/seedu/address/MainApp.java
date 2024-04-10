@@ -49,7 +49,8 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing "
+                + "FinCliq ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -74,26 +75,26 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using addressBook data file : " + storage.getAddressBookFilePath());
+        logger.info("Using FinCliq data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialAddressData;
         boolean addressBookIsPresent = false;
 
         // TODO: RETRIEVAL OF ADDRESS BOOK FROM FILE PATH
-        Path storagePath = Paths.get("data/newAddressBook.json");
+        Path storagePath = Paths.get("data/fincliq.json");
         try {
             addressBookOptional = storage.readAddressBook(storagePath);
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with custom AddressBook.");
+                        + " populated with custom FinCliq.");
             } else {
                 addressBookIsPresent = true;
             }
             initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty FinCliq.");
             initialAddressData = new AddressBook();
         }
 
@@ -179,13 +180,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting FinCliq " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping FinCliq ] "
+                + "=============================");
         try {
             storage.saveAddressBook(model.getAddressBook(), model.getAddressBookFilePath());
             storage.saveUserPrefs(model.getUserPrefs());
