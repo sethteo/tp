@@ -8,12 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.JAMAL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,11 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditMeetingCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.meeting.Meeting;
-import seedu.address.testutil.MeetingBuilder;
 
 public class EditMeetingCommandParserTest {
 
