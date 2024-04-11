@@ -21,7 +21,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String trimmedArgs = args.trim();
         String[] arguments = trimmedArgs.split(" ");
         String alphanumericRegex = "^[a-zA-Z0-9]+$";
-        System.out.println(trimmedArgs);
 
         if (arguments.length > 1) {
             throw new ParseException(MESSAGE_MULTIPLE_TAGS);
