@@ -25,8 +25,6 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
     public AddMeetingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_INDEX, PREFIX_DATETIME, PREFIX_DESCRIPTION);
-        System.out.println(!arePrefixesPresent(argMultimap, PREFIX_CLIENT_INDEX, PREFIX_DATETIME, PREFIX_DESCRIPTION));
-        System.out.println(!argMultimap.getPreamble().isEmpty());
         if (!arePrefixesPresent(argMultimap, PREFIX_CLIENT_INDEX, PREFIX_DATETIME, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
