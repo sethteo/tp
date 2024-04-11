@@ -268,7 +268,7 @@ Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list.
 - `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, ….
 - `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
-  the current time, and on the hour.**
+  the current time**
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
 
 Rejected Scenarios:

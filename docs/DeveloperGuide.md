@@ -672,24 +672,4 @@ not return an error.
     * Pros: Easy to implement, clears up confusion of users when using the `view c` command and thinking that their inputs were valid.
     * Cons: Additional variable has to be added in order to account for Scenario 2
 
-### 8.Change duration of each meeting to start in intervals of 30 minutes
-
-#### Implementation
-
-Currently, the duration of each meeting is fixed at 1 hour.
-
-In the future, we hope to be able to change the duration of each meeting to start in intervals
-of 30 minutes. This will allow the financial advisors to have more flexibility in scheduling
-meetings.
-
-To implement this, the validation check in the `Meeting` class will have to be updated to ensure
-the duration of each meeting is in intervals of 30 minutes.
-
-#### Design consideration:
-
-**Aspect: How to ensure that the duration of each meeting is in intervals of 30 minutes:**
-
-* When a new meeting is added or edited, check if the duration of the meeting is in intervals of 30 minutes.
-    * Pros: Easy to implement.
-    * Cons: Additional check required when adding/editing meetings.
 ---
