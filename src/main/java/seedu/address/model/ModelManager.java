@@ -117,15 +117,16 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Meeting Related =============================================================================
+    // =========== Meeting Related
+    // =============================================================================
     @Override
     public void addMeeting(Meeting meeting) {
         addressBook.addMeeting(meeting);
         updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
     }
 
-
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
@@ -175,6 +176,8 @@ public class ModelManager implements Model {
     @Override
     public void deleteAllMeetingsForClient(Index clientIndex) {
         Person targetClient = filteredPersons.get(clientIndex.getZeroBased());
+        ArrayList<Meeting> targetClientMeetings = targetClient.getMeetings();
+        targetClientMeetings.stream().forEach(meeting -> addressBook.deleteMeeting(meeting));
         targetClient.setMeetings(new ArrayList<Meeting>());
     }
 
