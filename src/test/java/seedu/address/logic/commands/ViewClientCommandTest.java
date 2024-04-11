@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -21,8 +21,7 @@ import seedu.address.model.UserPrefs;
 
 
 public class ViewClientCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -31,20 +30,20 @@ public class ViewClientCommandTest {
         ViewClientCommand secondViewCommand = new ViewClientCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(firstViewCommand.equals(firstViewCommand));
+        assertEquals(firstViewCommand, firstViewCommand);
 
         // same values -> returns true
         ViewClientCommand firstViewCommandCopy = new ViewClientCommand(INDEX_FIRST_PERSON);
-        assertTrue(firstViewCommand.equals(firstViewCommandCopy));
+        assertEquals(firstViewCommand, firstViewCommandCopy);
 
         // different types -> returns false
-        assertFalse(firstViewCommand.equals(1));
+        assertNotEquals(1, firstViewCommand);
 
         // null -> returns false
-        assertFalse(firstViewCommand.equals(null));
+        assertNotEquals(null, firstViewCommand);
 
         // different person -> returns false
-        assertFalse(firstViewCommand.equals(secondViewCommand));
+        assertNotEquals(firstViewCommand, secondViewCommand);
     }
     @Test
     public void execute_viewClient_success() {

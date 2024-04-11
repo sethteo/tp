@@ -8,12 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.JAMAL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,24 +18,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditMeetingCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.meeting.Meeting;
-import seedu.address.testutil.MeetingBuilder;
 
 public class EditMeetingCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditMeetingCommand.MESSAGE_USAGE);
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private EditMeetingCommandParser parser = new EditMeetingCommandParser();
 
     @Test
     public void parse_missingClientIndex_failure() {
-        Meeting editedMeeting = new MeetingBuilder().withClient(JAMAL).buildMeeting();
-
         // no clientIndex specified
         String testInputClientIndex = MEETING_INDEX + VALID_NAME_AMY + DATETIME;
         assertParseFailure(parser, testInputClientIndex, MESSAGE_INVALID_FORMAT);
@@ -55,8 +42,6 @@ public class EditMeetingCommandParserTest {
 
     @Test
     public void parse_missingMeetingIndex_failure() {
-        Meeting editedMeeting = new MeetingBuilder().withClient(JAMAL).buildMeeting();
-
         // no meetingIndex specified
         String testInputMeetingIndex = CLIENT_INDEX + VALID_NAME_AMY + DATETIME;
         assertParseFailure(parser, testInputMeetingIndex, MESSAGE_INVALID_FORMAT);
@@ -64,8 +49,6 @@ public class EditMeetingCommandParserTest {
 
     @Test
     public void parse_missingDateTime_failure() {
-        Meeting editedMeeting = new MeetingBuilder().withClient(JAMAL).buildMeeting();
-
         // no datetime specified
         String testInputDateTime = CLIENT_INDEX + MEETING_INDEX + VALID_NAME_AMY;
         assertParseFailure(parser, testInputDateTime, MESSAGE_INVALID_FORMAT);
@@ -73,8 +56,6 @@ public class EditMeetingCommandParserTest {
 
     @Test
     public void parse_missingDescription_failure() {
-        Meeting editedMeeting = new MeetingBuilder().withClient(JAMAL).buildMeeting();
-
         // no description specified
         String testInputDescription = CLIENT_INDEX + MEETING_INDEX + DATETIME;
         assertParseFailure(parser, testInputDescription, MESSAGE_INVALID_FORMAT);
@@ -98,12 +79,6 @@ public class EditMeetingCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-
-        String targetClientIndex = CLIENT_INDEX;
-        String targetMeetingIndex = MEETING_INDEX;
-        String description = PREFIX_NAME + VALID_NAME_AMY;
-        String dateTime = DATETIME;
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime parsedDateTime = LocalDateTime.parse(VALID_DATETIME, formatter);
 

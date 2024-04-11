@@ -633,12 +633,12 @@ To implement this, the check for duplicate clients in the `Person` class will ha
 
 ### 5.Make the flag for `DESCRIPTION` for `addMeeting` `editMeeting` consistent.
 
-Currently, the flag for the description of a meeting is `d/` for `addMeeting` and `n/` 
-for `editMeeting`. This is not ideal as the flag for the description should be consistent across 
-all commands. In the future, we hope to make the flag for the description for `addMeeting` and 
+Currently, the flag for the description of a meeting is `d/` for `addMeeting` and `n/`
+for `editMeeting`. This is not ideal as the flag for the description should be consistent across
+all commands. In the future, we hope to make the flag for the description for `addMeeting` and
 `editMeeting` consistent.
 
-To implement this, the flag for the description for `addMeeting` and `editMeeting` will have to 
+To implement this, the flag for the description for `addMeeting` and `editMeeting` will have to
 be updated in the `Command` classes.
 
 #### Design consideration:
@@ -659,7 +659,7 @@ Currently, the app does not validate the email format for `Person` objects. This
     * Pros: Easy to implement.
     * Cons: May cause confusion for users who are used to the current behaviour.
 
-### 7.Update the error message for `view c` for single client case 
+### 7.Update the error message for `view c` for single client case
 
 Currently, the `view c` command returns the error: `If you wish to view another client please return home by entering 'list' before viewing another client.` if there is only one client in the `Clients` list regardless of if the index is valid or invalid. This is not ideal as if there is only 1 `Client` in the list and user inputs `view c 1` it should
 not return an error.
@@ -667,8 +667,9 @@ not return an error.
 **Aspect: How to edit the error message to accommodate both scenarios**
 
 * Update the condition checking `execute()` method of the `ViewClientCommand` class to account for 2 scenarios
-  * Scenario 1: If user is already viewing that client and inputs the same index, in this case `1`
-  * Scenario 2: If there is only 1 client in the `Clients` list and user inputs that index, also by inputting `1`
-  * Pros: Easy to implement, clears up confusion of users when using the `view c` command and thinking that their inputs were valid.
-  * Cons: Additional variable has to be added in order to account for Scenario 2
+    * Scenario 1: If user is already viewing that client and inputs the same index, in this case `1`
+    * Scenario 2: If there is only 1 client in the `Clients` list and user inputs that index, also by inputting `1`
+    * Pros: Easy to implement, clears up confusion of users when using the `view c` command and thinking that their inputs were valid.
+    * Cons: Additional variable has to be added in order to account for Scenario 2
 
+---
