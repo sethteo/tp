@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.testutil.TypicalMeetings.ALICE_WITH_MEETING;
 import static seedu.address.testutil.TypicalMeetings.ALICE_WITH_MEETING;
 import static seedu.address.testutil.TypicalMeetings.BENSON_WITH_MEETING;
 import static seedu.address.testutil.TypicalMeetings.CARL_WITH_MEETING;

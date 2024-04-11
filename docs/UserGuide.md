@@ -30,16 +30,16 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    - `list` : List all clients.
+- `list` : List all clients.
 
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
-      contact named `John Doe` to FinCliq.
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
+  contact named `John Doe` to FinCliq.
 
-    - `delete 3` : Deletes the 3rd clients shown in the current list.
+- `delete 3` : Deletes the 3rd clients shown in the current list.
 
-    - `clear` : Deletes all clients.
+- `clear` : Deletes all clients.
 
-    - `exit` : Exit the app.
+- `exit` : Exit the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -79,40 +79,40 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 **:information_source: Notes about the command input format:**<br>
 
 * Spacing of values:
-    * Leading and trailing spaces of input values will be removed.
+  * Leading and trailing spaces of input values will be removed.
 
 * `NAME` format:
-    * Can only contain alphabetical characters and spaces.
-    * Cannot be blank.
-    * Extra spaces between values will be processed as a single space.
-    * Example: "John Doe"
+  * Can only contain alphabetical characters and spaces.
+  * Cannot be blank.
+  * Extra spaces between values will be processed as a single space.
+  * Example: "John Doe"
 
 * `PHONE_NUMBER` format:
-    * Must follow the standard Singapore telephone numbers (i.e. 9XXXXXXX or 8XXXXXXX).
-    * Spaces between numbers will be ignored.
-    * Example: 91234567
+  * Must follow the standard Singapore telephone numbers (i.e. 9XXXXXXX or 8XXXXXXX).
+  * Spaces between numbers will be ignored.
+  * Example: 91234567
 
 * `EMAIL` format:
-    * Must follow the standard email address format
-    * Example: alexyeoh@example.com
+  * Must follow the standard email address format
+  * Example: alexyeoh@example.com
 
 * `ADDRESS` format:
-    * Can only consist of alphanumeric characters, whitespace and the following set of characters: ``#-(),``.
-    * Cannot be blank.
-    * Example: `Blk 30 Geylang Street 29, #06-40`
+  * Can only consist of alphanumeric characters, whitespace and the following set of characters: ``#-(),``.
+  * Cannot be blank.
+  * Example: `Blk 30 Geylang Street 29, #06-40`
 
 * `TAG` format:
-    * Can only consist of alphanumeric characters.
-    * Must be a single word
-    * Example: `friends`
+  * Can only consist of alphanumeric characters.
+  * Must be a single word
+  * Example: `friends`
 
 * `DATE_TIME` format:
-    * Must follow the format `DD-MM-YYYY HH:MM`
-    * Example: `02-01-2025 12:00`
+  * Must follow the format `DD-MM-YYYY HH:MM`
+  * Example: `02-01-2025 12:00`
 
 * `CLIENT_INDEX` format:
-    * Must be a positive integer from 1 to 2147483647
-    * Example: `1`
+  * Must be a positive integer from 1 to 2147483647
+  * Example: `1`
 
 
 </div>
@@ -146,7 +146,7 @@ There is no need to save manually.
 
 #### Editing the data file
 
-FinCliq data are saved automatically as a JSON file `[JAR file location]/data/fincliq.json`. 
+FinCliq data are saved automatically as a JSON file `[JAR file location]/data/fincliq.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -263,7 +263,7 @@ Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list.
 - `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, ….
 - `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
-  the current time.**
+  the current time, and on the hour.**
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
 
 Rejected Scenarios:
@@ -344,17 +344,20 @@ To keep track of your clients/meetings, you can follow the various commands in t
 **Q**: When entering my name, some characters do not show up. Is this the intended behaviour?<br>
 **A**: Yes, currently, only our app only supports english names, although we intend to support this in the future.
 
-**Q**: I entered a date and time that was before the current time, and it fails to add. Is this
-the intended behaviour?<br>
-**A**: Yes. We implemented this so that people would not enter meetings that occur in the past.
+**Q**: I entered a date and time that was before the current time and not on the hour, and it
+fails to add. Is this the intended behaviour?<br>
+**A**: Yes. We implemented this so that people would not enter meetings that occur in the past,
+and to simplify the scheduling of meetings for financial advisors.
 
 **Q**: I entered a meeting for the same client with the same date and time but different
 description, and it fails to add. Is this the intended behaviour?<br>
-**A**: Yes. We implemented this with the intention that our user(financial advisor) is only booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
+**A**: Yes. We implemented this with the intention that our user (a financial advisor) is only 
+booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
 
 **Q**: I entered a meeting for a different client with the same date and time and description,
 and it succeeds to add. Is this the intended behaviour?<br>
-**A**: Yes. We implemented this with the intention that our user(financial advisor) can be meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
+**A**: Yes. We implemented this with the intention that our user (a financial advisor) can be 
+meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
 
 ---
 
@@ -396,3 +399,5 @@ and it succeeds to add. Is this the intended behaviour?<br>
 | **Clear** | `clear`          |
 | **Help**  | `help`           |
 | **Exit**  | `exit`           |
+
+---
