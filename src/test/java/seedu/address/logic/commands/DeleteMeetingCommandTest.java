@@ -26,19 +26,13 @@ import seedu.address.model.meeting.Meeting;
  * {@code DeleteCommand}.
  */
 public class DeleteMeetingCommandTest {
-
-    static {
-        System.out.println(JAMAL_WITH_MEETING.getMeetings().size());
-    }
     private static final Meeting testMeeting = JAMAL_WITH_MEETING.getMeetings().get(0);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validClientIndexValidMeetingIndex() {
-        System.out.println(JAMAL_WITH_MEETING.getMeetings());
         JAMAL_WITH_MEETING.getMeetings().add(testMeeting);
-        System.out.println(JAMAL_WITH_MEETING.getMeetings().size());
         model.addPerson(JAMAL_WITH_MEETING);
         int clientIndex = model.getAddressBook().getPersonList().indexOf(JAMAL_WITH_MEETING);
 
@@ -81,7 +75,6 @@ public class DeleteMeetingCommandTest {
         Index testMeetingIndex = Index.fromOneBased(Index.fromZeroBased(
                 JAMAL_WITH_MEETING.getMeetings().size()).getOneBased());
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(testClientIndex, testMeetingIndex);
-        System.out.println(JAMAL_WITH_MEETING.getMeetings());
         String expectedMessage = "Error: Meeting 3 not found";
         assertCommandFailure(deleteMeetingCommand, model, expectedMessage);
         model.deletePerson(JAMAL_WITH_MEETING);
