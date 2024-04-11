@@ -70,6 +70,8 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 - `CLIENT_INDEX` Refers to the index number shown in the displayed client list. In the example below `CLIENT_INDEX` is circled in red for added clarity.
   ![circled client index](images/clientIndex.png)
+- `MEETING_INDEX` Refers to the index number shown in the displayed meeting list. In the example below `MEETING_INDEX` is circled in red for added clarity.
+  ![circled meeting index](images/meetingIndex.png)
 </div>
 
 
@@ -111,9 +113,12 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
     * Example: `02-01-2025 12:00`
 
 * `CLIENT_INDEX` format:
-    * Must be a positive integer from 1 to 2147483647
+    * Must be a *positive integer* from 1 to 2147483647
     * Example: `1`
 
+* `MEETING_INDEX` format:
+    * Must be a *positive integer* from 1 to 2147483647
+    * Example: `1`
 
 </div>
 
