@@ -156,7 +156,7 @@ Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value 
+Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value
 entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -356,12 +356,12 @@ and to simplify the scheduling of meetings for financial advisors.
 
 **Q**: I entered a meeting for the same client with the same date and time but different
 description, and it fails to add. Is this the intended behaviour?<br>
-**A**: Yes. We implemented this with the intention that our user (a financial advisor) is only 
+**A**: Yes. We implemented this with the intention that our user (a financial advisor) is only
 booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
 
 **Q**: I entered a meeting for a different client with the same date and time and description,
 and it succeeds to add. Is this the intended behaviour?<br>
-**A**: Yes. We implemented this with the intention that our user (a financial advisor) can be 
+**A**: Yes. We implemented this with the intention that our user (a financial advisor) can be
 meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
 
 ---
