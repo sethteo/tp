@@ -39,5 +39,6 @@ Given below are my contributions to the project.
 
     * Developer Guide:
       * Updated the PUML diagrams to fit our group's usage of the classes by adding the new components we have as well as removing some components not used [\#121](https://github.com/AY2324S2-CS2103-F08-1/tp/issues/121)
+      * Updated sequence diagrams for the `FilterCommand` [PR#271](https://github.com/AY2324S2-CS2103-F08-1/tp/pull/271) 
 
 
