@@ -191,6 +191,12 @@ This section describes some noteworthy details on how certain features are imple
     - If yes, throws `ParseException`
 - If no exception was thrown, a `Tag` object is created which is then used to create a `FilterCommand` object
 
+#### Sequence Diagram
+<img src="images/FilterSequenceDiagram.png" width="550" />
+
+The details of the reference frame can be found in the sequence diagram below.
+<img src="images/FilterSequenceDiagram_2.png" width="550" />
+
 #### Design considerations:
 
 **Aspect: How FilterCommandParser executes:**
