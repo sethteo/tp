@@ -240,19 +240,19 @@ The details of the reference frame can be found in the sequence diagram below.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                 | I want to …                          | So that I can…                                               |
-|----------|------------------------|--------------------------------------|--------------------------------------------------------------|
-| `* * *`  | As a financial advisor | add new clients profiles to my list  | keep track of the clients under me                           |
-| `* * *`  | As a financial advisor | edit the profiles of my clients      | keep their information up to date                            |
-| `* * *`  | As a financial advisor | delete the clients under me          | remove clients that are no longer under me                   |
-| `* * *`  | As a financial advisor | view all my client profiles          | track all my clients in one place                            |
-| `* * *`  | As a financial advisor | filter client by their tags          | track clients with similar demographics                      |
-| `* * *`  | As a financial advisor | add client meetings                  | keep track of my schedule                                    |
-| `* * *`  | As a financial advisor | update client meetings               | revise my schedule and alter for reasons                     |
-| `* * *`  | As a financial advisor | view meetings with a specific client | so I can prepare for the meeting with the client accordingly |
-| `* *`    | As a financial advisor | search my meetings by date or agenda | locate meetings with specific filters                        |
-| `* *`    | As a financial advisor | filter my meetings by date           | so I can know the meetings of that day                       |
-| `*`      | As a financial advisor | sort persons by name                 | locate a person easily                                       |
+| Priority | As a …                 | I want to …                               | So that I can…                                                |
+|----------|------------------------|-------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | As a financial advisor | add new clients profiles to my list       | keep track of the clients under me                            |
+| `* * *`  | As a financial advisor | edit the profiles of my clients           | keep their information up to date                             |
+| `* * *`  | As a financial advisor | delete the clients under me               | remove clients that are no longer under me                    |
+| `* * *`  | As a financial advisor | view all my client profiles               | track all my clients in one place                             |
+| `* * *`  | As a financial advisor | filter client by their tags               | track clients with similar demographics                       |
+| `* * *`  | As a financial advisor | add client meetings                       | keep track of my schedule                                     |
+| `* * *`  | As a financial advisor | update client meetings                    | revise my schedule and alter for reasons                      |
+| `* * *`  | As a financial advisor | view a specific client and their meetings | so I can prepare for the materials for the client accordingly |
+| `* *`    | As a financial advisor | search my meetings by date or agenda      | locate meetings with specific filters                         |
+| `* *`    | As a financial advisor | filter my meetings by date                | so I can know the meetings of that day                        |
+| `*`      | As a financial advisor | sort persons by name                      | locate a person easily                                        |
 
 
 ### Use cases
@@ -337,11 +337,11 @@ financial advisor`, unless specified otherwise)
     - 1b2. FinCliq informs financial advisor of the invalid date
     - Use case ends
 
-**Use Case: View A Specific Client Meetings**
+**Use Case: View a specific client**
 
 **MSS:**
-1. Financial advisor requests to view all upcoming meetings.
-2. FinCliq retrieves and displays all upcoming meetings for that client.
+1. Financial advisor requests to view a client by a specified index.
+2. FinCliq retrieves and displays that specific client as well as all of his/her associated meetings.
     - Use case ends.
 
 **Use Case: Update existing Meetings**
@@ -352,7 +352,7 @@ financial advisor`, unless specified otherwise)
 3. FinCliq displays updated meeting to the advisor.
     - Use case ends.
 
-Use Case: Delete Meeting
+**Use Case: Delete Meeting**
 
 **MSS:**
 1. Financial advisor requests to delete a specific client's meeting
@@ -360,7 +360,7 @@ Use Case: Delete Meeting
 3. FinCliq displays successful deletion message
     - Use case ends
 
-Use Case: Filter Clients by Tag
+**Use Case: Filter Clients by Tag**
 
 **MSS:**
 1. Financial advisor requests to filter meetings by a tag by inputting the name of the tag.
