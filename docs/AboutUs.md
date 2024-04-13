@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Jerome Goh
@@ -14,7 +12,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jaejayrome.png" width="200px">
 
 [[github](https://github.com/jaejayrome)]
-[[portfolio](team/jerome.md)]
+[[portfolio](team/jaejayrome.md)]
 
 - Role: Developer
 - Responsibilities: Model
@@ -24,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/timothysashimi.png" width="200px">
 
 [[github](http://github.com/timothysashimi)]
-[[portfolio](team/timothy.md)]
+[[portfolio](team/timothysashimi.md)]
 
 - Role: Developer
 - Responsibilities: UI
