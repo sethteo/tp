@@ -13,7 +13,9 @@ title: Developer Guide
     4. [Model Component](#model-component)
     5. [Storage Component](#storage-component)
     6. [Common Classes](#common-classes)
-4. [Appendix](#appendix-requirements)
+4. [Appendix: Requirements](#appendix-requirements)
+5. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+6. [Appendix: Planned enhancements](#appendix-planned-enhancements)
 
 
 ---
