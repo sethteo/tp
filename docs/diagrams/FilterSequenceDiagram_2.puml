@@ -23,6 +23,7 @@ group sd [Logic for updateFilteredMeetingList()]
     Model --> FilterCommand : filteredPersonsWithTag
     deactivate Model
 
+    create MeetingList
     FilterCommand -> MeetingList
     activate MeetingList
 
