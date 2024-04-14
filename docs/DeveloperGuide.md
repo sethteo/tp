@@ -21,7 +21,7 @@ title: Developer Guide
     - 4.1.2. [Edit Meeting feature](#edit-meeting-feature)
     - 4.1.3. [Delete Meeting feature](#delete-meeting-feature)
     - 4.1.4. [View Client feature](#view-client-feature)
-  - 4.2. [Release v1.3](#release-v13)
+- 4.2. [Release v1.3](#release-v13)
     - 4.2.1 [Filter feature](#filter-feature)
 5. [Appendix: Requirements](#appendix-requirements)
 6. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
