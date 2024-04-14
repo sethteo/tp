@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteMeetingCommandParser" as DeleteMeetingCommandParser LOGIC_COLOR
+participant "d:DeleteMeetingCommand" as DeleteMeetingCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deleteMeeting clientIndex/2 meetingIndex/1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deleteMeeting...")
+activate  AddressBookParser
+
+create DeleteMeetingCommandParser
+AddressBookParser -> DeleteMeetingCommandParser
+activate DeleteMeetingCommandParser
+
+DeleteMeetingCommandParser --> AddressBookParser
+deactivate DeleteMeetingCommandParser
+
+AddressBookParser -> DeleteMeetingCommandParser : parse("clientIndex/2 meetingIndex/1")
+activate DeleteMeetingCommandParser
+
+create DeleteMeetingCommand
+DeleteMeetingCommandParser -> DeleteMeetingCommand
+activate DeleteMeetingCommand
+
+DeleteMeetingCommand --> DeleteMeetingCommandParser : d
+deactivate DeleteMeetingCommand
+
+DeleteMeetingCommandParser --> AddressBookParser : d
+deactivate DeleteMeetingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteMeetingCommandParser -[hidden]-> AddressBookParser
+destroy DeleteMeetingCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteMeetingCommand : execute()
+activate DeleteMeetingCommand
+
+DeleteMeetingCommand -> ModelManager : deleteSpecificMeetingForClient(2, 1)
+activate ModelManager
+
+ModelManager --> DeleteMeetingCommand
+deactivate ModelManager
+
+create CommandResult
+DeleteMeetingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteMeetingCommand : r
+deactivate CommandResult
+
+DeleteMeetingCommand --> LogicManager : r
+deactivate DeleteMeetingCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteMeetingCommandParser -[hidden]-> LogicManager
+destroy DeleteMeetingCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
