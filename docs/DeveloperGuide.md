@@ -195,7 +195,9 @@ This section describes some noteworthy details on how certain features are imple
 - If no exception was thrown, a `Tag` object is created which is then used to create a `FilterCommand` object
 
 #### Sequence Diagram
-<img src="images/FilterSequenceDiagram.png" width="550" />
+<img src="images/FilterSequenceDiagram.png" width="700" />
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
 
 The details of the reference frame can be found in the sequence diagram below.
 <img src="images/FilterSequenceDiagram_2.png" width="550" />
@@ -497,6 +499,9 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `filter [invalid tag]`
        Expected: Shows all clients. Error details that tag provided does not belong to any client.
+   
+    4. Test case: `filter [tag_1] [tag_2]`
+       Expected: Error thrown to tell user to only input a singular Tag
 
 ### Adding a meeting
 
@@ -708,4 +713,11 @@ Currently, the `view c` command returns the error: `If you wish to view another 
     * Cons: 
       * Additional variable has to be added in order to account for Scenario 2
 
----
+### 8. Update the error message or command information for `view c` to accomodate for edge cases.
+
+Currently, the `view c` command if given invalid arguments returns the error: `Invalid command format`. However, this might cause confusion to users if they type `view c 2/` thinking that 2 is a valid index.
+
+**Aspect: How to make the command more fool-proof**
+
+* Update the error message of the `view c` command to display the incorrect index provided, supposing the user type used the command with special characters such as `/`
+* Or we can update the current error message to specify that the parameters in this case `index` should be a positive integer without any special characters to reduce any ambiguity. 
