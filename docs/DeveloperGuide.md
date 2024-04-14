@@ -699,7 +699,10 @@ testers are expected to do more *exploratory* testing.
     1. Test case: ` addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`<br>
        Expected: A new meeting is added to the list. The meeting's details are shown in the list,
        and the status bar shows the meeting's details.
-
+   1. Test case: `addMeeting clientIndex/0 dt/02-01-2030 12:00 d/sign life plan`<br>
+       Expected: Meeting is not added. Index should be one-based. Error details shown in the status message.
+   1. Test case: `addMeeting clientIndex/2 dt/02-01-2030 12:00 d/sign life plan`<br>
+       Expected: Meeting is added to the list as different client with the same description at the same date and time is allowed. The meeting's details are shown in the list, and the status bar shows the meeting's details.
     1. Test case: `addMeeting clientIndex/1 dt/02-01-2024 12:00 d/sign life plan`<br>
        Expected: Meeting is not added because the date has already elapsed. Error details shown in
        status message.
