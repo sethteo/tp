@@ -15,14 +15,14 @@ title: Developer Guide
     - 3.4. [Model Component](#model-component)
     - 3.5. [Storage Component](#storage-component)
     - 3.6. [Common Classes](#common-classes)
-4. [Implementation](#implementation)
-- 4.1. [Release v1.2](#release-v12)
-    - 4.1.1. [Add Meeting feature](#add-meeting-feature)  
-    - 4.1.2. [Edit Meeting feature](#edit-meeting-feature)
-    - 4.1.3. [Delete Meeting feature](#delete-meeting-feature)
-    - 4.1.4. [View Client feature](#view-client-feature)
-- 4.2. [Release v1.3](#release-v13)
-    - 4.2.1 [Filter feature](#filter-feature)
+4. [Implementation](#implementation)<br>
+   - 4.1. [Release v1.2](#release-v12)<br>
+     * 4.1.1. [Add Meeting feature](#add-meeting-feature)
+     * 4.1.2. [Edit Meeting feature](#edit-meeting-feature)
+     * 4.1.3. [Delete Meeting feature](#delete-meeting-feature)
+     * 4.1.4. [View Client feature](#view-client-feature)<br>
+   - 4.2. [Release v1.3](#release-v13)<br>
+     * 4.2.1 [Filter feature](#filter-feature)<br>
 5. [Appendix: Requirements](#appendix-requirements)
 6. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 7. [Appendix: Planned enhancements](#appendix-planned-enhancements)
@@ -298,7 +298,7 @@ The following activity diagram summarises what happens when a user executes the 
 - `DeleteMeetingCommand` deletes the meeting of the client corresponding to the indices provided
   by the user.
 - `DeleteMeetingCommand` creates a `CommandResult` object and returns it to `LogicManager`
-- `LogicManager` then passes `CommandResult` to `UI` who then displays the `Meeting` list without 
+- `LogicManager` then passes `CommandResult` to `UI` who then displays the `Meeting` list without
   the deleted meeting
 
 **The `DeleteMeetingCommandParser` is implemented as such:**
@@ -308,12 +308,12 @@ The following activity diagram summarises what happens when a user executes the 
     - If more than 1 string was provided, throws `ParseException`
 - Parser then checks if an empty string was provided
     - If yes, throws `ParseException`
-- If no exception was thrown, the indices corresponding to the `Person` and the `Meeting` 
+- If no exception was thrown, the indices corresponding to the `Person` and the `Meeting`
   are used to create a `DeleteMeetingCommand` object
 
 #### Sequence Diagram
 
-The following sequence diagrams show how the `DeleteMeetingCommand` is executed when the user 
+The following sequence diagrams show how the `DeleteMeetingCommand` is executed when the user
 inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
 
 The first diagram shows how the command goes through the `Logic` component:<br>
@@ -368,7 +368,7 @@ The following activity diagram summarises what happens when a user executes the 
 - `AddressBookParser` then creates a `ViewCommandParser` which parses the user input and
   returns a `ViewClientCommand`
 - The created `ViewClientCommand` is then executed by the `LogicManager`
-- `ViewClientCommand` filters through the list of `Person` based on the index provided by the user. 
+- `ViewClientCommand` filters through the list of `Person` based on the index provided by the user.
 - `ViewClientCommand` creates a `CommandResult` object and returns it to `LogicManager`
 - `LogicManager` then passes `CommandResult` to `UI` who then displays the new `Person` as well as the person's `Meetings`
 
@@ -380,7 +380,7 @@ The following activity diagram summarises what happens when a user executes the 
 - Parser then checks if an empty string was provided
     - If yes, throws `ParseException`
 - Parser then checks if the prefix `c` is given
-  - If no, throws `ParseException`
+    - If no, throws `ParseException`
 - If no exception was thrown, the index corresponding to the `Person` is used to create a `ViewClientCommand` object
 
 The following activity diagram summarises what happens when a user executes the `ViewClientCommand` command:
@@ -403,8 +403,8 @@ The following sequence diagram summarises what happens when a user executes the 
 * **Alternative 1 (current choice):** Views the client based on the given index as well as a prefix `c`
     - Pros:
         * Easier to implement.
-        * Built in OOP fashion with a parent `ViewCommand` class, this allows us to expand to other `View` methods such as `ViewMeeting` in the future 
-      
+        * Built in OOP fashion with a parent `ViewCommand` class, this allows us to expand to other `View` methods such as `ViewMeeting` in the future
+
 ### Release v1.3
 
 ### Filter feature
@@ -629,7 +629,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Use Case**: A description of a specific user goal or task and the steps required to achieve it.
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
 - **Private contact detail**: A contact detail that is not meant to be shared with others
-- **CLI**: A command line interface (CLI) is a software mechanism you use to interact with your 
+- **CLI**: A command line interface (CLI) is a software mechanism you use to interact with your
   operating system using your keyboard.
 
 ---
@@ -734,7 +734,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `filter [invalid tag]`
        Expected: Shows all clients. Error details that tag provided does not belong to any client.
-   
+
     4. Test case: `filter [tag_1] [tag_2]`
        Expected: Error thrown to tell user to only input a singular Tag
 
@@ -748,9 +748,9 @@ testers are expected to do more *exploratory* testing.
     1. Test case: ` addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`<br>
        Expected: A new meeting is added to the list. The meeting's details are shown in the list,
        and the status bar shows the meeting's details.
-   1. Test case: `addMeeting clientIndex/0 dt/02-01-2030 12:00 d/sign life plan`<br>
+    1. Test case: `addMeeting clientIndex/0 dt/02-01-2030 12:00 d/sign life plan`<br>
        Expected: Meeting is not added. Index should be one-based. Error details shown in the status message.
-   1. Test case: `addMeeting clientIndex/2 dt/02-01-2030 12:00 d/sign life plan`<br>
+    1. Test case: `addMeeting clientIndex/2 dt/02-01-2030 12:00 d/sign life plan`<br>
        Expected: Meeting is added to the list as different client with the same description at the same date and time is allowed. The meeting's details are shown in the list, and the status bar shows the meeting's details.
     1. Test case: `addMeeting clientIndex/1 dt/02-01-2024 12:00 d/sign life plan`<br>
        Expected: Meeting is not added because the date has already elapsed. Error details shown in
