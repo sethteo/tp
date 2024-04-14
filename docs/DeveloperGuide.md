@@ -245,6 +245,46 @@ The following activity diagram summarises what happens when a user executes the 
       * More error-prone as the user needs to provide the date and time.
       * Users have to type more to enter the date and time.
 
+### [V1.2] Edit Meeting feature
+
+#### Implementation
+
+**The `EditMeetingCommand` is implemented as such:**
+
+- `LogicManager`'s execute method is called with the command string which then calls the `parseCommand()` method of `AddressBookParser`
+- `AddressBookParser` then creates a `EditMeetingCommandParser` which parses the user input and
+  returns a `EditMeetingCommand`
+- The created `EditMeetingCommand` is then executed by the `LogicManager`
+- `EditMeetingCommand` edits the meeting of the client corresponding to the indices provided
+  by the user.
+- `EditMeetingCommand` creates a `CommandResult` object and returns it to `LogicManager`
+- `LogicManager` then passes `CommandResult` to `UI` who then displays the new `Meeting` list 
+
+**The `EditMeetingCommandParser` is implemented as such:**
+
+- Takes in a `String` input from the user
+- Splits the given `String` based on the prefixes.
+    - If one or more prefixes are missing, throws `ParseException`
+- Parser then checks if an empty string was provided
+    - If yes, throws `ParseException`
+- If no exception was thrown, the indices corresponding to the `Person` and the `Meeting`
+  are used to create a `EditMeetingCommand` object
+
+The following activity diagram summarises what happens when a user executes the `editMeeting` command:
+
+<img src="images/EditMeetingCommandActivityDiagram.png" width="550" />
+<img src="images/EditMeetingCommandParserActivityDiagram.png" width="550" />
+
+#### Design considerations:
+
+**Aspect: How edit meeting executes:**
+
+* **Alternative 1 (current choice):** Edits the meeting by directly modifying the current meeting
+    - Pros:
+        * Easier to implement.
+    - Cons:
+        * May cause unwanted side effects such as two different meetings (addressbook and client) being modified
+
 ### [V1.3] Filter feature
 
 #### Implementation
@@ -595,9 +635,6 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Editing a meeting
-
-<img src="images/EditMeetingCommandActivityDiagram.png" width="550" />
-<img src="images/EditMeetingCommandParserActivityDiagram.png" width="550" />
 
 1. Editing a meeting's details in the meeting list
 
