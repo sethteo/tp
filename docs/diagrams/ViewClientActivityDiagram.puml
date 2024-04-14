@@ -13,8 +13,8 @@ else ([Valid prefix])
     -Error: The person index [invalid index] provided is invalid!
     stop
     else([valid index])
-        :Display client with specified index;
-        :Display meetings of the client;
+        :Display client with the specified index;
+        :Display meetings of the client with the specified index;
         stop
 
 endif
