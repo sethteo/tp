@@ -1,0 +1,30 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Create EditMeetingCommandParser object;
+
+if (MeetingIndex present?) then (yes)
+    :Parse MeetingIndex;
+    if (ClientIndex present?) then (yes)
+        :Parse ClientIndex;
+        if (Description present?) then (yes)
+            :Parse Description;
+            if (DateTime present?) then (yes)
+                :Parse DateTime;
+                :Create EditMeetingCommand object;
+            else (no)
+                :Throw ParseException;
+            endif
+        else (no)
+            :Throw ParseException;
+        endif
+    else (no)
+        :Throw ParseException;
+    endif
+else (no)
+    :Throw ParseException;
+endif
+stop
+@enduml

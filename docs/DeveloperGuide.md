@@ -523,6 +523,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a meeting
 
+<img src="images/EditMeetingCommandActivityDiagram.png" width="550" />
+<img src="images/EditMeetingCommandParserActivityDiagram.png" width="550" />
+
 1. Editing a meeting's details in the meeting list
 
     1. Prerequisites: At least 1 meeting in the meeting list
