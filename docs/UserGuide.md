@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+# FinCliq - User Guide
+
 FinCliq is a **desktop app for financial advisors to manage contacts and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FinCliQ can get your contact management tasks done faster than traditional GUI apps.
 
 ---
@@ -23,7 +25,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the <br>`java
-   -jar fincliq.jar` <br> command to run the application.<br>
+   -jar fincliq.jar` command to run the application.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -41,7 +43,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 - `exit` : Exit the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features & Commands](#features--commands) section below for details of each command.
 
 ---
 
@@ -340,7 +342,7 @@ between them?<br>
 **A**: This app is designed to help you keep track of your clients and meetings with them. <br>
 To keep track of your clients/meetings, you can follow the various commands in the user guide and enter the commands according to the specified format.
 
-**Q**: Is there a limit to the number of clients/meetings I can store in the app<br>
+**Q**: Is there a limit to the number of clients/meetings I can store in the app?<br>
 **A**: No, there is no limit to the number.
 
 **Q**: Are the clients/meetings storage persistent between application restarts?<br>
