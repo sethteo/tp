@@ -405,6 +405,13 @@ The following sequence diagram summarises what happens when a user executes the 
         * Easier to implement.
         * Built in OOP fashion with a parent `ViewCommand` class, this allows us to expand to other `View` methods such as `ViewMeeting` in the future
 
+* **Alternative 2:** Views the client based on client's name
+    - Pros:
+        * More intuitive to search.
+    - Cons:
+        * Very similar to the current `Find` feature 
+        * Harder to implement due to bugs that could come from a `String` input.
+
 ### Release v1.3
 
 ### Filter feature
