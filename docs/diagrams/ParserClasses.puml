@@ -4,8 +4,8 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
-Class "{abstract}\nCommand" as Command
-Class XYZCommand
+Class "{abstract}\n<<Command>>\nCommand" as Command
+Class "<<ConcreteCommand>>\nXYZCommand" as XYZCommand
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
