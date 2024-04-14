@@ -1,0 +1,35 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Create EditMeetingCommandParser object;
+
+if () then (MeetingIndex present)
+    :Parse MeetingIndex;
+    if () then (ClientIndex present)
+        :Parse ClientIndex;
+        if () then (Description present)
+            :Parse Description;
+            if () then (DateTime present)
+                :Parse DateTime;
+                :Create EditMeetingCommand object;
+                stop
+            else (else)
+                :Error : Invalid command;
+                stop
+            endif
+        else (else)
+            :Error : Invalid command;
+            stop
+        endif
+    else (else)
+        :Error : Invalid command;
+        stop
+    endif
+else (else)
+    :Error : Invalid command;
+    stop
+endif
+
+@enduml

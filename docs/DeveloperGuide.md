@@ -16,10 +16,11 @@ title: Developer Guide
     - 3.5. [Storage Component](#storage-component)
     - 3.6. [Common Classes](#common-classes)
 4. [Implementation](#implementation)
-   4.1 [Release v1.2](#release-v12)
-   - 4.1.1. [Delete Meeting feature](#delete-meeting-feature)
-   4.2 [Release v1.3](#release-v13)
-   - 4.2.1 [Filter feature](#filter-feature)
+   - 4.1. [Release v1.2](#release-v12)
+     - 4.1.1. [Delete Meeting feature](#edit-meeting-feature)
+     - 4.1.2. [Delete Meeting feature](#delete-meeting-feature)
+   - 4.2. [Release v1.3](#release-v13)
+     - 4.2.1 [Filter feature](#filter-feature)
 5. [Appendix: Requirements](#appendix-requirements)
 6. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 7. [Appendix: Planned enhancements](#appendix-planned-enhancements)
@@ -180,6 +181,46 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Release v1.2
 
+### Edit Meeting feature
+
+#### Implementation
+
+**The `EditMeetingCommand` is implemented as such:**
+
+- `LogicManager`'s execute method is called with the command string which then calls the `parseCommand()` method of `AddressBookParser`
+- `AddressBookParser` then creates a `EditMeetingCommandParser` which parses the user input and
+  returns a `EditMeetingCommand`
+- The created `EditMeetingCommand` is then executed by the `LogicManager`
+- `EditMeetingCommand` edits the meeting of the client corresponding to the indices provided
+  by the user.
+- `EditMeetingCommand` creates a `CommandResult` object and returns it to `LogicManager`
+- `LogicManager` then passes `CommandResult` to `UI` who then displays the new `Meeting` list
+
+**The `EditMeetingCommandParser` is implemented as such:**
+
+- Takes in a `String` input from the user
+- Splits the given `String` based on the prefixes.
+    - If one or more prefixes are missing, throws `ParseException`
+- Parser then checks if an empty string was provided
+    - If yes, throws `ParseException`
+- If no exception was thrown, the indices corresponding to the `Person` and the `Meeting`
+  are used to create a `EditMeetingCommand` object
+
+The following activity diagram summarises what happens when a user executes the `editMeeting` command:
+
+<img src="images/EditMeetingCommandActivityDiagram.png" width="550" />
+<img src="images/EditMeetingCommandParserActivityDiagram.png" width="550" />
+
+#### Design considerations:
+
+**Aspect: How edit meeting executes:**
+
+* **Alternative 1 (current choice):** Edits the meeting by directly modifying the current meeting
+    - Pros:
+        * Easier to implement.
+    - Cons:
+        * May cause unwanted side effects such as two different meetings (addressbook and client) being modified
+
 ### Delete Meeting feature
 
 #### Implementation
@@ -212,7 +253,7 @@ This section describes some noteworthy details on how certain features are imple
 The following sequence diagrams show how the `DeleteMeetingCommand` is executed when the user
 inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
 
-The first diagram shows how the command goes through the `Logic` component:
+The first diagram shows how the command goes through the `Logic` component:<br>
 <img src="images/DeleteMeetingSequenceDiagramLogic.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for
@@ -220,7 +261,7 @@ The first diagram shows how the command goes through the `Logic` component:
 to a limitation of PlantUML, the lifelines reach the end of the diagram.
 </div>
 
-Similarly, the second diagram shows how the command goes through the `Model` component:
+Similarly, the second diagram shows how the command goes through the `Model` component:<br>
 <img src="images/DeleteMeetingSequenceDiagramModel.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The indices of the
