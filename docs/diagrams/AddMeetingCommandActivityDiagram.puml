@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes AddMeeting command;
+
+if () then ([Invalid parameters])
+    -Error: Invalid command format
+    stop
+else ([Valid parameters])
+    if () then ([Duplicate meeting])
+        -Error: This meeting either already exists in the address book or you are already booked for this timing
+        stop
+    else ([Meeting not duplicate])
+        :Add new meeting to client's meeting list;
+        :Add new meeting to UniqueMeetingList;
+        :Commit changes to AddressBook;
+        :Save AddressBook state;
+        stop
+
+
+endif
+@enduml

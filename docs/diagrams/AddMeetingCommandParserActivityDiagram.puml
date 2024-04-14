@@ -1,0 +1,39 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Create AddMeetingCommandParser object;
+
+if () then ([clientIndex not present])
+     :Throw ParseException;
+     stop
+else ([clientIndex present])
+    if () then ([clientIndex not valid])
+        :Throw ParseException;
+        stop
+    else ([clientIndex valid])
+        :Parse ClientIndex;
+        if () then ([datetime not present])
+            :Throw ParseException;
+            stop
+        else ([datetime present])
+            :Parse DateTime;
+            if () then ([datetime not valid])
+                :Throw ParseException;
+                stop
+            else ([datetime valid])
+                :Parse Description;
+                if () then ([description not present])
+                    :Throw ParseException;
+                    stop
+                else ([description present])
+                   if () then ([description not valid])
+                        :Throw ParseException;
+                        stop
+                    else ([description valid])
+                        :Create AddMeetingCommand object;
+                        stop
+
+endif
+@enduml
