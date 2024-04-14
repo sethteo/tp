@@ -11,7 +11,9 @@ start
 if () then ([No duplicate meeting])
     :Delete old meeting in addressbook and client's meeting list;
     :Add new meeting in addressbook and client's meeting list;
+    stop
 else ([else])
+    :Error : Duplicate meeting;
+    stop
 endif
-stop
 @enduml

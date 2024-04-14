@@ -14,17 +14,22 @@ if () then (MeetingIndex present)
             if () then (DateTime present)
                 :Parse DateTime;
                 :Create EditMeetingCommand object;
+                stop
             else (else)
-                :Throw ParseException;
+                :Error : Invalid command;
+                stop
             endif
         else (else)
-            :Throw ParseException;
+            :Error : Invalid command;
+            stop
         endif
     else (else)
-        :Throw ParseException;
+        :Error : Invalid command;
+        stop
     endif
 else (else)
-    :Throw ParseException;
+    :Error : Invalid command;
+    stop
 endif
-stop
+
 @enduml
