@@ -14,7 +14,7 @@ else ([Valid prefix])
     stop
     else([valid index])
         :Display client with specified index;
-        :Display client with specified index;
+        :Display meetings of the client;
         stop
 
 endif
