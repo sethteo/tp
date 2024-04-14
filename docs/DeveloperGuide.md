@@ -392,8 +392,7 @@ The following sequence diagram summarises what happens when a user executes the 
 <img src="images/ViewClientCommand.png" width="700"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for
-`DeleteMeetingCommandParser` and `DeleteMeetingCommand` should end at the destroy marker (X) but due
-to a limitation of PlantUML, the lifelines reach the end of the diagram.
+`ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines reach the end of the diagram.
 </div>
 
 
