@@ -8,12 +8,10 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if (Valid parameters and
-new meeting is not
-        duplicate) then ([Execute command])
+if () then ([No duplicate meeting])
     :Delete old meeting in addressbook and client's meeting list;
     :Add new meeting in addressbook and client's meeting list;
-else ([Throw exception])
+else ([else])
 endif
 stop
 @enduml

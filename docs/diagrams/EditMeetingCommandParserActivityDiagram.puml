@@ -5,25 +5,25 @@ skinparam ArrowFontSize 12
 start
 :Create EditMeetingCommandParser object;
 
-if (MeetingIndex present?) then (yes)
+if () then (MeetingIndex present)
     :Parse MeetingIndex;
-    if (ClientIndex present?) then (yes)
+    if () then (ClientIndex present)
         :Parse ClientIndex;
-        if (Description present?) then (yes)
+        if () then (Description present)
             :Parse Description;
-            if (DateTime present?) then (yes)
+            if () then (DateTime present)
                 :Parse DateTime;
                 :Create EditMeetingCommand object;
-            else (no)
+            else (else)
                 :Throw ParseException;
             endif
-        else (no)
+        else (else)
             :Throw ParseException;
         endif
-    else (no)
+    else (else)
         :Throw ParseException;
     endif
-else (no)
+else (else)
     :Throw ParseException;
 endif
 stop
