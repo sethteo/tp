@@ -24,10 +24,10 @@ group sd Logic for updateFilteredMeetingList()
     deactivate Model
 
     create MeetingList
-    FilterCommand -> MeetingList
+    FilterCommand -> MeetingList : new ArrayList()
     activate MeetingList
 
-    MeetingList -> FilterCommand
+    MeetingList --> FilterCommand
     deactivate MeetingList
 
 
@@ -36,7 +36,7 @@ group sd Logic for updateFilteredMeetingList()
         activate MeetingList
     end
 
-    MeetingList -> FilterCommand :
+    MeetingList --> FilterCommand :
     deactivate MeetingList
 
 
