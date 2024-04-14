@@ -20,6 +20,7 @@ title: Developer Guide
     - 4.1.1. [Add Meeting feature](#add-meeting-feature)  
     - 4.1.2. [Edit Meeting feature](#edit-meeting-feature)
     - 4.1.3. [Delete Meeting feature](#delete-meeting-feature)
+    - 4.1.4. [View Client feature](#view-client-feature)
   - 4.2. [Release v1.3](#release-v13)
     - 4.2.1 [Filter feature](#filter-feature)
 5. [Appendix: Requirements](#appendix-requirements)
@@ -384,7 +385,16 @@ The following activity diagram summarises what happens when a user executes the 
 
 The following activity diagram summarises what happens when a user executes the `ViewClientCommand` command:
 
-<img src="images/ViewClientCommand.png" width="700" />
+<img src="images/ViewClientActivityDiagram.png" width="700"/>
+
+The following sequence diagram summarises what happens when a user executes the `ViewClientCommand` command:
+
+<img src="images/ViewClientCommand.png" width="700"/>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for
+`DeleteMeetingCommandParser` and `DeleteMeetingCommand` should end at the destroy marker (X) but due
+to a limitation of PlantUML, the lifelines reach the end of the diagram.
+</div>
 
 
 #### Design considerations:
