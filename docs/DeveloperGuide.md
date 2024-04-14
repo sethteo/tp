@@ -295,6 +295,45 @@ The following activity diagram summarises what happens when a user executes the 
         * More error-prone as the user needs to provide the date and time.
         * Users have to type more to enter the date and time.
 
+### View Client feature
+
+#### Implementation
+
+**The `ViewClientCommand` is implemented as such:**
+
+- `LogicManager`'s execute method is called with the command string which then calls the `parseCommand()` method of `AddressBookParser`
+- `AddressBookParser` then creates a `ViewCommandParser` which parses the user input and
+  returns a `ViewClientCommand`
+- The created `ViewClientCommand` is then executed by the `LogicManager`
+- `ViewClientCommand` filters through the list of `Person` based on the index provided by the user. 
+- `ViewClientCommand` creates a `CommandResult` object and returns it to `LogicManager`
+- `LogicManager` then passes `CommandResult` to `UI` who then displays the new `Person` as well as the person's `Meetings`
+
+**The `ViewCommandParser` is implemented as such:**
+
+- Takes in a `String` input from the user
+- Splits the given `String` based on the prefixes.
+    - If one or more prefixes are missing, throws `ParseException`
+- Parser then checks if an empty string was provided
+    - If yes, throws `ParseException`
+- Parser then checks if the prefix `c` is given
+  - If no, throws `ParseException`
+- If no exception was thrown, the index corresponding to the `Person` is used to create a `ViewClientCommand` object
+
+The following activity diagram summarises what happens when a user executes the `ViewClientCommand` command:
+
+<img src="images/ViewClientCommand.png" width="700" />
+
+
+#### Design considerations:
+
+**Aspect: How ViewClientCommand executes:**
+
+* **Alternative 1 (current choice):** Views the client based on the given index as well as a prefix `c`
+    - Pros:
+        * Easier to implement.
+        * Built in OOP fashion with a parent `ViewCommand` class, this allows us to expand to other `View` methods such as `ViewMeeting` in the future 
+      
 ### Release v1.3
 
 ### Filter feature
