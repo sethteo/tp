@@ -9,10 +9,10 @@ if () then ([clientIndex not present])
      :Throw ParseException;
      stop
 else ([clientIndex present])
-    if () then (clientIndex not valid))
+    if () then ([clientIndex not valid])
         :Throw ParseException;
         stop
-    else (clientIndex valid)
+    else ([clientIndex valid])
         :Parse ClientIndex;
         if () then ([datetime not present])
             :Throw ParseException;

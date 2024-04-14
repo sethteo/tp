@@ -172,6 +172,67 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### [V1.2] Add Meeting feature
+
+#### Implementation
+
+**The `AddMeetingCommand` is implemented as such:**
+
+- `LogicManager`'s execute method is called with the command string which then calls the `parseCommand()` method of `AddressBookParser`
+- `AddressBookParser` then creates a `AddMeetingCommandParser` which parses the user input and
+  returns a `AddMeetingCommand`
+- The created `AddMeetingCommand` is then executed by the `LogicManager`
+- `AddMeetingCommand` adds the meeting to the client's meeting list corresponding to the index provided by the user.
+- The UniqueMeetingList object in the Model is updated with the new meeting
+- `AddMeetingCommand` creates a `CommandResult` object and returns it to `LogicManager`
+- `LogicManager` then passes `CommandResult` to `UI` who then displays the `Meeting` list with the added meeting
+
+**The `AddMeetingCommandParser` is implemented as such:**
+
+- Takes in a `String` input from the user
+- Splits the given `String` and checks if there is more than 1 string provided
+    - If more than 1 string was provided, throws `ParseException`
+-Parser then checks if required prefixes are provided
+    - If not, throws `ParseException`
+- Parser then checks if an empty string was provided
+    - If yes, throws `ParseException`
+- Parser then checks if duplicate prefixes are provided
+    - If yes, throws `ParseException`
+- Parser then checks if the date, time, description and client index are valid
+    - If not, throws `ParseException`
+- If no exception was thrown, the index corresponding to the `Person`, the date, time and description are used to create a `AddMeetingCommand` object
+
+#### Sequence Diagram
+
+The following activity diagrams show how the `AddMeetingCommand` and `AddMeetingCommandParser` are executed in the event of valid and invalid user input.
+
+The first diagram shows how the AddMeetingCommandParser works when valid and invalid user input is given:<br>
+<img src="images/AddMeetingCommandParserActivityDiagram.png" width="1566"  alt="AddMeetingCommandParser activity diagram"/>
+
+The second diagram shows how the AddMeetingCommand is executed when the user inputs a valid and invalid command:<br>
+<img src="images/AddMeetingCommandActivityDiagram.png" width="1566"  alt="AddMeetingCommand activity diagram"/>
+
+
+#### Design considerations:
+
+**Aspect: How add meeting executes:**
+
+- **Alternative 1 (current choice):** Adds the meeting based on the client index, date, time and description provided by the user
+    - Pros:
+      * More realistic as we would need to consider for conflicting meetings for the same client.
+      * Easier to visualise the different scenarios that could happen.
+    - Cons:
+      * More complex to implement.
+      * More error-prone as the user needs to provide the date and time.
+
+- **Alternative 2:** Adds the meeting based on the date and time provided by the user
+  - Pros:
+    * More flexible.
+    * More user-friendly.
+  - Cons:
+    * Unable to add meetings based on other criteria such as client index, description, etc.
+    * Less realistic as we would need to consider for conflicting meetings for the same client.
+
 ### [V1.2] Delete Meeting feature
 
 #### Implementation
