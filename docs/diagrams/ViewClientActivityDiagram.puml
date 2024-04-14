@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes ViewClient command;
+
+if () then ([No 'c' prefix])
+    -Error: Invalid command format
+    stop
+else ([Valid prefix])
+    if () then ([invalid index])
+    -Error: The person index [invalid index] provided is invalid!
+    stop
+    else([valid index])
+        :Display client with specified index;
+        :Display client with specified index;
+        stop
+
+endif
+@enduml

@@ -1,0 +1,92 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
+participant "v:ViewClientCommand" as ViewClientCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "predicate:MeetingBelongingToClientPredicate" as MeetingBelongingToClientPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("view c 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("view c 1")
+activate  AddressBookParser
+
+create ViewCommandParser
+AddressBookParser -> ViewCommandParser
+activate ViewCommandParser
+
+ViewCommandParser --> AddressBookParser
+deactivate ViewCommandParser
+
+AddressBookParser -> ViewCommandParser : parse("c 1")
+activate ViewCommandParser
+
+create ViewClientCommand
+ViewCommandParser -> ViewClientCommand
+activate ViewClientCommand
+
+ViewClientCommand --> ViewCommandParser : v
+deactivate ViewClientCommand
+
+ViewCommandParser --> AddressBookParser : v
+deactivate ViewCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewCommandParser -[hidden]-> AddressBookParser
+destroy ViewCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewClientCommand : execute()
+activate ViewClientCommand
+
+ViewClientCommand -> ModelManager : getFilteredPersonList()
+activate ModelManager
+
+ModelManager --> ViewClientCommand : lastShownList
+deactivate ModelManager
+
+ViewClientCommand -> ModelManager : updateFilteredPersonList(p -> p.equals(lastShownList.get(1)))
+activate ModelManager
+
+ModelManager --> ViewClientCommand
+deactivate ModelManager
+
+create MeetingBelongingToClientPredicate
+ViewClientCommand -> MeetingBelongingToClientPredicate : new MeetingBelongingToClientPredicate(lastShownList.get(1))
+activate MeetingBelongingToClientPredicate
+
+MeetingBelongingToClientPredicate --> ViewClientCommand : predicate
+deactivate MeetingBelongingToClientPredicate
+
+ViewClientCommand -> ModelManager : updateFilteredMeetingList(predicate)
+activate ModelManager
+
+ModelManager --> ViewClientCommand
+deactivate ModelManager
+
+create CommandResult
+ViewClientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewClientCommand : r
+deactivate CommandResult
+
+ViewClientCommand --> LogicManager : r
+deactivate ViewClientCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewCommandParser -[hidden]-> LogicManager
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
