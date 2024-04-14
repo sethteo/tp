@@ -203,7 +203,7 @@ This section describes some noteworthy details on how certain features are imple
 The following sequence diagrams show how the `DeleteMeetingCommand` is executed when the user 
 inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
 
-The first diagram shows how the command goes through the `Logic` component:
+The first diagram shows how the command goes through the `Logic` component:<br>
 <img src="images/DeleteMeetingSequenceDiagramLogic.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for
@@ -211,7 +211,7 @@ The first diagram shows how the command goes through the `Logic` component:
 to a limitation of PlantUML, the lifelines reach the end of the diagram.
 </div>
 
-Similarly, the second diagram shows how the command goes through the `Model` component:
+Similarly, the second diagram shows how the command goes through the `Model` component:<br>
 <img src="images/DeleteMeetingSequenceDiagramModel.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The indices of the
