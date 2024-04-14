@@ -172,6 +172,80 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### [V1.2] Delete Meeting feature
+
+#### Implementation
+
+**The `DeleteMeetingCommand` is implemented as such:**
+
+- `LogicManager`'s execute method is called with the command string which then calls the `parseCommand()` method of `AddressBookParser`
+- `AddressBookParser` then creates a `DeleteMeetingCommandParser` which parses the user input and 
+  returns a 
+  `DeleteMeetingCommand`
+- The created `DeleteMeetingCommand` is then executed by the `LogicManager`
+- `DeleteMeetingCommand` deletes the meeting of the client corresponding to the indices provided 
+  by the user.
+- `DeleteMeetingCommand` creates a `CommandResult` object and returns it to `LogicManager`
+- `LogicManager` then passes `CommandResult` to `UI` who then displays the `Meeting` list without 
+  the deleted meeting
+
+**The `DeleteMeetingCommandParser` is implemented as such:**
+
+- Takes in a `String` input from the user
+- Splits the given `String` and checks if there is more than 1 string provided
+    - If more than 1 string was provided, throws `ParseException`
+- Parser then checks if an empty string was provided
+    - If yes, throws `ParseException`
+- If no exception was thrown, the indices corresponding to the `Person` and the `Meeting` 
+  are used to create a `DeleteMeetingCommand` object
+
+#### Sequence Diagram
+
+The following sequence diagrams show how the `DeleteMeetingCommand` is executed when the user 
+inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
+
+The first diagram shows how the command goes through the `Logic` component:
+<img src="images/DeleteMeetingSequenceDiagramLogic.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for 
+`DeleteMeetingCommandParser` and `DeleteMeetingCommand` should end at the destroy marker (X) but due 
+to a limitation of PlantUML, the lifelines reach the end of the diagram.
+</div>
+
+Similarly, the second diagram shows how the command goes through the `Model` component:
+<img src="images/DeleteMeetingSequenceDiagramModel.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The indices of the 
+meeting and person are converted to zero-based indices by the `ModelManager` class, using 
+`Index#getZeroBased()`.
+</div>
+
+The following activity diagram summarises what happens when a user executes the `deleteMeeting` command:
+<img src="images/DeleteMeetingActivityDiagram.png" width="550"  alt="DeleteMeetingCommand activity diagram"/>
+#### Design considerations:
+
+**Aspect: How delete meeting executes:**
+
+  * **Alternative 1 (current choice):** Deletes the meeting based on the index provided by the user
+    - Pros: 
+      * Easier to implement.
+      * Less error-prone as the user only needs to provide the index.
+      * Users have to type less to enter the index.
+    - Cons: 
+      * Unable to delete meetings based on other criteria such as date, time, etc.
+      * Less flexible.
+      * Less user-friendly.
+  
+  * **Alternative 2:** Deletes the meeting based on the date and time provided by the user
+    - Pros: 
+      * Able to delete meetings based on date and time.
+      * More flexible.
+      * More user-friendly.
+    - Cons: 
+      * More complex to implement.
+      * More error-prone as the user needs to provide the date and time.
+      * Users have to type more to enter the date and time.
+
 ### [V1.3] Filter feature
 
 #### Implementation
