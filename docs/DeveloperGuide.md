@@ -87,9 +87,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, 
-`PersonListPanel`, `MeetingListPanel`, `StatusBarFooter` etc. All these, including the 
-`MainWindow`, 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`,
+`PersonListPanel`, `MeetingListPanel`, `StatusBarFooter` etc. All these, including the
+`MainWindow`,
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
@@ -98,7 +98,7 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person`, `Meeting`, 
+* depends on some classes in the `Model` component, as it displays `Person`, `Meeting`,
   objects residing in the `Model`.
 * uses the façade pattern to provide a unified interface to the other components.
 * uses the observer pattern to listen for changes in the `Model` and update the UI accordingly.
@@ -179,11 +179,10 @@ This section describes some noteworthy details on how certain features are imple
 **The `DeleteMeetingCommand` is implemented as such:**
 
 - `LogicManager`'s execute method is called with the command string which then calls the `parseCommand()` method of `AddressBookParser`
-- `AddressBookParser` then creates a `DeleteMeetingCommandParser` which parses the user input and 
-  returns a 
-  `DeleteMeetingCommand`
+- `AddressBookParser` then creates a `DeleteMeetingCommandParser` which parses the user input and
+  returns a `DeleteMeetingCommand`
 - The created `DeleteMeetingCommand` is then executed by the `LogicManager`
-- `DeleteMeetingCommand` deletes the meeting of the client corresponding to the indices provided 
+- `DeleteMeetingCommand` deletes the meeting of the client corresponding to the indices provided
   by the user.
 - `DeleteMeetingCommand` creates a `CommandResult` object and returns it to `LogicManager`
 - `LogicManager` then passes `CommandResult` to `UI` who then displays the `Meeting` list without 
@@ -207,16 +206,16 @@ inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
 The first diagram shows how the command goes through the `Logic` component:
 <img src="images/DeleteMeetingSequenceDiagramLogic.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for 
-`DeleteMeetingCommandParser` and `DeleteMeetingCommand` should end at the destroy marker (X) but due 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for
+`DeleteMeetingCommandParser` and `DeleteMeetingCommand` should end at the destroy marker (X) but due
 to a limitation of PlantUML, the lifelines reach the end of the diagram.
 </div>
 
 Similarly, the second diagram shows how the command goes through the `Model` component:
 <img src="images/DeleteMeetingSequenceDiagramModel.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The indices of the 
-meeting and person are converted to zero-based indices by the `ModelManager` class, using 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The indices of the
+meeting and person are converted to zero-based indices by the `ModelManager` class, using
 `Index#getZeroBased()`.
 </div>
 
@@ -227,21 +226,21 @@ The following activity diagram summarises what happens when a user executes the 
 **Aspect: How delete meeting executes:**
 
   * **Alternative 1 (current choice):** Deletes the meeting based on the index provided by the user
-    - Pros: 
+    - Pros:
       * Easier to implement.
       * Less error-prone as the user only needs to provide the index.
       * Users have to type less to enter the index.
-    - Cons: 
+    - Cons:
       * Unable to delete meetings based on other criteria such as date, time, etc.
       * Less flexible.
       * Less user-friendly.
   
   * **Alternative 2:** Deletes the meeting based on the date and time provided by the user
-    - Pros: 
+    - Pros:
       * Able to delete meetings based on date and time.
       * More flexible.
       * More user-friendly.
-    - Cons: 
+    - Cons:
       * More complex to implement.
       * More error-prone as the user needs to provide the date and time.
       * Users have to type more to enter the date and time.
