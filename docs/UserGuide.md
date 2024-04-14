@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+# FinCliq - User Guide
+
 FinCliq is a **desktop app for financial advisors to manage contacts and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FinCliQ can get your contact management tasks done faster than traditional GUI apps.
 
 ---
@@ -23,7 +25,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 1. Copy the file to the folder you want to use as the _home folder_ for your own personal FinCliq application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the <br>`java
-   -jar fincliq.jar` <br> command to run the application.<br>
+   -jar fincliq.jar` command to run the application.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -41,7 +43,7 @@ FinCliq is a **desktop app for financial advisors to manage contacts and meeting
 
 - `exit` : Exit the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features & Commands](#features--commands) section below for details of each command.
 
 ---
 
@@ -156,7 +158,7 @@ Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, FinCliq will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value 
+Furthermore, certain edits can cause FinCliq to behave in unexpected ways (e.g., if a value
 entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -340,7 +342,7 @@ between them?<br>
 **A**: This app is designed to help you keep track of your clients and meetings with them. <br>
 To keep track of your clients/meetings, you can follow the various commands in the user guide and enter the commands according to the specified format.
 
-**Q**: Is there a limit to the number of clients/meetings I can store in the app<br>
+**Q**: Is there a limit to the number of clients/meetings I can store in the app?<br>
 **A**: No, there is no limit to the number.
 
 **Q**: Are the clients/meetings storage persistent between application restarts?<br>
@@ -356,12 +358,12 @@ and to simplify the scheduling of meetings for financial advisors.
 
 **Q**: I entered a meeting for the same client with the same date and time but different
 description, and it fails to add. Is this the intended behaviour?<br>
-**A**: Yes. We implemented this with the intention that our user (a financial advisor) is only 
+**A**: Yes. We implemented this with the intention that our user (a financial advisor) is only
 booked for one type of meeting agenda at a particular date and time, to simulate real life scenario.
 
 **Q**: I entered a meeting for a different client with the same date and time and description,
 and it succeeds to add. Is this the intended behaviour?<br>
-**A**: Yes. We implemented this with the intention that our user (a financial advisor) can be 
+**A**: Yes. We implemented this with the intention that our user (a financial advisor) can be
 meeting two different clients, who may be friends, at the same date and time to discuss the same agenda, to simulate real life scenario where it might not always be a 1 to 1 meeting.
 
 ---

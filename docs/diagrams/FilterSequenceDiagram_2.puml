@@ -1,0 +1,51 @@
+@startuml
+group sd [Logic for updateFilteredMeetingList()]
+    !include style.puml
+    skinparam ArrowFontStyle plain
+    skinparam sequenceReferenceBackgroundColor white
+
+    box Logic LOGIC_COLOR_T1
+    participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+    participant "m:List<Meeting>" as MeetingList LOGIC_COLOR
+
+    end box
+
+    box Model MODEL_COLOR_T1
+    participant ":Model" as Model MODEL_COLOR
+    end box
+
+    [-> FilterCommand
+     activate FilterCommand
+
+    FilterCommand -> Model : getFilteredPersonList()
+    activate Model
+
+    Model --> FilterCommand : filteredPersonsWithTag
+    deactivate Model
+
+    create MeetingList
+    FilterCommand -> MeetingList
+    activate MeetingList
+
+    MeetingList -> FilterCommand
+    deactivate MeetingList
+
+
+    loop Person p : filteredPersonsWithTag
+        FilterCommand -> MeetingList: addAll(p.getMeetings())
+        activate MeetingList
+    end
+
+    MeetingList -> FilterCommand :
+    deactivate MeetingList
+
+
+
+    FilterCommand -> Model : updateFilteredMeetingList(m::contains)
+    activate Model
+
+    Model --> FilterCommand
+    deactivate Model
+
+end
+@enduml

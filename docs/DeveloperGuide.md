@@ -3,17 +3,21 @@ layout: page
 title: Developer Guide
 ---
 
+# FinCliq - Developer Guide
+
 ## Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)
-    1. [Architecture](#architecture)
-    2. [UI Component](#ui-component)
-    3. [Logic Component](#logic-component)
-    4. [Model Component](#model-component)
-    5. [Storage Component](#storage-component)
-    6. [Common Classes](#common-classes)
-4. [Appendix](#appendix-requirements)
+    - 3.1. [Architecture](#architecture)
+    - 3.2. [UI Component](#ui-component)
+    - 3.3. [Logic Component](#logic-component)
+    - 3.4. [Model Component](#model-component)
+    - 3.5. [Storage Component](#storage-component)
+    - 3.6. [Common Classes](#common-classes)
+4. [Appendix: Requirements](#appendix-requirements)
+5. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+6. [Appendix: Planned enhancements](#appendix-planned-enhancements)
 
 
 ---
@@ -35,12 +39,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ---
 
 ## **Design**
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-
-</div>
 
 ### Architecture
 
@@ -89,10 +87,21 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, 
+`PersonListPanel`, `MeetingListPanel`, `StatusBarFooter` etc. All these, including the 
+`MainWindow`, 
+inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 
+The `UI` component,
+
+* executes user commands using the `Logic` component.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `Person`, `Meeting`, 
+  objects residing in the `Model`.
+* uses the façade pattern to provide a unified interface to the other components.
+* uses the observer pattern to listen for changes in the `Model` and update the UI accordingly.
 
 ### Logic component
 
@@ -141,12 +150,6 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to dd the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S2-CS2103-F08-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -191,6 +194,14 @@ This section describes some noteworthy details on how certain features are imple
     - If yes, throws `ParseException`
 - If no exception was thrown, a `Tag` object is created which is then used to create a `FilterCommand` object
 
+#### Sequence Diagram
+<img src="images/FilterSequenceDiagram.png" width="700" />
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+The details of the reference frame can be found in the sequence diagram below.
+<img src="images/FilterSequenceDiagram_2.png" width="550" />
+
 #### Design considerations:
 
 **Aspect: How FilterCommandParser executes:**
@@ -234,25 +245,24 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                 | I want to …                          | So that I can…                                               |
-|----------|------------------------|--------------------------------------|--------------------------------------------------------------|
-| `* * *`  | As a financial advisor | add new clients profiles to my list  | keep track of the clients under me                           |
-| `* * *`  | As a financial advisor | edit the profiles of my clients      | keep their information up to date                            |
-| `* * *`  | As a financial advisor | delete the clients under me          | remove clients that are no longer under me                   |
-| `* * *`  | As a financial advisor | view all my client profiles          | track all my clients in one place                            |
-| `* * *`  | As a financial advisor | filter client by their tags          | track clients with similar demographics                      |
-| `* * *`  | As a financial advisor | add client meetings                  | keep track of my schedule                                    |
-| `* * *`  | As a financial advisor | update client meetings               | revise my schedule and alter for reasons                     |
-| `* * *`  | As a financial advisor | view meetings with a specific client | so I can prepare for the meeting with the client accordingly |
-| `* *`    | As a financial advisor | search my meetings by date or agenda | locate meetings with specific filters                        |
-| `* *`    | As a financial advisor | filter my meetings by date           | so I can know the meetings of that day                       |
-| `*`      | As a financial advisor | sort persons by name                 | locate a person easily                                       |
+| Priority | As a …                 | I want to …                               | So that I can…                                                |
+|----------|------------------------|-------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | As a financial advisor | add new clients profiles to my list       | keep track of the clients under me                            |
+| `* * *`  | As a financial advisor | edit the profiles of my clients           | keep their information up to date                             |
+| `* * *`  | As a financial advisor | delete the clients under me               | remove clients that are no longer under me                    |
+| `* * *`  | As a financial advisor | view all my client profiles               | track all my clients in one place                             |
+| `* * *`  | As a financial advisor | filter client by their tags               | track clients with similar demographics                       |
+| `* * *`  | As a financial advisor | add client meetings                       | keep track of my schedule                                     |
+| `* * *`  | As a financial advisor | update client meetings                    | revise my schedule and alter for reasons                      |
+| `* * *`  | As a financial advisor | view a specific client and their meetings | so I can prepare for the materials for the client accordingly |
+| `* *`    | As a financial advisor | search my meetings by date or agenda      | locate meetings with specific filters                         |
+| `* *`    | As a financial advisor | filter my meetings by date                | so I can know the meetings of that day                        |
+| `*`      | As a financial advisor | sort persons by name                      | locate a person easily                                        |
 
 
 ### Use cases
 
-(For all use cases below, the **System** is the `FinCliq` and the **Actor** is the `targeted
-financial advisor`, unless specified otherwise)
+(For all use cases below, the **System** is the `FinCliq` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use Case: Add New Client Profiles**
 
@@ -331,11 +341,11 @@ financial advisor`, unless specified otherwise)
     - 1b2. FinCliq informs financial advisor of the invalid date
     - Use case ends
 
-**Use Case: View A Specific Client Meetings**
+**Use Case: View a specific client**
 
 **MSS:**
-1. Financial advisor requests to view all upcoming meetings.
-2. FinCliq retrieves and displays all upcoming meetings for that client.
+1. Financial advisor requests to view a client by a specified index.
+2. FinCliq retrieves and displays that specific client as well as all of his/her associated meetings.
     - Use case ends.
 
 **Use Case: Update existing Meetings**
@@ -346,7 +356,7 @@ financial advisor`, unless specified otherwise)
 3. FinCliq displays updated meeting to the advisor.
     - Use case ends.
 
-Use Case: Delete Meeting
+**Use Case: Delete Meeting**
 
 **MSS:**
 1. Financial advisor requests to delete a specific client's meeting
@@ -354,7 +364,7 @@ Use Case: Delete Meeting
 3. FinCliq displays successful deletion message
     - Use case ends
 
-Use Case: Filter Clients by Tag
+**Use Case: Filter Clients by Tag**
 
 **MSS:**
 1. Financial advisor requests to filter meetings by a tag by inputting the name of the tag.
@@ -384,6 +394,8 @@ Use Case: Filter Clients by Tag
 - **Use Case**: A description of a specific user goal or task and the steps required to achieve it.
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
 - **Private contact detail**: A contact detail that is not meant to be shared with others
+- **CLI**: A command line interface (CLI) is a software mechanism you use to interact with your 
+  operating system using your keyboard.
 
 ---
 
@@ -487,6 +499,9 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `filter [invalid tag]`
        Expected: Shows all clients. Error details that tag provided does not belong to any client.
+   
+    4. Test case: `filter [tag_1] [tag_2]`
+       Expected: Error thrown to tell user to only input a singular Tag
 
 ### Adding a meeting
 
@@ -507,6 +522,9 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Editing a meeting
+
+<img src="images/EditMeetingCommandActivityDiagram.png" width="550" />
+<img src="images/EditMeetingCommandParserActivityDiagram.png" width="550" />
 
 1. Editing a meeting's details in the meeting list
 
@@ -560,10 +578,10 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-## **Appendix: Planned Enhancements**
+## **Appendix: Planned enhancements**
 In future iterations of FinCliq, the following improvements could be made:
 
-### 1.Prevent meeting slots at the same date and time
+### 1. Prevent meeting slots at the same date and time
 
 #### Implementation
 
@@ -576,15 +594,19 @@ To implement this, there has to be a check to ensure that the meeting timing doe
 **Aspect: How to ensure that the meeting timing does not clash with any other meetings:**
 
 * When a new meeting is added or edited, check if the meeting timing clashes with any other meetings.
-    * Pros: Easy to implement.
-    * Cons: Additional check required when adding/editing meetings.
+    * Pros: 
+      * Prevents scheduling conflicts.
+      * Prevents confusion for the financial advisor.
+    * Cons: 
+      * Additional check required when adding/editing meetings. 
+      * Difficult to implement due to having to check against meetings that all other clients have.
 
 
-### 2.Shorten command words to improve user experience
+### 2. Shorten command words to improve user experience
 
 Currently, the command words are quite long and may be difficult to remember. In the future, we
 hope to shorten the command words to improve the user experience to optimise the user experience
-for financial advisors who are comfortable with typing and using CLI apps.
+for financial advisors who are comfortable with CLI apps.
 
 To implement this, the command words in the different `Command` classes will have to be updated to
 shorter
@@ -596,10 +618,14 @@ command words, such as `am` for `addMeeting`, `dm` for `deleteMeeting`, `em` for
 **Aspect: How to shorten the command words:**
 
 * Update the command words in the different `Command` classes to shorter command words.
-    * Pros: Easy to implement.
-    * Cons: May be confusing for users who are used to the current command words.
+    * Pros: 
+      * Easy to implement.
+      * Decreases the time taken to type commands.
+    * Cons: 
+      * May be confusing for users who are used to the current command words.
+      * May require additional documentation to explain the new command words.
 
-### 3.Allow different clients with same name but different phone number and email to be added
+### 3. Allow different clients with same name but different phone number and email to be added
 
 Currently, the app does not allow different clients with the same name but different phone
 number to be added. This is not ideal as there may be multiple clients with the same name but
@@ -613,11 +639,16 @@ To implement this, the check for duplicate clients in the `Person` class will ha
 **Aspect: How to allow different clients with the same name but different phone number and email to be added:**
 
 * Update the check for duplicate clients in the `Person` class to allow clients with the same name but different phone number and email to be added.
-    * Pros: Easy to implement.
-    * Cons: May cause confusion for users who are used to the current behaviour.
+    * Pros: 
+      * Prevents confusion for users who are adding different clients with the same name.
+      * Allows for more flexibility when adding clients.
+      * Reflects real-world scenarios where clients may have the same name but are different people.
+    * Cons: 
+      * May cause confusion for users who are used to the current behaviour.
+      * The logic to check for duplicate clients will have to be updated. 
 
 
-### 4.Prevent the addition of clients with duplicate phone numbers and emails
+### 4. Prevent the addition of clients with duplicate phone numbers and emails
 
 Currently, the app allows clients with duplicate phone numbers and emails to be added. This is not ideal as there should not be multiple clients with the same phone number or email. In the future, we hope to prevent the addition of clients with duplicate phone numbers and emails.
 
@@ -628,10 +659,16 @@ To implement this, the check for duplicate clients in the `Person` class will ha
 **Aspect: How to prevent the addition of clients with duplicate phone numbers and emails:**
 
 * Update the check for duplicate clients in the `Person` class to prevent clients with the same phone number or email from being added.
-    * Pros: Easy to implement.
-    * Cons: May cause confusion for users who are used to the current behaviour.
+    * Pros: 
+      * Prevents confusion for users who may be entering duplicate phone numbers or emails 
+        unintentionally.
+      * Reflects real-world scenarios where clients should have unique phone numbers and emails.
+    * Cons: 
+      * May cause confusion for users who are used to the current behaviour.
+      * The logic to check for duplicate clients will have to be updated to check for duplicate 
+        phone numbers and emails.
 
-### 5.Make the flag for `DESCRIPTION` for `addMeeting` `editMeeting` consistent.
+### 5. Make the flag for `DESCRIPTION` for `addMeeting` `editMeeting` consistent.
 
 Currently, the flag for the description of a meeting is `d/` for `addMeeting` and `n/`
 for `editMeeting`. This is not ideal as the flag for the description should be consistent across
@@ -646,30 +683,44 @@ be updated in the `Command` classes.
 **Aspect: How to make the flag for `DESCRIPTION` for `addMeeting` and `editMeeting` consistent:**
 
 * Update the flag for the description for `addMeeting` and `editMeeting` to be consistent.
-    * Pros: Easy to implement.
-    * Cons: May cause confusion for users who are used to the current behaviour.
+    * Pros: 
+      * Easy to implement.
+      * Improves consistency across commands.
+    * Cons: 
+      * May cause confusion for users who are used to the current behaviour.
 
-### 6.Validate the email format for `Person` objects
+### 6. Validate the email format for `Person` objects
 
 Currently, the app does not validate the email format for `Person` objects. This is not ideal as the email format should be validated to ensure that the email is in the correct format. In the future, we hope to validate the email format for `Person` objects.
 
 **Aspect: How to validate the email format for `Person` objects:**
 
 * Update the `Person` class to have a validation regex for the email field.
-    * Pros: Easy to implement.
-    * Cons: May cause confusion for users who are used to the current behaviour.
+    * Pros: 
+      * Helps to inform the user that the email format is invalid.
+    * Cons: 
+      * Additional validation logic has to be added to the `Person` class.
+      * It is difficult to account for all possible email formats.
 
-### 7.Update the error message for `view c` for single client case
+### 7. Update the error message for `view c` for single client case
 
-Currently, the `view c` command returns the error: `If you wish to view another client please return home by entering 'list' before viewing another client.` if there is only one client in the `Clients` list regardless of if the index is valid or invalid. This is not ideal as if there is only 1 `Client` in the list and user inputs `view c 1` it should
-not return an error.
+Currently, the `view c` command returns the error: `If you wish to view another client please return home by entering 'list' before viewing another client.` if there is only one client in the `Clients` list regardless of if the index is valid or invalid. This is not ideal as if there is only 1 `Client` in the list and user inputs `view c 1` it should not return an error.
 
 **Aspect: How to edit the error message to accommodate both scenarios**
 
 * Update the condition checking `execute()` method of the `ViewClientCommand` class to account for 2 scenarios
     * Scenario 1: If user is already viewing that client and inputs the same index, in this case `1`
     * Scenario 2: If there is only 1 client in the `Clients` list and user inputs that index, also by inputting `1`
-    * Pros: Easy to implement, clears up confusion of users when using the `view c` command and thinking that their inputs were valid.
-    * Cons: Additional variable has to be added in order to account for Scenario 2
+    * Pros: 
+      * Easy to implement, clears up confusion of users when using the `view c` command and thinking that their inputs were valid.
+    * Cons: 
+      * Additional variable has to be added in order to account for Scenario 2
 
----
+### 8. Update the error message or command information for `view c` to accomodate for edge cases.
+
+Currently, the `view c` command if given invalid arguments returns the error: `Invalid command format`. However, this might cause confusion to users if they type `view c 2/` thinking that 2 is a valid index.
+
+**Aspect: How to make the command more fool-proof**
+
+* Update the error message of the `view c` command to display the incorrect index provided, supposing the user type used the command with special characters such as `/`
+* Or we can update the current error message to specify that the parameters in this case `index` should be a positive integer without any special characters to reduce any ambiguity. 

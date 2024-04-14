@@ -18,7 +18,7 @@ Given below are my contributions to the project.
       * Added code for the view client command as well as created test for the class and the class methods
       * Created the parser for the new command
       * Created an overarching ViewCommand class in order to implement other subsets of view such as ViewMeeting in future iterations.
-    
+
     * Added the filter command
       * Displays all the clients who share a tag where the tag is taken as an input
       * Added the code for the filter command as well as created test for the class and the class methods
@@ -39,6 +39,6 @@ Given below are my contributions to the project.
 
     * Developer Guide:
       * Updated the PUML diagrams to fit our group's usage of the classes by adding the new components we have as well as removing some components not used [\#121](https://github.com/AY2324S2-CS2103-F08-1/tp/issues/121)
+      * Updated sequence diagrams for the `FilterCommand` [PR#271](https://github.com/AY2324S2-CS2103-F08-1/tp/pull/271) 
 
-        
 
