@@ -276,7 +276,7 @@ This sequence diagram assumes that a valid addMeeting command is executed and th
 - If no exception was thrown, the indices corresponding to the `Person` and the `Meeting`
   are used to create a `EditMeetingCommand` object
 
-#### Sequence Diagram
+#### Sequence Diagrams
 
 The following sequence diagrams show how the `EditMeetingCommand` is executed when the user
 inputs the command `editMeeting clientIndex/2 meetingIndex/2 n/sign life plan dt/01-01-2025 12:00`.
@@ -288,7 +288,7 @@ Do note that the parameters inside all the method calls are either shortened or 
 this diagram is to showcase the sequence of method calls and not meant to illustrate the type of parameters each
 method takes in.
 
-### Activity Diagram
+### Activity Diagrams
 
 The following activity diagram summarises what happens when a user executes the `editMeeting` command:
 
@@ -331,7 +331,7 @@ The following activity diagram summarises what happens when a user executes the 
 - If no exception was thrown, the indices corresponding to the `Person` and the `Meeting`
   are used to create a `DeleteMeetingCommand` object
 
-#### Sequence Diagram
+#### Sequence Diagrams
 
 The following sequence diagrams show how the `DeleteMeetingCommand` is executed when the user
 inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
@@ -339,9 +339,9 @@ inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
 The first diagram shows how the command goes through the `Logic` component:<br>
 <img src="images/DeleteMeetingSequenceDiagramLogic.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for
-`DeleteMeetingCommandParser` and `DeleteMeetingCommand` should end at the destroy marker (X) but due
-to a limitation of PlantUML, the lifelines reach the end of the diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for
+`DeleteMeetingCommandParser` should end at the destroy marker (X) but due
+to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 </div>
 
 Similarly, the second diagram shows how the command goes through the `Model` component:<br>
@@ -352,7 +352,9 @@ meeting and person are converted to zero-based indices by the `ModelManager` cla
 `Index#getZeroBased()`.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `deleteMeeting` command:
+### Activity Diagram
+The following activity diagram summarises what happens when a user executes the `deleteMeeting` 
+command:<br>
 <img src="images/DeleteMeetingActivityDiagram.png" width="550"  alt="DeleteMeetingCommand activity diagram"/>
 #### Design considerations:
 

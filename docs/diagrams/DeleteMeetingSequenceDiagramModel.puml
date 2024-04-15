@@ -54,6 +54,6 @@ deactivate UniqueMeetingList
 Person --> ModelManager
 deactivate Person
 
-[<-- ModelManager : r
+[<-- ModelManager :
 deactivate ModelManager
 @enduml
