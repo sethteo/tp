@@ -16,18 +16,15 @@ import seedu.address.model.person.Person;
  * Represents a Meeting in the address book.
  * Guarantees: details are present and not null, field values are validated.
  * Description is validated to be alphanumeric.
- * Date and time is validated to be in the future and on the hour.
+ * Date and time is validated to be in the future.
  */
 public class Meeting {
 
     public static final String MESSAGE_CONSTRAINTS = "Description must not be empty and must be alphanumeric. \n"
            + "Date must be in dd-MM-yyyy HH:mm format and must not be in the past.";
     public static final String MESSAGE_INVALID_DATE_TIME = "Date must be in dd-MM-yyyy HH:mm format.\n"
-            + "Date & time must be after the current time.\n"
-            + "Time of appointment must be on the hour.";
-    /*
-     * description must be alphanumeric
-     */
+            + "Date & time must be after the current time.";
+
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*$";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
 
