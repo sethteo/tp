@@ -270,6 +270,20 @@ The second diagram shows how the AddMeetingCommand is executed when the user inp
 - If no exception was thrown, the indices corresponding to the `Person` and the `Meeting`
   are used to create a `EditMeetingCommand` object
 
+#### Sequence Diagram
+
+The following sequence diagrams show how the `EditMeetingCommand` is executed when the user
+inputs the command `editMeeting clientIndex/2 meetingIndex/2 n/sign life plan dt/01-01-2025 12:00`.
+
+The diagram shows how the command goes through the `Logic` component:<br>
+<img src="images/EditMeetingSequenceDiagram.png" width="1566"  alt="EditMeetingCommand sequence diagram"/>
+
+Do note that the parameters inside all the method calls are either shortened or omitted for brevity as the point of 
+this diagram is to showcase the sequence of method calls and not meant to illustrate the type of parameters each
+method takes in.
+
+### Activity Diagram
+
 The following activity diagram summarises what happens when a user executes the `editMeeting` command:
 
 <img src="images/EditMeetingCommandActivityDiagram.png" width="550" />
@@ -277,7 +291,7 @@ The following activity diagram summarises what happens when a user executes the 
 
 #### Design considerations:
 
-**Aspect: How edit meeting executes:**
+**Aspect: How the edit meeting feature executes:**
 
 * **Alternative 1 (current choice):** Edits the meeting by directly modifying the current meeting
     - Pros:
