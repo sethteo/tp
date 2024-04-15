@@ -28,7 +28,7 @@ public class AddMeetingCommand extends Command {
             + "Parameters: clientIndex/ CLIENT_INDEX dt/ DATE_TIME /d DESCRIPTION \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
-            + PREFIX_DATETIME + "02-01-2024 12:00 "
+            + PREFIX_DATETIME + "02-01-2030 12:00 "
             + PREFIX_DESCRIPTION + "sign life plan";
 
 
