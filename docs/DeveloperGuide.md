@@ -227,7 +227,7 @@ The following sequence diagrams show how the 'AddMeetingCommand' is executed whe
 inputs the command `addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`:
 
 The first diagram shows how the command goes through the `Logic` component:<br>
-<img src="images/AddMeetingSequenceDiagramLogic.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
+<img src="images/AddMeetingCommandSequenceDiagramLogic.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
 
 Similarly, the second diagram shows how the command goes through the `Model` component:<br>
 <img src="images/AddMeetingCommandSequenceDiagram.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
