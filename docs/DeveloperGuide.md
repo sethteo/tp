@@ -319,9 +319,9 @@ inputs the command `deleteMeeting clientIndex/2 meetingIndex/2`.
 The first diagram shows how the command goes through the `Logic` component:<br>
 <img src="images/DeleteMeetingSequenceDiagramLogic.png" width="1566"  alt="DeleteMeetingCommand sequence diagram"/>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for
-`DeleteMeetingCommandParser` and `DeleteMeetingCommand` should end at the destroy marker (X) but due
-to a limitation of PlantUML, the lifelines reach the end of the diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for
+`DeleteMeetingCommandParser` should end at the destroy marker (X) but due
+to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 </div>
 
 Similarly, the second diagram shows how the command goes through the `Model` component:<br>
