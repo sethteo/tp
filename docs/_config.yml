@@ -8,7 +8,7 @@ header_pages:
 
 markdown: kramdown
 
-repository: "AY2324S2-CS2103-F08-1"
+repository: "AY2324S2-CS2103-F08-1/tp"
 github_icon: "images/github-icon.png"
 
 plugins:
