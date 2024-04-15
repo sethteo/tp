@@ -1005,6 +1005,7 @@ Currently, the handling of negative index, zero index or index that exceeds MAX_
     * Error: The person index [index] provided is invalid as it should be a positive integer! or
     * Error: The meeting index [index] provided is invalid as it should be a positive integer! 
 
+---
 
 ## **Appendix: Effort**
 
