@@ -1,5 +1,5 @@
 @startuml
-group sd Logic for updateFilteredMeetingList()
+group sd Logic for getting meetings of specified person
     !include style.puml
     skinparam ArrowFontStyle plain
     skinparam sequenceReferenceBackgroundColor white

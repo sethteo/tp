@@ -8,6 +8,7 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
 participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "predicate:PersonContainsTagPredicate" as PersonContainsTagPredicate LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -31,8 +32,16 @@ AddressBookParser -> FilterCommandParser : parse("friend")
 activate FilterCommandParser
 
 create FilterCommand
-FilterCommandParser -> FilterCommand : new("friend")
+FilterCommandParser -> FilterCommand : new FilterCommand("friend")
+
 activate FilterCommand
+
+create PersonContainsTagPredicate
+FilterCommand -> PersonContainsTagPredicate : new PersonContainsTagPredicate("friend")
+activate PersonContainsTagPredicate
+
+PersonContainsTagPredicate --> FilterCommand
+deactivate PersonContainsTagPredicate
 
 FilterCommand --> FilterCommandParser :
 deactivate FilterCommand
@@ -49,23 +58,20 @@ deactivate AddressBookParser
 LogicManager -> FilterCommand : execute(m)
 activate FilterCommand
 
-FilterCommand -> Model : updateFilteredPersonList(predicate)
+FilterCommand -> Model : updateFilteredPersonList(this.predicate)
 
 
 activate Model
 Model --> FilterCommand
 deactivate Model
+
+
+
 
 ref over FilterCommand
-Logic for updateFilteredMeetingList()
+Logic for getting meetings of specified person
 end ref
 
-FilterCommand -> Model : updateFilteredMeetingList(predicate)
-
-activate Model
-
-Model --> FilterCommand
-deactivate Model
 
 create CommandResult
 FilterCommand -> CommandResult
