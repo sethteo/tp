@@ -29,13 +29,13 @@ activate UniquePersonList
 UniquePersonList -> ObservableListPerson : get(0)
 activate ObservableListPerson
 
-ObservableListPerson -> UniquePersonList : p
+ObservableListPerson --> UniquePersonList : p
 deactivate ObservableListPerson
 
 UniquePersonList --> AddressBook : p
 deactivate UniquePersonList
 
-AddressBook -> ModelManager : p
+AddressBook --> ModelManager : p
 deactivate AddressBook
 
 ModelManager -> Meeting : new(description="sign life plan", dateTime="2023-01-02 12:00", client=p)
