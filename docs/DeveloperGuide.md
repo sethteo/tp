@@ -989,9 +989,9 @@ Currently, the `view c` command if given invalid arguments returns the error: `I
 * Update the error message of the `view c` command to display the incorrect index provided, supposing the user type used the command with special characters such as `/` or if they used negative or numbers larger than 2147483647.
 * Or we can update the current error message to specify that the parameters in this case `index` should be a positive integer without any special characters to reduce any ambiguity.
 
-### 9. Standardise the handling of negative index or index that exceeds MAX_INT
+### 9. Standardise the handling of negative index, zero index or index that exceeds MAX_INT
 
-Currently, the handling of negative index or index that exceeds MAX_INT(2147483647) is not standardised between the methods. For example if `view c [negative integer or over MAX_INT]` is called, `Invalid command format` error is thrown whereas if `addMeeting clientIndex/[negative integer or over MAX_INT] dt/02-01-2024 12:00 d/sign life plan` it returns `Index is not a non-zero unsigned integer.`
+Currently, the handling of negative index, zero index or index that exceeds MAX_INT(2147483647) is not standardised between the methods. For example if `view c [negative integer or over MAX_INT]` is called, `Invalid command format` error is thrown whereas if `addMeeting clientIndex/[negative integer or over MAX_INT] dt/02-01-2024 12:00 d/sign life plan` it returns `Index is not a non-zero unsigned integer.`
 
 **Aspect: How to standardise the error message across all commands that use indexes.**
 
