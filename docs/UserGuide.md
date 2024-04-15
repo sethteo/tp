@@ -351,7 +351,7 @@ To keep track of your clients/meetings, you can follow the various commands in t
 **Q**: When entering my name, some characters do not show up. Is this the intended behaviour?<br>
 **A**: Yes, currently, only our app only supports english names, although we intend to support this in the future.
 
-**Q**: I entered a date and time that was before the current time and not on the hour, and it
+**Q**: I entered a date and time that was before the current time, and it
 fails to add. Is this the intended behaviour?<br>
 **A**: Yes. We implemented this so that people would not enter meetings that occur in the past,
 and to simplify the scheduling of meetings for financial advisors.
