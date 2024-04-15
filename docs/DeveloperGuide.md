@@ -993,7 +993,7 @@ Currently, the `view c` command if given invalid arguments returns the error: `I
 
 Currently, the handling of negative index or index that exceeds MAX_INT(2147483647) is not standardised between the methods. For example if `view c [negative integer or over MAX_INT]` is called, `Invalid command format` error is thrown whereas if `addMeeting clientIndex/[negative integer or over MAX_INT] dt/02-01-2024 12:00 d/sign life plan` it returns `Index is not a non-zero unsigned integer.`
 
-**Aspect: How to standardise the error message among commands.**
+**Aspect: How to standardise the error message across all commands that use indexes.**
 
 * Standardise all commands to return the following errors in accordance to the invalid input.
   * Scenario 1: Index is positive and smaller than MAX_INT and is within the MeetingList or PersonList size
