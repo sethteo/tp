@@ -332,7 +332,8 @@ meeting and person are converted to zero-based indices by the `ModelManager` cla
 `Index#getZeroBased()`.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `deleteMeeting` command:
+The following activity diagram summarises what happens when a user executes the `deleteMeeting` 
+command:<br>
 <img src="images/DeleteMeetingActivityDiagram.png" width="550"  alt="DeleteMeetingCommand activity diagram"/>
 #### Design considerations:
 
