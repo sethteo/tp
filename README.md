@@ -15,8 +15,7 @@
   * Allows Financial Advisors to create meetings with existing clients
   * Allows Financial Advisors to delete meetings with existing clients
 
-* We hope that through FinCliQ we can help Financial Advisors achieve financial freedom for all their customers by
-* providing an easy way to keep track of all clients and the meetings with them.
+* We hope that through FinCliQ we can help Financial Advisors achieve financial freedom for all their customers by providing an easy way to keep track of all clients and the meetings with them.
 
 ### Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

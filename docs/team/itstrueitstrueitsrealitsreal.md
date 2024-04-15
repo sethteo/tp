@@ -24,6 +24,7 @@ Given below are my contributions to the project.
         * Added the target user profile, value proposition, and user stories: [\#39](https://github.com/AY2324S2-CS2103-F08-1/tp/issues/39)
         * Added the Manual Testing section: [\#146](https://github.com/AY2324S2-CS2103-F08-1/tp/pull/146)
         * Added the future enhancements section [\#146](https://github.com/AY2324S2-CS2103-F08-1/tp/pull/146)
+        * Added the implementation details and diagrams of the delete meeting feature: [\#277](https://github.com/AY2324S2-CS2103-F08-1/tp/pull/277)
 
 * **Enhancements to existing features**:
     * User Interface:
