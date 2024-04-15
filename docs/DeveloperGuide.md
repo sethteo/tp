@@ -758,8 +758,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least 1 client in client list
 
-    2. Test case: `filter friends`
-       Expected: Shows all clients who have the tag "friends"
+    2. Test case: `filter [valid tag]`
+       Expected: Shows all clients who have the tag: `valid tag`
 
     3. Test case: `filter [invalid tag]`
        Expected: Shows all clients. Error details that tag provided does not belong to any client.
