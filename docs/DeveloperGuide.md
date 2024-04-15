@@ -981,4 +981,6 @@ Currently, the `view c` command if given invalid arguments returns the error: `I
 6. **Refactoring**: Refactoring was a challenge as we had to ensure that our new features were integrated seamlessly with the existing codebase. This required a lot of thought and planning to ensure that the code was clean and maintainable. We faced issues with the naming of our classes and methods as we had to ensure that they were descriptive and followed the naming conventions.
 7. **Time management**: Time management was a challenge as we had to balance our other commitments with working on the project. This required a lot of planning and prioritization to ensure that we met our deadlines and delivered a high-quality product.
 8. **Communication**: As we all had different schedules and commitments, we had to communicate well to ensure that we were all on the same page and that we were updated on the progress of the project. There were blocker features where one feature would rely on another. We had to communicate well to ensure that our parameters were aligned, logic and understanding of our eventual output was the same.
+<br>
+
 ---
