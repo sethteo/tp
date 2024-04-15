@@ -1002,8 +1002,8 @@ Currently, the handling of negative index or index that exceeds MAX_INT(21474836
     * Error: The person index [index] provided is invalid as it exceeds the PersonList! or
     * Error: The meeting index [index] provided is invalid as it exceeds the MeetingList!
   * Scenario 3: Index is negative/0 or index is greater than MAX_INT
-    * Error: The person index [index] provided should be a positive integer! or
-    * Error: The meeting index [index] provided should be a positive integer! 
+    * Error: The person index [index] provided is invalid as it should be a positive integer! or
+    * Error: The meeting index [index] provided is invalid as it should be a positive integer! 
 
 
 ## **Appendix: Effort**
