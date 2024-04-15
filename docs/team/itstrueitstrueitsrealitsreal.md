@@ -14,6 +14,7 @@ Given below are my contributions to the project.
 * **Project management**:
     * Set up the GitHub team organisation and the repository
     * Set up and maintained the issue tracker for [`v1.1`](https://github.com/AY2324S2-CS2103-F08-1/tp/milestone/1), [`v1.2`](https://github.com/AY2324S2-CS2103-F08-1/tp/milestone/2), [`v1.3`](https://github.com/AY2324S2-CS2103-F08-1/tp/milestone/3) [`v1.4`](https://github.com/AY2324S2-CS2103-F08-1/tp/milestone/4) on GitHub
+    * Managed the release of [`v1.4`](https://github.com/AY2324S2-CS2103-F08-1/tp/releases/tag/v1.4) on GitHub
 
 * **Documentation**:
     * User Guide:
