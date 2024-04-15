@@ -32,6 +32,9 @@ activate FilterCommandParser
 
 create FilterCommand
 FilterCommandParser -> FilterCommand : new("friend")
+ref over FilterCommand
+Creation of predicate
+end ref
 activate FilterCommand
 
 FilterCommand --> FilterCommandParser :
@@ -49,21 +52,21 @@ deactivate AddressBookParser
 LogicManager -> FilterCommand : execute(m)
 activate FilterCommand
 
-FilterCommand -> Model : updateFilteredPersonList(predicate)
+FilterCommand -> Model : updateFilteredPersonList(this.predicate)
 
 
 activate Model
 Model --> FilterCommand
 deactivate Model
 
+
+
+FilterCommand -> Model : updateFilteredMeetingList()
+
+activate Model
 ref over FilterCommand
 Logic for updateFilteredMeetingList()
 end ref
-
-FilterCommand -> Model : updateFilteredMeetingList(predicate)
-
-activate Model
-
 Model --> FilterCommand
 deactivate Model
 
