@@ -989,6 +989,13 @@ Currently, the `view c` command if given invalid arguments returns the error: `I
 * Update the error message of the `view c` command to display the incorrect index provided, supposing the user type used the command with special characters such as `/`
 * Or we can update the current error message to specify that the parameters in this case `index` should be a positive integer without any special characters to reduce any ambiguity.
 
+### 9. Allow editMeeting to take in only one meeting component to edit.
+
+Currently, the `editMeeting` command requires the user to key in information for both `n/` and `dt` to edit an existing meeting. This may be inconvenient if the user only plans to edit one component. 
+
+**Aspect: How to make the command more convenient**
+
+* Allow the user to edit a meeting by keying in information for either `n/` or `dt` and only that specific meeting component will be edited.
 ---
 
 ## **Appendix: Effort**
