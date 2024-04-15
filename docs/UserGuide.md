@@ -270,7 +270,7 @@ Format: `addMeeting clientIndex/CLIENT_INDEX dt/DATE_TIME d/DESCRIPTION`
 - `CLIENT_INDEX` refers to the index number shown in the displayed client list.
 - `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, ….
 - `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
-  the current time**
+  the current datetime**
 - `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
 
 Rejected Scenarios:
@@ -305,16 +305,25 @@ Edits an existing meeting for a client.
 
 Format: `editMeeting clientIndex/CLIENT_INDEX meetingIndex/MEETING_INDEX n/DESCRIPTION dt/DATE_TIME`
 
+- `CLIENT_INDEX` refers to the index number shown in the displayed client list.
+- `CLIENT_INDEX` must be a **positive integer** 1, 2, 3, ….
+- `MEETING_INDEX` refers to the index number of the meeting for the specific client.
+- `MEETING_INDEX` must be a **positive integer** 1, 2, 3, ….
+- `DATE_TIME` format should be `DD-MM-YYYY HH:MM`, e.g., `02-01-2025 12:00`, and should be **after
+  the current datetime**
+- `DESCRIPTION` refers to what the meeting is about. Format should be a single string and be alphanumeric, e.g. d/Meeting-Sales Pitch, **is not allowed.**
+
 - Edits the meeting specified by `MEETING_INDEX` for the client specified by `CLIENT_INDEX`. Both indexes must be positive integers 1, 2, 3, ….
 - All the fields (clientIndex, meetingIndex, description, datetime), must be provided.
 - Existing values will be updated to the input values.
 - When editing descriptions, the existing descriptions of the meeting will be removed i.e.
   adding of descriptions is not cumulative.
 - Do note that the prefix for meeting description here is "n/", not "d/". Future enhancements will include standardising prefixes across different commands.
+- Does not allow editing a meeting such that it becomes similar to an existing meeting. Follows the aforementioned addMeeting logic.
 
 Examples:
 
-- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2024 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
+- `editMeeting clientIndex/1 meetingIndex/2 n/starbucks meeting dt/01-01-2025 12:00` Edits the description and date/time of the 2nd meeting of the 1st client.<br>
   ![edit meeting result](images/release_images/editMeeting.png)
 
 #### Deleting a Meeting: `deleteMeeting`
