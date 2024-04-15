@@ -213,7 +213,7 @@ This section describes some noteworthy details on how certain features are imple
     - If not, throws `ParseException`
 - If no exception was thrown, the index corresponding to the `Person`, the date, time and description are used to create a `AddMeetingCommand` object
 
-#### Sequence Diagram
+#### Diagrams
 
 The following activity diagrams show how the `AddMeetingCommand` and `AddMeetingCommandParser` are executed in the event of valid and invalid user input.
 
@@ -223,6 +223,12 @@ The first diagram shows how the AddMeetingCommandParser works when valid and inv
 The second diagram shows how the AddMeetingCommand is executed when the user inputs a valid and invalid command:<br>
 <img src="images/AddMeetingCommandActivityDiagram.png" width="1566"  alt="AddMeetingCommand activity diagram"/>
 
+The following sequence diagrams show how the 'AddMeetingCommand' is executed when the user
+inputs the command `addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`:
+
+<img src="images/AddMeetingCommandSequenceDiagram.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
+
+This sequence diagram assumes that a valid addMeeting command is executed and the meeting is added successfully. 
 
 #### Design considerations:
 
