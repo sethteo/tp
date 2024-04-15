@@ -22,7 +22,7 @@ title: Developer Guide
      * 4.1.3. [Delete Meeting feature](#delete-meeting-feature)
      * 4.1.4. [View Client feature](#view-client-feature)<br>
    - 4.2. [Release v1.3](#release-v13)<br>
-     * 4.2.1 [Filter feature](#filter-feature)<br>
+     * 4.2.1. [Filter feature](#filter-feature)<br>
 5. [Appendix: Requirements](#appendix-requirements)
 6. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 7. [Appendix: Planned enhancements](#appendix-planned-enhancements)
