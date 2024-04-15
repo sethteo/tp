@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+participant "m:Meeting" as Meeting MODEL_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+participant ":ObservableList<Person>" as ObservableListPerson MODEL_COLOR
+participant ":UniqueMeetingList" as UniqueMeetingList MODEL_COLOR
+participant ":ObservableList<Meeting>" as ObservableListMeeting MODEL_COLOR
+end box
+
+[-> ModelManager : addSpecificMeetingForClient(1, "02-01-2030 12:00", "sign life plan")
+activate ModelManager
+
+ModelManager -> AddressBook: getPersonList()
+activate AddressBook
+
+AddressBook -> UniquePersonList : getPersonList()
+activate UniquePersonList
+
+UniquePersonList -> ObservableListPerson : get(0)
+activate ObservableListPerson
+
+ObservableListPerson -> UniquePersonList : p
+deactivate ObservableListPerson
+
+UniquePersonList --> AddressBook : p
+deactivate UniquePersonList
+
+AddressBook -> ModelManager : p
+deactivate AddressBook
+
+ModelManager -> Meeting : new(description="sign life plan", dateTime="2023-01-02 12:00", client=p)
+activate Meeting
+Meeting --> ModelManager : meetingToAdd
+deactivate Meeting
+
+' Adding the meeting to the person identified as p
+ModelManager -> Person : addMeeting(meetingToAdd)
+activate Person
+Person --> ModelManager : p
+deactivate Person
+
+ModelManager -> ModelManager : addMeeting(meetingToAdd)
+
+ModelManager -> UniqueMeetingList : addMeeting(meetingToAdd)
+activate UniqueMeetingList
+
+UniqueMeetingList -> ObservableListMeeting : add()
+activate ObservableListMeeting
+
+ObservableListMeeting --> UniqueMeetingList
+deactivate ObservableListMeeting
+
+UniqueMeetingList --> ModelManager
+deactivate UniqueMeetingList
+
+create CommandResult
+ModelManager -> CommandResult : new("New meeting added")
+activate CommandResult
+CommandResult --> ModelManager : r
+deactivate CommandResult
+
+[<-- ModelManager : r
+deactivate ModelManager
+
+@enduml
