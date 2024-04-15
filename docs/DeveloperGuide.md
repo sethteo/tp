@@ -226,6 +226,10 @@ The second diagram shows how the AddMeetingCommand is executed when the user inp
 The following sequence diagrams show how the 'AddMeetingCommand' is executed when the user
 inputs the command `addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`:
 
+The first diagram shows how the command goes through the `Logic` component:<br>
+<img src="images/AddMeetingCommandSequenceDiagramLogic.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
+
+Similarly, the second diagram shows how the command goes through the `Model` component:<br>
 <img src="images/AddMeetingCommandSequenceDiagram.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
 
 This sequence diagram assumes that a valid addMeeting command is executed and the meeting is added successfully. 
@@ -980,13 +984,13 @@ Currently, the `view c` command returns the error: `If you wish to view another 
     * Cons:
         * Additional variable has to be added in order to account for Scenario 2
 
-### 8. Update the error message or command information for `view c` to accomodate for edge cases.
+### 8. Update the error message or command information for `view c` to accommodate for edge cases.
 
-Currently, the `view c` command if given invalid arguments returns the error: `Invalid command format`. However, this might cause confusion to users if they type `view c 2/` thinking that 2 is a valid index.
+Currently, the `view c` command if given invalid arguments returns the error: `Invalid command format`. However, this might cause confusion to users if they type `view c 2/` thinking that 2 is a valid index or if they type `view c -1` thinking that -1 is a valid index.
 
 **Aspect: How to make the command more fool-proof**
 
-* Update the error message of the `view c` command to display the incorrect index provided, supposing the user type used the command with special characters such as `/`
+* Update the error message of the `view c` command to display the incorrect index provided, supposing the user type used the command with special characters such as `/` or if they used negative or numbers larger than 2147483647.
 * Or we can update the current error message to specify that the parameters in this case `index` should be a positive integer without any special characters to reduce any ambiguity.
 
 ### 9. Allow editMeeting to take in only one meeting component to edit.
@@ -996,6 +1000,23 @@ Currently, the `editMeeting` command requires the user to key in information for
 **Aspect: How to make the command more convenient**
 
 * Allow the user to edit a meeting by keying in information for either `n/` or `dt` and only that specific meeting component will be edited.
+
+### 10. Standardise the handling of negative index, zero index or index that exceeds MAX_INT
+
+Currently, the handling of negative index, zero index or index that exceeds MAX_INT(2147483647) is not standardised between the methods. For example if `view c [negative integer or over MAX_INT]` is called, `Invalid command format` error is thrown whereas if `addMeeting clientIndex/[negative integer or over MAX_INT] dt/02-01-2024 12:00 d/sign life plan` it returns `Index is not a non-zero unsigned integer.`
+
+**Aspect: How to standardise the error message across all commands that use indexes.**
+
+* Standardise all commands to return the following errors in accordance to the invalid input.
+  * Scenario 1: Index is positive and smaller than MAX_INT and is within the MeetingList or PersonList size
+    * No error thrown. Valid index
+  * Scenario 2: Index is positive and smaller than MAX_INT but is greater than MeetingList or PersonList size
+    * Error: The person index [index] provided is invalid as it exceeds the PersonList! or
+    * Error: The meeting index [index] provided is invalid as it exceeds the MeetingList!
+  * Scenario 3: Index is negative/0 or index is greater than MAX_INT
+    * Error: The person index [index] provided is invalid as it should be a positive integer! or
+    * Error: The meeting index [index] provided is invalid as it should be a positive integer! 
+
 ---
 
 ## **Appendix: Effort**
