@@ -8,6 +8,7 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
 participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "predicate:PersonContainsTagPredicate" as PersonContainsTagPredicate LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -31,11 +32,16 @@ AddressBookParser -> FilterCommandParser : parse("friend")
 activate FilterCommandParser
 
 create FilterCommand
-FilterCommandParser -> FilterCommand : new("friend")
-ref over FilterCommand
-Creation of predicate
-end ref
+FilterCommandParser -> FilterCommand : new FilterCommand("friend")
+
 activate FilterCommand
+
+create PersonContainsTagPredicate
+FilterCommand -> PersonContainsTagPredicate : new PersonContainsTagPredicate("friend")
+activate PersonContainsTagPredicate
+
+PersonContainsTagPredicate --> FilterCommand
+deactivate PersonContainsTagPredicate
 
 FilterCommand --> FilterCommandParser :
 deactivate FilterCommand
