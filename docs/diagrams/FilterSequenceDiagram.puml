@@ -67,14 +67,11 @@ deactivate Model
 
 
 
-FilterCommand -> Model : updateFilteredMeetingList()
 
-activate Model
 ref over FilterCommand
-Logic for updateFilteredMeetingList()
+Logic for getting meetings of specified person
 end ref
-Model --> FilterCommand
-deactivate Model
+
 
 create CommandResult
 FilterCommand -> CommandResult
