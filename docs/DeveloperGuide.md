@@ -226,6 +226,10 @@ The second diagram shows how the AddMeetingCommand is executed when the user inp
 The following sequence diagrams show how the 'AddMeetingCommand' is executed when the user
 inputs the command `addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan`:
 
+The first diagram shows how the command goes through the `Logic` component:<br>
+<img src="images/AddMeetingSequenceDiagramLogic.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
+
+Similarly, the second diagram shows how the command goes through the `Model` component:<br>
 <img src="images/AddMeetingCommandSequenceDiagram.png" width="1566"  alt="AddMeetingCommand sequence diagram"/>
 
 This sequence diagram assumes that a valid addMeeting command is executed and the meeting is added successfully. 

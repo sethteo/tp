@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddMeetingCommandParser" as AddMeetingCommandParser LOGIC_COLOR
+participant "a:AddMeetingCommand" as AddMeetingCommand LOGIC_COLOR
+participant "m:Meeting" as Meeting LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addMeeting clientIndex/1 dt/02-01-2030 12:00 d/sign life plan")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addMeeting...")
+activate  AddressBookParser
+
+create AddMeetingCommandParser
+AddressBookParser -> AddMeetingCommandParser
+activate AddMeetingCommandParser
+
+AddMeetingCommandParser --> AddressBookParser
+deactivate AddMeetingCommandParser
+
+AddressBookParser -> AddMeetingCommandParser : parse("clientIndex/1 dt/02-01-2030 12:00 d/sign life plan")
+activate AddMeetingCommandParser
+
+create AddMeetingCommand
+AddMeetingCommandParser -> AddMeetingCommand
+activate AddMeetingCommand
+
+AddMeetingCommand --> AddMeetingCommandParser : a
+deactivate AddMeetingCommand
+
+AddMeetingCommandParser --> AddressBookParser : a
+deactivate AddMeetingCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddMeetingCommand : execute()
+activate AddMeetingCommand
+
+create Meeting
+
+AddMeetingCommand -> Meeting
+activate Meeting
+
+Meeting --> AddMeetingCommand : m
+deactivate Meeting
+
+AddMeetingCommand -> ModelManager : addMeeting(m)
+activate ModelManager
+
+ModelManager --> AddMeetingCommand
+deactivate ModelManager
+
+create CommandResult
+AddMeetingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddMeetingCommand : r
+deactivate CommandResult
+
+AddMeetingCommand --> LogicManager : r
+deactivate AddMeetingCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddMeetingCommandParser -[hidden]-> LogicManager
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
